@@ -1,423 +1,74 @@
-  <!doctype html>
-
+<!DOCTYPE html>
 <html>
 
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Jbk1109.github.io : ">
 
-<style>
-body{
-	font-size: 18px;
-	font-weight: 400;
-  /*line-height: 10px;*/
-}
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-#container {
-  /*padding: 2px 5px 2px 5px;*/
-  clear:both;
-}
+    <title>Jbk1109.github.io</title>
+  </head>
 
-.hidden { 
-  display: none; 
-}
+  <body>
 
-div.tooltip {
-   font-family: Avenir;
-  color: #222; 
-  background: rgba(160,180,240, 0.8);
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/jbk1109">View on GitHub</a>
 
-  /*background: #72cbff; */
-    /*padding: .5em;*/
-  /*text-shadow: #f5f5f5 0 1px 0;*/
-  /*border-radius: 1px; */
-  /*box-shadow: 0px 0px 2px 0px #a6a6a6; */
-  padding: 2px;
-  /*opacity: 0.6; */
-  position: absolute;
-  font-size: 14px;
-  margin:10px;
+          <h1 id="project_title">Jbk1109.github.io</h1>
+          <h2 id="project_tagline"></h2>
 
-}
+        </header>
+    </div>
 
-.title{
-  background: black;
-  /*background: #72cbff;*/
-  font-family: Avenir;
-  font-size: 22px;
-  position: fixed;
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>
+<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
 
+<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
 
-}
+<pre><code>$ cd your_repo_root/repo_name
+$ git fetch origin
+$ git checkout gh-pages
+</code></pre>
 
-</style>
+<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
 
-<head>
-<script src="d3.v3.min.js"> </script>
-<script src="http://d3js.org/topojson.v1.min.js"></script>
- </head>
+<h3>
+<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
 
-<body>
-<!-- tooltip container -->
-<div id="container"></div>
+<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
 
+<h3>
+<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
 
+<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
 
-<script>
-var width = 960,
-    height = 960;
+<h3>
+<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
 
-//var projection = d3.geo.orthographic()
-var projection = d3.geo.stereographic()
-.scale(245)
-    .translate([width / 2, height / 2])
-    .rotate([-20, 0])
-    .clipAngle(180 - 1e-4)
-    .clipExtent([[0, 0], [width, height]])
-    .precision(.1);
+<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
 
-// var projection = d3.geo.orthographic()
-//       .translate([width/2,height/2])
-//           .scale([350])
-//           .rotate([0, 100])
+<h3>
+<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
 
-// var projection = d3.geo.mercator()
-//     .scale((width + 1) / 2 / Math.PI)
-//     .translate([width / 2, height / 2])
-//     .precision(.1);
+<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+      </section>
+    </div>
 
-var path = d3.geo.path()
-    .projection(projection)
-var graticule = d3.geo.graticule();
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
 
-
-//Color Value Per Continent
-// Europe: #FFBD6B
-// Asia: #B5C57C
-// US: #B5C57C
-// Africa: #F79D7B
-// Austrailia: #FFBD6B
-// OCean: #A5DEFF
-// Canada / South America: #FFEF7B
-
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height)
-//    .style("background-color","#A5DEFF")
-//.style("background-color"," #A5D3FF")
-var title = svg.append("text").attr("class","title").text("Roger Federer's tournament travels in 2014")
-              .attr("y",20)
-              .attr("x",220)
-              .style("color","black");
-      
-
-var g = svg.append("g")
-
-//tooltip container that hides caption when no countries are selected.
-var tooltip = d3.select("#container").append("div").attr("class","tooltip hidden");
-
-
-d3.json("continent.json", function(world) {
- var countries = topojson.feature(world, world.objects.countries);
-
-  var asia = {type: "FeatureCollection", name: "Asia", color: "#90B4D2", id:1, features: countries.features.filter(function(d) { return d.properties.continent=="Asia"; })};
-  
-  var africa = {type: "FeatureCollection", name: "Africa", color: "#6B9BC3", id:2, features: countries.features.filter(function(d) { return d.properties.continent=="Africa"; })};
-  
-  var europe = {type: "FeatureCollection", name: "Europe", color: "#4682B4", id:3, features: countries.features.filter(function(d) { return d.properties.continent=="Europe"; })};
-  
-  var na = {type: "FeatureCollection", name: "North America", color: "#386890", id:4, features: countries.features.filter(function(d) { return d.properties.continent=="North America"; })};
-  
-  var sa = {type: "FeatureCollection", name: "South America", color: "##2A4E6C", id:5, features: countries.features.filter(function(d) { return d.properties.continent=="South America"; })};
-  
-  var antarctica = {type: "FeatureCollection", name: "Antarctica", color: "#1C3448", id:6, features: countries.features.filter(function(d) { return d.properties.continent=="Antarctica"; })};
-  
-  var oceania = {type: "FeatureCollection", name: "Oceania", color: "#0E1A24", id:7, features: countries.features.filter(function(d) { return d.properties.continent=="Oceania"; })};
-
-
-
-var continents = [asia,africa,europe,na,sa,antarctica,oceania];
-var continent = g.selectAll(".continent").data(continents);
-
-
-g.append("path") 
-      //.datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
-      .datum(topojson.mesh(world, world.objects.countries))
-      .attr("class", "boundary")
-      .attr("d", path)
-     .style("fill","none")
-      // .style("fill","#cdc")
-      .style("stroke-width",1)
-     .style("stroke","#fff");
-
-svg.append("path")
-    .datum(graticule)
-    .attr("class", "graticule")
-    .attr("d", path)
-   .style("fill","none")
-   .style("stroke","#777")
-        .style("stroke-width",0.2)
-
-svg.insert("path", ".graticule")
-      .datum(topojson.feature(world, world.objects.land))
-      .attr("class", "land")
-      .attr("d", path)
-      .style("fill",'#cbcbcb')
-      .style("opacity",0.8)
-
-        //.style("fill","white")
-
-//draw maps of continents and countries.
- // continent.enter().insert("path")
- //      .attr("class", "continent")
- //      .attr("d", path)
- //      .attr("id", function(d,i){ return d.id; })
- //      .attr("title", function(d,i){ 
- //            return d.name; })
- //      .style("fill", function(d,i) { 
- //            return "#cdc";
- //            //  return d.color;
- //            }) //fills the inside color
- //      .style("stroke",function(d,i) { return "#000"; }) // draws the boundary
- //      .style("stroke-width", 0.1)
- //      .style("stroke-dasharray",2)
- //      .style("stroke-linejoin","round")
-
-
-   d3.csv("federer3.csv", function(da) {
-
-     
-
-//Draw circles based on the country list, and append circle svg element to SVG
-            
-  var tournament = svg.selectAll("circle")
-                              .data(da)
-
-
-
-
-var coor;
-
-  // // tournament.enter().append("image")   
-  // //                            .attr("transform",function(d){
-  // //                             coor = projection([d.lon-3,d.lat-1]);
-  // //                               return "translate(" + projection([d.lon-3,d.lat-1]) + ")"
-  // //                            })
-  //                            // .attr("transform",function(d){
-  //                            //    return "rotate(5,"+coor[0],coor[1]+ ")"
-
-  //                            // })
-  //                           //  .attr("x",function(d){
-  //                           //     return projection([d.lon,d.lat])[0]
-  //                           //  })
-  //                           // .attr("y",function(d){
-  //                           //     return projection([d.lon,d.lat])[1]
-  //                           //  })
-  //                            .attr("xlink:href","map-marker-orange.png")
-  //                             .attr("width",30)
-  //                             .attr("height",30)
-
-  //                             //.style("stroke","black")
-  //                            // .style("stroke-width",0.8)
-  //                             .attr("class",function(d){
-  //                               return d.city 
-  //                                })
-  //                             .style("opacity",0.7)
-
-  tournament.enter().append("circle")   
-                             .attr("transform",function(d){
-                                return "translate(" + projection([d.lon,d.lat]) + ")"
-                             })
-                              .attr("r",8)
-                              .attr("fill","orangered")
-                              .style("stroke","black")
-                              .style("stroke-width",1.5)
-                              .attr("class",function(d){
-                                return d.city 
-                                 })
-                              .style("opacity",0.7)
-
-         var city_display = d3.select("#container")
-         						.append("div")
-         						.attr("class","tooltip hidden")
-         						.attr("id","city_display");
-         
-         var prev_city_display = d3.select("#container")
-                    .append("div")
-                    .attr("class","tooltip hidden")
-                    .attr("id","prev_city_display");
-         
-         var next_display = d3.select("#container")
-                    .append("div")
-                    .attr("class","tooltip hidden")
-                    .attr("id","city_display");
-
-        var extension = svg.append("line")
-                          .attr("class","hidden")
-        var prev_extension = svg.append("line")
-                          .attr("class","hidden")
-
-
-
-
-//links continas coordiates for current city and next city.
-    links=[];
-    var g = svg.append("g")
-    var arcGroup= svg.append("g")
-    // console.log(da[0].lat)
     
-    for(var i=0, len=da.length-1; i<len; i++) {
-              // (note: loop until length - 1 since we're getting the next
-              //  item with i+1)
-        links.push(
-          {
-            type: "LineString",
-            coordinates: [
-                [ da[i].lon, da[i].lat ],
-                [ da[i+1].lon, da[i+1].lat]
-            ],
-            city: da[i].city          
-        });
-    }; //end of for loop
-//    console.log(da[1].city)
 
-
-
-    //pathArcs is a path variable with coordinate information 
-            var pathArcs = arcGroup.selectAll(".arc")
-            .data(links);
-
-        //enter
-        pathArcs.enter()
-            .append("path")
-            .attr({
-                'class': 'arc'
-            })
-            .style({ 
-                fill: 'none','opacity':0.5
-            })
-            .attr("id",function(d,i){
-              return d.city;
-            })
-
-
-        //update
-        pathArcs.attr({
-                //d is the points attribute for this path, we'll draw
-                //  an arc between the points using the arc function
-                d: path
-            })
-             .style({
-                'stroke':'orangered',
-                //'stroke': '#444',
-                //'stroke': 'rgba(255,255,255,0.5)',
-                'stroke-width': 2,
-                'opacity':0.8
-
-            })
-  
-
-tournament.on("mouseover",function(d,i){
-    d3.select(this)
-      .attr('r',15)
-})
-.on("mouseout",function(d,i){
-  d3.select(this)
-      .attr('r',8)
-})
-
-
-tournament.on("click", function(d,i) {
-//i reflects the order of country.
-
-d3.selectAll("circle").style("fill","orangered").style("opacity",0.5).attr("r",8);
-
-d3.select(this).style("fill","#4169E1").attr("r",15).style("opacity",0.7)
-//Change the color of desitnation city.
-d3.select("."+da[i+1].city).style("fill","#4169E1").style("opacity",0.7).attr("r",15);      
-
-	var mouse = d3.mouse(this);
-      // var mouse = d3.mouse("circle").map( function(d) 
-      // 	return parseInt(d); } );
-    var transform = projection([d.lon,d.lat]);
- 
-    d3.selectAll(".arc").style({
-
-               //   'stroke': '#444',
-//               'stroke': '#F0F0F0',
-                  'stroke': 'orangered',
-                //'stroke': 'rgba(255,255,255,0.5)',
-                'stroke-width': '1.2',
-                'opacity':0.8
-            })
- 
-
-//    d3.selectAll("circle").attr("fill","#dcd").style("opacity",0.7);
-
-
-//    console.log(i)
-    var c = d.city;
-    // var a = d3.select("#"+c)
-    //   .style('stroke','red')
-
-// pathArcs[0][i].node.style('stroke','red')
-
-//Change the color of the path
-  d3.select(pathArcs[0][i]).style('stroke','#4169E1').style('opacity',0.7).style('stroke-width','3')
-
-
-  // d3.select(this).attr("width",50)
-  //               .attr("height",50)
-//d3.selectAll("#"+c).style('stroke-width',"20")
-      extension.classed("hidden",false)
-              .attr('x1',transform[0])
-              .attr('x2',(transform[0]+15))
-              .attr('y1',(transform[1]))
-              .attr('y2',(transform[1]+19))
-              .attr("stroke-width",1.3)
-              //.attr("stroke","black")
-//             .attr("stroke",'rgb(255,255,255)')      
-              .attr("stroke","#7693E9")
-        city_display.classed("hidden", false)
-                   .attr("style", "left:"+((-24)+transform[0])+"px;top:"+(15+transform[1])+"px")
-       //  .attr("style", "left:"+(mouse[0]+(0)+transform[0])+"px;top:"+(mouse[1]+17+transform[1])+"px")
-
-          .html( "FROM <br>"+"<strong>"+d.city+ "</strong> <br>"+d.nation)
-   
-
-    var prev_city_loc = projection([da[i+1].lon,da[i+1].lat]);
-   
-  
-     prev_extension.classed("hidden",false)
-              .attr('x1',prev_city_loc[0])
-              .attr('x2',(prev_city_loc[0]+15))
-              .attr('y1',(prev_city_loc[1]))
-              .attr('y2',(prev_city_loc[1]-21))
-              .attr("stroke-width",2)
-              .attr("stroke","#7693E9")
-          //    .attr("stroke",'rgb(255,255,255)')      
-
-      prev_city_display.classed("hidden", false)
-          .attr("style", "left:"+(((-9)+prev_city_loc[0])+"px;top:"+((-65+prev_city_loc[1])+"px")))
-           // .attr("transform",function(d){
-           //                      return "translate(" + projection([da[i-1].lon,da[i+1].lat]) + ")"
-           //                   })
-          .html( "TO <br>"+ "<strong>"+da[i+1].city+ "</strong> <br>"+da[i+1].nation)
-      }) // end of tournmament.on function
-
-
-
-
-
-
-});  //end of CSV function	
-
-
-
-
-
-
-});
-
-</script>
-
-</body>
-
+  </body>
 </html>
