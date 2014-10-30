@@ -1,0 +1,45 @@
+<html>
+
+<head>
+ <script type="text/javascript" src="http://mbostock.github.com/d3/d3.v2.js"></script>
+
+</head>
+
+<body>
+
+<script>
+
+
+
+var projection = d3.geo.mercator()
+					.scale([1000])
+					.translate([350,300])
+			
+
+var path = d3.geo.path().projection(projection)
+
+
+
+var svg = d3.select("body")
+	.append("svg")
+	.attr("class","map")
+	.attr("width",700)
+	.attr("height",600)
+
+
+
+//d3.json("us_states.json",function(d){
+//	svg.selectAll("path")
+//		.data(d.features)
+//		.enter()
+		svg.append("path")
+		.attr("d",path)
+		.attr("fill","rgb(8, 48, 107)")
+
+
+
+</script>
+
+</body>
+
+</html>
