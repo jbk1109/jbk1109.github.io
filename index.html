@@ -195,7 +195,7 @@ svg.insert("path", ".graticule")
 
 
 svg.selectAll(".subunit-label")
-    .data(topojson.feature(world, world.objects.countries.features.countries.geometries).features)
+    .data(topojson.feature(world, world.objects.countries.geometries).features)
   .enter().append("text")
     .attr("class", function(d) { return "subunit-label " + d.id; })
     .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
