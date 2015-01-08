@@ -22,7 +22,9 @@ path.line {
 	stroke-width":"10px";
 
 }
-
+.intro{
+	margin-left: 80px;
+}
 circle {
 	fill:#bbb;
 }
@@ -72,6 +74,7 @@ circle {
         </form> -->
 
 <!-- onchange works but onsubmit doesn't work -->
+<div class="intro">
 <p>Please select a country from the drop down menu to see the visuzalition</p>
 <form name="myform" onsubmit="return userInput()" >
   		<select id="menuInput" onchange="userInput1()" >
@@ -92,6 +95,7 @@ circle {
             <input  type="text" id="myVal" placeholder="Enter Country Name &hellip;" autocomplete>
 
  </form>
+ </div>
 <!-- //data info:
 // variable, unit, country, year, value, flag
 //color encode each immunization type
@@ -161,7 +165,7 @@ var format = d3.time.format("%Y");
 
 main()
 
-function main(){d3.csv("immune.csv",function(data){
+function main() {d3.csv("immune.csv",function(data){
 
   console.log("Main has been called22")
 
@@ -258,7 +262,7 @@ var line2 = d3.svg.line()
 				})
 
 var inputValue=d3.selectAll("input")
-console.log(inputValue.value)
+
 
 
 
@@ -327,13 +331,13 @@ var inputNation;
 
 // function reDraw(xn){
 // 	inputNation = xn;
-// console.log(userinput)
+ console.log(userinput)
 
 circles.enter().append('circle')
 	//filter by country
 	.filter(function(d,i){
 					// console.log(d)
-					if (userinput == null){
+					if (userinput == "undefined"){
 						return false;
 					}
 					if (userinput == "All Countries"){
@@ -375,9 +379,18 @@ svg.append('g')
 	.attr('transform','translate(0,500)')
 	.style('fill','none')
 	.style('stroke','black')
+	 .append("text")
+      	// .attr("transform", "rotate(-90)")
+      	.attr("x",840)
+      	.attr("y", 20)
+      	// .attr("dy", ".71em")
+      	.style("text-anchor", "end")
+      	.text("Year")
 	.selectAll('text')
 	.style('fill','black')
 	.style('font-size',11)
+
+
 
 
 svg.append('g')
