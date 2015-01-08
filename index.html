@@ -58,7 +58,9 @@ a{
 	
 	<p class="description">
 		Tennis players travel around the world all year round to play in tournaments. 
-		On the map, I marked cities and flight paths that Roger Federer flew in 2014.  
+		Using d3 geo projections and topojson data, I marked cities and flight paths that Roger Federer flew in 2014.  
+		<br>
+		Data was scraped from www.atptour.com wtih 'beautifulsoup' python library, then parsed and cleaned.
 		<br><br>
 		<a href="Federer_Github.html">- View Roger Federer's Air Travel</a>
 	</p>
@@ -71,7 +73,8 @@ a{
 	<img src="https://cloud.githubusercontent.com/assets/7552207/5659333/7350d114-96c5-11e4-9610-09b260e8cf28.png" height='200px'>
 	<p class="description">
 		Immunization is an important mark in modern medicine. I wanted to visualize the trend of immunization in countries over the years.
-		It's a simple line graph where you can select a country to view its immunization history. 
+		I first began with a line graph in conjunction with scatter plot. You can select a country to view its immunization history from 1980 to 2013. 
+		*Data Source: wwww.oecd.org
 		<br><br>
 		<a href="Immunization.html">- View Immunization Line Graph</a>
 	</p>
@@ -82,7 +85,9 @@ a{
 	<img src="https://cloud.githubusercontent.com/assets/7552207/5659644/88c069f6-96ca-11e4-8014-aa98d0642055.png" height='200px'>
 	<p class="description">
 		After creating the line graph of immunization history, I wanted to create a visualiation that allowed easier comparison between countries.
+		The line graph made it diffcult comparisons among countires. 
 		Stacked bar graph seemed like a rational choice (and I just wanted to learn how to make one in d3).
+		I used distinct hue for each disease rather than varying saturation and value in order to visually separate each disease. 
 		<br><br>
 		<a href="immunization_stacked_bar.html">- View Immunization Stacked Bar Graph</a>
 	</p>
