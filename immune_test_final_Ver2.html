@@ -1,4 +1,5 @@
-
+<!-- Immune Final. -->
+<!-- Add Map -->
 
 <!doctype html>
 <html>
@@ -57,7 +58,7 @@ circle {
   left: 0;
 }
 </style>
-<script type="text/javascript" src="d3.v3.min.js"> </script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 
  </head>
@@ -71,22 +72,23 @@ circle {
         </form> -->
 
 <!-- onchange works but onsubmit doesn't work -->
-<form name="myform" onchange="return userInput()" >
-  		<select id="myVal1" >
-  			<option>Select a country</option>	
+<form name="myform" onsubmit="return userInput()" >
+  		<select id="menuInput" onchange="userInput1()" >
+  			<option value="Select a country">Select a country</option>	
   			<option value="All Countries">All Countries </option>
-  			<option value="Austrailia">Austrailia</option>
+<!--   			<option value="Austrailia">Austrailia</option>
   			<option value="Korea">Korea </option>
   			<option value="Austria">Austria </option>
   			<option value="United States of America">United States of America </option>
   			<option value="Japan">Japan</option>
   			<option value="Canada">Canada </option>
-  			<option value="India">India</option>
+  			<option value="India">India</option> -->
   		</select>
  
 
   			 <!-- <input name="Submit"  type="submit" value="Add to list" > -->
-            <input onsubmit="return userInput()" type="text" id="myVal" placeholder="Add some text&hellip;">
+  			 <!-- <label for="myVal"> Enter Country Name </label> -->
+            <input  type="text" id="myVal" placeholder="Enter Country Name &hellip;" autocomplete>
 
  </form>
 <!-- //data info:
@@ -106,14 +108,36 @@ Last name: <input type="text" name="lastname"> -->
 
  var dataset = [];
  var userinput;
- 
+// windows.onload(main());
+
             function userInput(event){
+               var form = document.getElementById("menuInput").value
+               console.log(form.value);
                userinput = document.getElementById("myVal").value
+               document.getElementById("menuInput").value ="Select a country"
              //  console.log(userinput)
                 // console.log(document.getElementById("myVal").value)
                 //draw(document.getElementById("myVal").value)
-           //     d3.select('svg').remove();
-                main()
+               d3.select('svg').remove();
+                main();
+                console.log("Main has been called")
+                // draw(document.getElementById("myVal").value)
+                return false;
+            }
+
+            function userInput1(event){
+               var form = document.getElementById("myVal").value;
+               form.value=" ";
+               document.getElementById("myVal").value ="";
+               userinput = document.getElementById("menuInput").value;
+
+               
+             //  console.log(userinput)
+                // console.log(document.getElementById("myVal").value)
+                //draw(document.getElementById("myVal").value)
+               d3.select('svg').remove();
+                main();
+                console.log("Main has been called")
                 // draw(document.getElementById("myVal").value)
                 return false;
             }
@@ -136,11 +160,9 @@ var format = d3.time.format("%Y");
 
 main()
 
+function main(){d3.csv("immune.csv",function(data){
 
-
-function main() { d3.csv("immune.csv",function(data){
-
-
+  console.log("Main has been called22")
 
 
 	data.forEach(function(d,i){
@@ -234,7 +256,8 @@ var line2 = d3.svg.line()
  					return yScale(d.Value);
 				})
 
-
+var inputValue=d3.selectAll("input")
+console.log(inputValue.value)
 
 
 
@@ -311,6 +334,9 @@ circles.enter().append('circle')
 					// console.log(d)
 					if (userinput == null){
 						return false;
+					}
+					if (userinput == "All Countries"){
+						return true;
 					}
 					else{
 							console.log(userinput)
@@ -423,6 +449,9 @@ var line= disease.append('path')
 			if (userinput == null){
 						return false;
 				}
+			if (userinput == "All Countries"){
+				return true;
+			}
 			else{
 
 				return (d.values[0].Country == userinput);
@@ -484,7 +513,8 @@ re.append('text')
 
 
 }) // end of d3.csv("immune.csv")
-}
+
+} // end of main function
 </script>
 </body>
 </html>
