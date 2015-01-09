@@ -7,446 +7,328 @@
 
 <head>
 
-<style>
+	<style>
+		form{
+			margin: 40px 0px 40px 50px;
+		}
 
-form{
-	margin-left: 40px;
-}
- .tick text{
- 	font-size: 11px;
- 	text-anchor: end;
- }
-.yaxis path{
-	fill: none;
-	stroke: black;
-	stroke-width: 1.5px;
-}
-.xaxis path{
-	display: none;
-}
+		rect{
+			opacity: 0.7;
+		}
+		text{
+			font-family: Helvetica;
+			font-size: 16px;
+		}
+		 .tick text{
+		 	font-size: 11px;
+		 	/*text-anchor: end;*/
+		 }
+		 .yaxis text{
+		 	display:none;
+		 }
+		.yaxis path{
+			fill: none;
+			 /*fill: #ddd;*/
 
-</style>
+		}
+		.yaxis line{
+			fill: none;
+			stroke: #ddd;
+
+		}
+
+		.xaxis path{
+			display: none;
+		/*	fill: none;
+			stroke: black;
+			stroke-width: 1.5px;*/
+		}
+		.xaxis line{
+		/*display: none;*/
+			fill: none;
+			stroke: black;
+			stroke-width: 1.5px;	
+		}
+
+	</style>
+
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-
  </head>
 
 
 <body>
 
-<!--   <form name="myform" onSubmit="return userInput()">
-            <input name="Submit"  type="submit" value="Add to list" >
-            <input type="text" id="myVal" placeholder="Add some text&hellip;">
-        </form> -->
-
-<!-- onchange works but onsubmit doesn't work -->
 <form name="myform" onsubmit="" >
-  		<select id="menuInput" onchange="userInput()" >
-  			<option value="Select a country">Choose a year</option>	
-
-  		</select>
-
- </form>
-<!-- //data info:
-// variable, unit, country, year, value, flag
-//color encode each immunization type
-// draw line graph over years. -->
-
-<!-- <form name="myForm" onSubmit="return userInput()">
- <input name="Submit"  type="submit" value="Add to list" >
-<input type="text" name="firstname" id="user">
+<label for="yearMenu">Select a year from the menu:    </label>
+	<select name ="yearMenu" id="menuInput" onchange="userInput()" >
+		
+		 <option  value="Select a country">Choose a year</option>	
+	</select>
 </form>
- -->
-<!-- <br>
-Last name: <input type="text" name="lastname"> -->
+
 
 <script>
 
+	var year;
 
-var year;
-main();
-//  var dataset = [];
-//  var userinput;
-// // windows.onload(main());
+	main();
 
-//             function userInput(event){
-//                var form = document.getElementById("menuInput").value
-//                console.log(form.value);
-//                userinput = document.getElementById("myVal").value
-//                document.getElementById("menuInput").value ="Select a country"
-//              //  console.log(userinput)
-//                 // console.log(document.getElementById("myVal").value)
-//                 //draw(document.getElementById("myVal").value)
-//                d3.select('svg').remove();
-//                 main();
-//                 console.log("Main has been called")
-//                 // draw(document.getElementById("myVal").value)
-//                 return false;
-//             }
-
-            function userInput(event){
-               var inputYear = document.getElementById("menuInput").value;
-               // form.value=" ";
-               year = format.parse(inputYear);
-               console.log(year)
-               
-               
-             //  console.log(userinput)
-                // console.log(document.getElementById("myVal").value)
-                //draw(document.getElementById("myVal").value)
-               d3.select('svg').remove();
-                main(year);
-                console.log("Main has been called")
-                // draw(document.getElementById("myVal").value)
-                return false;
-            }
- 
-//             // function draw(val){
-//             //     console.log(val)
-//             //     d3.select("body").select("ul").append("li");
-//             //     dataset.push(val);d3
-
-//             //     var p = d3.select("body").selectAll("li")
-//             //     .data(dataset)
-//             //     .text(function(d,i){return i + ": " + d;})
-//             // }
-
-// //reference
-// //http://bl.ocks.org/mbostock/3902569
+	function userInput(event){
+	           var inputYear = document.getElementById("menuInput").value;
+	           year = format.parse(inputYear);
+	               
+	               
+	           d3.select('svg').remove();
+	            main(year);
+	            return false;
+	}
+	 
 
 
-var format = d3.time.format("%Y");
+	var format = d3.time.format("%Y");
 
-var y = 1980;
-var arrayYears = new Array();
-while (y<2014){	
-	arrayYears.push(format.parse(y.toString()));
-	y++;
-}
+	var y = 1980;
+	var arrayYears = new Array();
 
-	
+	while (y<2014){	
+		arrayYears.push(format.parse(y.toString()));
+		y++;
+	}
+
+		
 	for(var i =0; i<arrayYears.length; i++){
 		var option  = document.createElement('option');
 		document.getElementById('menuInput').appendChild(option).value = arrayYears[i].getFullYear();
 		document.getElementById('menuInput').appendChild(option).text = arrayYears[i].getFullYear();
 		// console.log(arrayYears[i].getFullYear())
 	}
-	//Add years to the drop down menu
+		//Add years to the drop down menu
 
-// addYearsToMenu();
+	// addYearsToMenu();
 
 
-function main (arg){
+	function main (arg){
 
-d3.csv("immune.csv",function(data){
+	d3.csv("immune.csv",function(data){
 
-if(arg !== undefined){
-	year = arg
-}
+		if(arg !== undefined){
+			year = arg
+		}
 
-else{
-	year = arrayYears[0]
-}
-// demo for 1980
+		else{
+			year = arrayYears[0]
+		}
 
-	data.forEach(function(d,i){
-		d.Value = +d.Value;
-		// d.Year = d.Year;
-		d.Year = format.parse(d.Year);   // format input to time format. 
-	})
+		data.forEach(function(d,i){
+			d.Value = +d.Value;
+			d.Year = format.parse(d.Year);   // format input to time format. 
+		})
 
 
 
-var nested = d3.nest().key(function(d){
-					return d.Country;
-				})
-				.key(function(d){
-					return d.Year;
-				})
-				.entries(data)
+		var nested = d3.nest().key(function(d)
+					{
+						return d.Country;
+					})
+					.key(function(d){
+						return d.Year;
+					})
+					.entries(data)
 
-var nested1 = d3.nest().key(function(d){
-					return d.Country;
+		var nested1 = d3.nest().key(function(d)
+					{
+						return d.Country;
+					})
+					
+					.map(data)
+
+
+		var min = d3.min(data, function(d){
+						return d.Value;
+					})
+
+
+		var height = 600;
+		var width = 1100;
+		var c;
+
+
+		nested.forEach(function(d){
+		
+			d.values.forEach(function(d,i){
+				var initial = 0;
+				var offset =20;	
+
+				d.values.forEach(function(d,i){
+					d.y1 = offset+(d.Value/2);
+					d.y0 = offset;			
+					offset += d.Value/2;
 				})
 			
-				.map(data)
+			})
+		})
+
+		var countryArray = nested.map(function(d){
+				return d.key
+		})
+
+		var maxValue = d3.max(nested,function(d,i){
+			var l =  d.values[0].values.length
+			return d.values[0].values[l-1].y1;					
+		})
+
+		var xscale = d3.scale.ordinal()
+				.domain(countryArray)		
+				.rangeRoundBands([0,(width-120)],0.1)
+
+		var yScale = d3.scale.linear().domain([0,maxValue])
+			.rangeRound([(height-140),0])
 
 
-var min = d3.min(data, function(d){
-	return d.Value;
-})
+		var xAxis = d3.svg.axis()
+				.scale(xscale)
+				.orient('bottom')
+				.tickSize(8)
+
+		var yAxis = d3.svg.axis()
+				.scale(yScale)
+				.orient("left")
+				.ticks(5)
+				.tickSize(-width)
+
+		var domain = ['Measles','Influenza', 'Hepatitis B', 'Diphtheria, Tetanus, Pertussis'];
+
+		var color = d3.scale.ordinal()
+			.range(['blue','red','orange','green'])
+		color.domain(domain);
 
 
-var height = 700;
-var width = 1200;
 
-var c;
-nested.forEach(function(d){
-	// console.log(d.values)
-	
-	d.values.forEach(function(d,i){
-	var initial = 0;
-		var offset =20;	
+		var svg = d3.select('body').append("svg")
+			.attr('width',width+20)
+			.attr('height',height+20)
+			.append("g")
+			.attr("transform", "translate(" + 50 + "," + 30 + ")");
 
-		d.values.forEach(function(d,i){
+		svg.append("g")
+			.attr("transform", "translate(0," + (height-140)+ ")")
+			.call(xAxis)
+			.attr("class","xaxis")
+			.selectAll('text')
+			// .attr("y", 10)
+			.attr("dx","-1em")
+		           .attr("dy", "-0.2em")
+		           	.attr("transform",function(d){
+				return ("rotate(-70)")
+			})
+		           	.style("text-anchor", "end")
 
-			d.y1 = offset+(d.Value/2);
-			d.y0 = offset;
-			// console.log("offset=",offset, "value=",d.Value/2, "d.y1=",d.y1)
-			offset += d.Value/2;
+		svg.append('g')
+			.call(yAxis)
+			.attr("class","yaxis")
+		    	.append("text")	  
+			.attr("x", 80)
+			.attr("y", 0)
+			.attr("dy", ".71em")
+			.style("text-anchor", "end")
+			.text(function(d){
+				return "Year: " + year.getFullYear();
+			})
 
-			// var height = d.Value - initial;
-			// initial = d.Value
-			
-			// // console.log(d)
-			// d.tallness = height;	
+		var countries = svg.selectAll('.countries')
+			.data(nested)
+			.enter()
+			.append("g")
+			.attr('class','countries')
+			.attr("transform", function(d,i){
+				return "translate(" + xscale(d.key) + ",45)" 
+			})
+							 	
+
+	/*
+	nested:
+	key:Australia
+		values: [ ] 
+			key: Year
+				values: []
+	.
+	.
+	.			
+	*/
+
+		var mini = d3.min(data,function(d){
+			return d.Year
+		})
+
+		var maxi = d3.max(data,function(d){
+			return d.Year
 		})
 		
-	})
-
-})
-var countryArray = nested.map(function(d){
-		return d.key
-})
-
-var maxValue = d3.max(nested,function(d,i){
-		console.log(d.values[0].values)
-		var l =  d.values[0].values.length
-		// console.log(d.values[0].values[l-1].y1)
-		return d.values[0].values[l-1].y1;
-
-		// d3.max(d.values[0].values,function(d,i){
-		// 	console.log (d.y1)
-		// 	return d.y1
-		// })
-					
-	})
-console.log(maxValue)
-
-var xscale = d3.scale.ordinal()
-			.domain(countryArray)		
-			.rangeRoundBands([0,(width)],0.1)
-
-var yScale = d3.scale.linear().domain([0,maxValue])
-	.rangeRound([(height-140),0])
+		var val;
 
 
-var xAxis = d3.svg.axis()
-		.scale(xscale)
-		.orient('bottom')
-
-
-var yAxis = d3.svg.axis()
-		.scale(yScale)
-		.orient("left")
-
-
-
-
-var domain = ['Measles','Influenza', 'Hepatitis B', 'Diphtheria, Tetanus, Pertussis'];
-
-var color = d3.scale.ordinal()
-	
-	.range(['blue','red','orange','green'])
-
-	color.domain(domain);
-
-// console.log(color("Measles"))
-// console.log(color('Diphtheria, Tetanus, Pertussis'))
-    // .range(["#98abc5", "#d0743c", "#7b6888", "#ff8c00"])
-    // "#a05d56", "#d0743c", "#ff8c00"]);
-
-
-var svg = d3.select('body').append("svg")
-	.attr('width',width+40)
-	.attr('height',height+40)
-	  .append("g")
-    .attr("transform", "translate(" + 50 + "," + 30 + ")");
-
-svg.append("g")
-	.attr("transform", "translate(0," + (height-40)+ ")")
-	.call(xAxis)
-	.attr("class","xaxis")
-	.selectAll('text')
-	// .attr("y", 10)
-	.attr("dx","5em")
-           .attr("dy", "-3em")
-           	.attr("transform",function(d){
-		return ("rotate(-70)")
-	})
-
-svg.append('g')
-	.call(yAxis)
-	.attr("class","yaxis")
-    .append("text")
-
-	
-	  // .attr("transform", "rotate(-90)")
-      .attr("x", 80)
-      .attr("y", 0)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text(function(d){
-      	return "Year: " + year.getFullYear();
-      })
-
-
-
-svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis)
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("Population");
-
-
-
-// append g elements for the number of Countries.
-// key = name of the countries
-var countries = svg.selectAll('.countries')
-					.data(nested)
-					.enter()
-					.append("g")
-					.attr('class','countries')
-					.attr("transform", function(d,i){
-						return "translate(" + xscale(d.key) + ",55)" 
+		 var z = countries.selectAll('rect')
+				.data(function(d,i){
+					d.values.forEach(function(d){
+						if (d.key == year){
+							val = d.values;
+						}
 					})
-						 	
-
-/*
-nested:
-key:Australia
-	values: [ ] 
-		key: Year
-			values: []
-.
-.
-.			
-*/
-console.log(countries)
-
-var mini = d3.min(data,function(d){
-	return d.Year
-})
-
-var maxi = d3.max(data,function(d){
-	return d.Year
-})
-	var val;
-
-//will execute 37 times...
- var z = countries.selectAll('rect')
-
-			.data(function(d,i){
-					// d is an object with key : Country values: [Array]
-
-							// console.log(i, d,  d.values)
-				d.values.forEach(function(d){
-					// console.log(d)
-					if (d.key == year){
-						 // console.log("FOUND")
-						val = d.values;
-						
-					}
-					else{
-						// console.log(year)
-						// console.log(d.key,d)
-						// console.log("key does not equal to year" + d.key)
-							// val = 0;
-						// break;
-					}
-					 // val = d.values;
-					 // return val;
-
-					 // return val;
+					return val;
 				})
-		
-				// console.log(val)
-				return val;
-			})
+				.enter()
+				z.append('rect')
+				.attr("y",function(d,i){
+					return yScale(d.y1);
+				})
+				.attr('width', function(d,i){
+					return xscale.rangeBand();
+				})
+				.attr("height",function(d,i){
+					return (yScale(d.y0)-yScale(d.y1))
+					var prev_value = 0;
+					var result;
+				})
+				.style("fill",function(d,i){
+					return color(d.Variable)				
+				} 
+					)
+
+		var legend = svg.append('g')
+			.selectAll('rect')
+			.data(function(d){
+				return color.domain();
+				})
 			.enter()
-			// console.log(z)
-			z.append('rect')
-			// .attr('x',function(d,i){
-			// 	return xscale.range();
-			// })
+
+		legend.append('rect')
+			.attr("width",25)
+			.attr("height",20)
+			.attr("x",980)
 			.attr("y",function(d,i){
-				return yScale(d.y1);
+				return (20*i)
 			})
-			.attr('width', function(d,i){
-				return xscale.rangeBand();
+			.style("fill",function(d){
+				return color(d);
 			})
-			.attr("height",function(d,i){
-				// console.log(d,i)
-				// console.log(d.Variable, d.tallness)
-				// return d.Value/2
-				return (yScale(d.y0)-yScale(d.y1))
-				
-				var prev_value = 0;
-				var result;
 
-				// var l = d.values.length
-				// var prev_value=0;
-				// var result;
-				// for (var j = 0; j<l; j++){
-				// 	result = d.values[j].Value + prev_value;
-				// 	prev_value = d.values[j].Value;
-				// 	return result;
-				// }	
+
+		legend.append('text')
+			.text(function(d){
+				return d;
 			})
-			.style("fill",function(d,i){
-				// var l = d.values.length				
-				// for (var j = 0; j<l; j++){
-				// 	// console.log(d.values[j].Variable)
-				// 	console.log(d.values[j].Variable,d.values[j].Country,color(d.values[j].Variable),d.values[j].Year)
-				// 	return color(d.values[j].Variable);
-					
-				// }	
-				return color(d.Variable)
-				
-			} 
-				)
-
-var legend = svg.append('g')
-	.selectAll('rect')
-	.data(function(d){
-		console.log(color.domain())
-		return color.domain();
-	})
-	.enter()
-
-	legend.append('rect')
-	.attr("width",25)
-	.attr("height",20)
-	.attr("x",1050)
-	.attr("y",function(d,i){
-		return 630+(20*i)
-	})
-	.style("fill",function(d){
-		return color(d);
-	})
+			.attr("x",1010)
+			.attr("y",function(d,i){
+				return 10+(22*i)
+			})
+			.style("fill","black")
+			.style("font-size","10px")
 
 
-console.log(legend)
-	legend.append('text')
-	.text(function(d){
-		// console.log(d)
-		return d;
-	})
-	.attr("x",1090)
-	.attr("y",function(d,i){
-		return 640+(22*i)
-	})
-	.style("fill","black")
-	.style("font-size","10px")
+	}) // END OF d3.csv("immune.csv")
 
-	// .attr("y",function(d){return 50})
+	}
 
-}) // END OF d3.csv("immune.csv")
-
-}
-
-</script>
+	</script>
 </body>
 </html>
