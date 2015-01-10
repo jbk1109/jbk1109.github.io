@@ -90,7 +90,7 @@
 	var y = 1980;
 	var arrayYears = new Array();
 
-	while (y<2014){	
+	while (y<2013){	
 		arrayYears.push(format.parse(y.toString()));
 		y++;
 	}
@@ -111,18 +111,24 @@
 
 	d3.csv("immune.csv",function(data){
 
+		data.forEach(function(d,i){
+			d.Value = +d.Value;
+			d.Year = format.parse(d.Year);   // format input to time format. 
+		})
+
 		if(arg !== undefined){
 			year = arg
 		}
 
 		else{
 			year = arrayYears[0]
+			console.log(data)
+			console.log(year)
 		}
 
-		data.forEach(function(d,i){
-			d.Value = +d.Value;
-			d.Year = format.parse(d.Year);   // format input to time format. 
-		})
+		//console.log(arrayYears[arrayYears.length-1])
+
+	
 
 
 
@@ -182,7 +188,7 @@
 				.rangeRoundBands([0,(width-120)],0.1)
 
 		var yScale = d3.scale.linear().domain([0,maxValue])
-			.rangeRound([(height-140),0])
+			.rangeRound([(height-140),20])
 
 
 		var xAxis = d3.svg.axis()
@@ -194,7 +200,7 @@
 				.scale(yScale)
 				.orient("left")
 				.ticks(5)
-				.tickSize(-(width-10))
+				.tickSize(-(width-110))
 
 		var domain = ['Measles','Influenza', 'Hepatitis B', 'Diphtheria, Tetanus, Pertussis'];
 
@@ -208,7 +214,7 @@
 			.attr('width',width+20)
 			.attr('height',height+20)
 			.append("g")
-			.attr("transform", "translate(" + 50 + "," + 30 + ")");
+			.attr("transform", "translate(" + 50 + "," + 40 + ")");
 
 		svg.append("g")
 			.attr("transform", "translate(0," + (height-140)+ ")")
@@ -255,7 +261,7 @@
 	.
 	.			
 	*/
-
+console.log(nested)
 		var mini = d3.min(data,function(d){
 			return d.Year
 		})
@@ -269,10 +275,18 @@
 
 		 var z = countries.selectAll('rect')
 				.data(function(d,i){
+					console.log(i)
+					console.log(d.values.length)
+
 					d.values.forEach(function(d){
 						if (d.key == year){
+							console.log(year)
+							console.log(d.values)
 							val = d.values;
 						}
+						// else{
+						// 	val=undefined;
+						// }
 					})
 					return val;
 				})
@@ -301,30 +315,45 @@
 				})
 			.enter()
 
+			
 		legend.append('rect')
 			.attr("width",25)
 			.attr("height",20)
-			.attr("x",970)
+			.attr("x",15)
 			.attr("y",function(d,i){
-				return (20*i)
+				return -40+(20*i)
 			})
 			.style("fill",function(d){
 				return color(d);
 			})
 
 
-		legend.append('text')
+		eachLegend = legend.append('text')
 			.text(function(d){
 				return d;
+				// return d.replace(", ", ", \n");
 			})
-			.attr("x",1000)
+
+			.attr("x",50)
 			.attr("y",function(d,i){
-				return 10+(22*i)
+				
+				return -30+(22*i)
+				
 			})
 			.style("fill","black")
 			.style("font-size","10px")
+			
 
 
+		// function legendFormat(d,i){
+		// 	if (d.indexOf(', ') > -1){
+		// 			d.split(' ');
+		// 		}
+
+
+		// 		return 10+(22*i)
+
+		// }
 	}) // END OF d3.csv("immune.csv")
 
 	}
