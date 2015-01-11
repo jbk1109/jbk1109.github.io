@@ -8,12 +8,14 @@
 <style>
 
 body{
-
   font-size: 8px;
   font-weight: 400;
   /*line-height: 10px;*/
 }
 
+.graticule{
+    stroke: black 1px solid;
+}
 svg{
   /*background: #2956B2;*/
   background: #c9c9c9;
@@ -67,9 +69,6 @@ div.tooltip {
 </head>
 
 <body>
-<div id="container">
- </div>
-
 
 
 <script>
@@ -119,6 +118,7 @@ g.append("path")
 
 
 
+
 g.append("path") 
       .datum(topojson.feature(world, world.objects.countries))
       .attr("class", "boundary")
@@ -146,7 +146,7 @@ tournament.enter().append("circle")
                              })
                               .attr("r",radius)
                               // .attr("fill","#dcd")
-                              .attr("fill","#b692b6")
+                              .attr("fill","#ce27ff")
                               .style("stroke","#dbc9db")
                               .style("stroke-width",0.8)
                               .attr("class",function(d){
@@ -228,7 +228,7 @@ var pathArcs = arcGroup.selectAll(".arc")
         })
          .style({
             'stroke': '#aea3c3',
-            'stroke-width': 0.7,
+            'stroke-width': 1.2,
             'opacity':1
 
         })
@@ -260,20 +260,20 @@ d3.selectAll(".arc").style({
         'stroke': '#aea3c3',
 //                'stroke': '#F0F0F0',
                 //'stroke': 'rgba(255,255,255,0.5)',
-        'stroke-width': '0.7',
-        'opacity':1
+        'stroke-width': '1',
+        'opacity':0.3
             })
  
  
-
- d3.selectAll("circle").attr("fill","#b692b6").style("opacity",1).attr("r",radius)     ;
+//Style attributes for non-selected cities when user selects a city
+ d3.selectAll("circle").attr("fill","#ce27ff").style("opacity",0.3).attr("r",radius)     ;
     
 
 
     var c = d.city;
 
 //Style attributes for selected cities
-  d3.select(pathArcs[0][i]).style('stroke','#ff8f20').style('opacity',1)
+  d3.select(pathArcs[0][i]).style('stroke','#ff8f20').style('opacity',1).style("stroke-width",1.2)
 
   d3.select(this).attr("fill","#ff8f20").style("opacity",1).attr("r",radius)     
 
@@ -322,8 +322,12 @@ d3.selectAll(".arc").style({
 
 
 });
-
 </script>
+<div id="container">
+
+This is
+
+ </div>
 
 </body>
 
