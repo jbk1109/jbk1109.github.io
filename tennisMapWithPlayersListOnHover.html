@@ -733,6 +733,34 @@ console.log(countryArray)
               },
             fill: 'steelblue'
         }).attr('class','countryRect')
+              addRect.on('mouseover',function(d){
+  
+        console.log(d)
+        d3.select('.divContainer').style('left',this.x.baseVal.value).style('left',this.x.baseVal.value + 'px').style('display','block')
+        divContainer.style('top',this.y.baseVal.value).style('top',(this.y.baseVal.value+90) +'px')
+  
+        var playerList = d.players;
+        playerList.sort(function(a,b){ return a.RANKING - b.RANKING})
+  
+        var table = divContainer.append('table')
+        var headerRow = table.append('tr')
+        headerRow.append('th').html("Ranking").attr("class",'ranking')
+        headerRow.append('th').html("Name").attr("class",'name')
+  
+        var players = table.append('tbody').selectAll('tr').data(playerList).enter()
+        var eachRow = players.append('tr')
+        var eachCell1 = eachRow.append('td').attr('class','rankingCell').html(function(d){return d.RANKING})
+        var eachCell2 =  eachRow.append('td').attr('class','nameCell').html(function(d){return d.PLAYER_NAME})
+
+        // var addPlayers = players.append('text').text(function(d){
+          // return d.PLAYER_NAME
+        
+  })
+  .on('mouseout',function(d){
+      d3.select('.divContainer').style('display','none')
+      // console.log(d3.select('.divContainer'))
+        d3.select('.divContainer').select('table').remove()
+  })
 
 
 
@@ -791,68 +819,7 @@ Working code for Histogram
             height: function(d){ 
                return heightScale(d.COUNT)},
             fill: 'steelblue'
-        })
-    
-
-
-              // Add player count to at the top of each bar
-
-        var countLabel = d3.select('g.nations').selectAll('text.count')
-        .data(function(){
-            return d3.values(tennis).filter(function(d){
-              return d.COUNTRY_ID == 840;
-            })
-        })
-
-        countLabel.enter()
-        .append('text')
-        .attr('class','count')
-        .attr('x',function(d,i){
-            return(xScale(d.DATE) + ((width-150)/yearArray.length)/2)
-        })
-        .attr('y', function(d){
-          return (rectHeight + 50) -heightScale(d.COUNT) +11
-        })
-        .text(function(d){
-            return d.COUNT
-        })
-        .attr('text-anchor','middle')
-
-        //    // Add year to at the top of each bar
-        // nations.selectAll('.year')
-        // .data(function(){
-        //     return d3.values(tennis).filter(function(d){
-        //       return d.COUNTRY_ID == 840;
-        //     })
-        // })
-        // .enter()
-        // .append('text')
-        // .attr('class',function(d){
-        //   return 'year'+d.DATE
-        // })
-        // .attr('x',function(d,i){
-        //     return(xScale(d.DATE) + ((width-150)/yearArray.length)/2)
-        // })
-        // .attr('y', function(d){
-        //   return heightScale(d.COUNT)+18
-        // })
-        // .text(function(d){
-        //     return d.COUNT
-        // })
-        // .attr('text-anchor','middle')
-
-
-
-      //adjust tick location (shift to right so that tick is placed under the middle of each bar)
-        var x_axis = nations.append('g').attr("class","xAxis").attr("transform", "translate(0," + (rectHeight+50) + ")").call(xAxis)
-
-        d3.selectAll('.tick line').attr('x1',function(d){ return ((width-150)/yearArray.length)/2}).attr('x2',function(d){ return ((width-150)/yearArray.length)/2})
-        d3.selectAll('.tick text').attr('x',function(d){ return ((width-150)/yearArray.length)/2})
-
-
-d3.select('g.nations').on('mouseover',function(d){ console.log("text hover")})
-var selectRect = d3.select('g.nations').selectAll('.countryRect')
-selectRect.on('mouseover',function(d){
+        }).on('mouseover',function(d){
   
         console.log(d)
         d3.select('.divContainer').style('left',this.x.baseVal.value).style('left',this.x.baseVal.value + 'px').style('display','block')
@@ -880,6 +847,101 @@ selectRect.on('mouseover',function(d){
       // console.log(d3.select('.divContainer'))
         d3.select('.divContainer').select('table').remove()
   })
+
+      
+
+
+
+
+
+      
+
+
+              // Add player count to at the top of each bar
+
+        var countLabel = d3.select('g.nations').selectAll('text.count')
+        .data(function(){
+            return d3.values(tennis).filter(function(d){
+              return d.COUNTRY_ID == 840;
+            })
+        })
+
+        countLabel.enter()
+        .append('text')
+        .attr('class','count')
+        .attr('x',function(d,i){
+            return(xScale(d.DATE) + ((width-150)/yearArray.length)/2)
+        })
+        .attr('y', function(d){
+          return (rectHeight + 50) -heightScale(d.COUNT) +11
+        })
+        .text(function(d){
+            return d.COUNT
+        })
+        .attr('text-anchor','middle')
+     var x_axis = nations.append('g').attr("class","xAxis").attr("transform", "translate(0," + (rectHeight+50) + ")").call(xAxis)
+        //    // Add year to at the top of each bar
+        // nations.selectAll('.year')
+        // .data(function(){
+        //     return d3.values(tennis).filter(function(d){
+        //       return d.COUNTRY_ID == 840;
+        //     })
+        // })
+        // .enter()
+        // .append('text')
+        // .attr('class',function(d){
+        //   return 'year'+d.DATE
+        // })
+        // .attr('x',function(d,i){
+        //     return(xScale(d.DATE) + ((width-150)/yearArray.length)/2)
+        // })
+        // .attr('y', function(d){
+        //   return heightScale(d.COUNT)+18
+        // })
+        // .text(function(d){
+        //     return d.COUNT
+        // })
+        // .attr('text-anchor','middle')
+
+
+
+      //adjust tick location (shift to right so that tick is placed under the middle of each bar)
+        
+
+        d3.selectAll('.tick line').attr('x1',function(d){ return ((width-150)/yearArray.length)/2}).attr('x2',function(d){ return ((width-150)/yearArray.length)/2})
+        d3.selectAll('.tick text').attr('x',function(d){ return ((width-150)/yearArray.length)/2})
+
+
+
+// var selectRect = d3.select('g.nations').selectAll('.countryRect')
+// selectRect.on('mouseover',function(d){
+  
+//         console.log(d)
+//         d3.select('.divContainer').style('left',this.x.baseVal.value).style('left',this.x.baseVal.value + 'px').style('display','block')
+//         divContainer.style('top',this.y.baseVal.value).style('top',(this.y.baseVal.value+90) +'px')
+  
+//         var playerList = d.players;
+//         playerList.sort(function(a,b){ return a.RANKING - b.RANKING})
+  
+//         var table = divContainer.append('table')
+//         var headerRow = table.append('tr')
+//         headerRow.append('th').html("Ranking").attr("class",'ranking')
+//         headerRow.append('th').html("Name").attr("class",'name')
+  
+//         var players = table.append('tbody').selectAll('tr').data(playerList).enter()
+//         var eachRow = players.append('tr')
+//         var eachCell1 = eachRow.append('td').attr('class','rankingCell').html(function(d){return d.RANKING})
+//         var eachCell2 =  eachRow.append('td').attr('class','nameCell').html(function(d){return d.PLAYER_NAME})
+
+//         // var addPlayers = players.append('text').text(function(d){
+//           // return d.PLAYER_NAME
+        
+//   })
+//   .on('mouseout',function(d){
+//       d3.select('.divContainer').style('display','none')
+//       // console.log(d3.select('.divContainer'))
+//         d3.select('.divContainer').select('table').remove()
+//   })
 
 // var selectRect = d3.selectAll('rect')
 // selectRect.on('mouseover',function(d){ 
@@ -954,7 +1016,8 @@ selectRect.on('mouseover',function(d){
 
  // var yearListBackground = d3.select(".yearListBackground").append('svg').append("g")
    
-   var yearListGruopBackground = svg.append('rect').attr('width','42px').attr('height',560).attr("transform", "translate(0," + (150) + ")").attr('fill','#F0F0F0').attr('x',35).style('opacity','0.8')
+   var yearListGruopBackground = svg.append('g').attr('class','yearListBackground')
+   yearListGruopBackground.append('rect').attr('width','42px').attr('height',560).attr("transform", "translate(0," + (150) + ")").attr('fill','#F0F0F0').attr('x',35).style('opacity','0.8')
    
 
 var yearListGroup = svg.append('g').attr('class','yearListGroup').attr("transform", "translate(0," + (170) + ")").selectAll('text').data(yearArray).enter() 
