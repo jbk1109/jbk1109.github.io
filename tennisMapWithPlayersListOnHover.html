@@ -6,13 +6,39 @@
 <style>
 body {
   font: 12px sans-serif;
+  background-color:  #f1f1f1;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0px;
+  width: 90%;
+  /*width: 1500px;*/
 }
 
+.histogramNationName{
+  fill: #5E545D;
+  font-size: 13px;
+}
+.histogramNationName tspan{
+  font-weight: bold;
+ 
+}
+.container{
+  margin-left: auto;
+  margin-right: auto;
+  
+}
 
 .rankingList:not(.selectedPlayers){
   opacity: 1;
 }
 
+.countryRect{
+  fill: #404040;
+}
+
+.countryRect:hover{
+  opacity: 0.8;
+}
 
 .divContainer{
   /*display:none;*/
@@ -58,6 +84,11 @@ tr:nth-child(even) {
 /*.divcontainer{
   display:block;
 }*/
+svg{
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+}
 .svgInDivContainer{
   background-color: #111;
   opacity: 0.9;
@@ -79,7 +110,7 @@ tr:nth-child(even) {
   /*text-align: center;*/
   top:-25px;
   margin: 10px 0px 0px 0px;
-  left:30%;
+  left:50%;
   border-radius: 2px;
 }
 #try{
@@ -152,11 +183,26 @@ text.year:hover{
   border-radius: 2px;
 
 }
-svg{
+
+
+.svgForMap{
   background: #ddd;
   position: absolute;
-  /*top:50px;*/
+  top:190px;
+
 }
+.histogramContainer{
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+.svgHistogram{
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 path {
   stroke: #222;
   stroke-width: 0.25px;
@@ -164,8 +210,10 @@ path {
 
 
 path:hover{
-  stroke: orange;
-  stroke-width: 1px;
+  fill: #969696;
+  opacity: 0.8;
+  /*stroke: #969696;*/
+  /*stroke-width: 1px;*/
 }
 
 .xAxis line, .xAxis path{
@@ -200,11 +248,13 @@ Distribution of Top 100 Tennis Players
 <script src = "http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 <script>
 var width = 1200,
-    height = 2500;
+    height = 700;
+
+var HeightForSvgHistogram = 170; 
 
 var projection = d3.geo.kavrayskiy7()
     .scale(230)
-    .translate([width / 2, height / 5])
+    .translate([width / 2, height / 2])
     .precision(.1);
 
 // var projection = d3.geo.mercator()
@@ -212,9 +262,25 @@ var projection = d3.geo.kavrayskiy7()
 //     .scale(190)
 //     .rotate([-180,0]);
 
-var svg = d3.select("body").append("svg")
+
+var container = d3.select('body').append('div').attr('class','container')
+
+var histogramContainer = d3.select('.container').append('div').attr('class','histogramContainer')
+
+var svgHistogram = d3.select('body').select('.histogramContainer').append('svg')
+                        .attr({
+                          "width": width,
+                          'height': HeightForSvgHistogram
+                        })
+                        .attr('class','svgHistogram')
+
+
+var svg = d3.select("body").select('.container').append("svg")
     .attr("width", width)
     .attr("height", height)
+    .attr('class','svgForMap')
+    
+    // .attr("transform","translate(0," + HeightForSvgHistogram + 100  +")")
 
 var xYear = d3.scale.linear().domain([1982,2016])
                     .range([20,width-20])
@@ -249,10 +315,11 @@ queue()
 // // load and display the World
 function ready(error, topology, tennis) {
   loc = width/2
-var mainTitle = d3.select('svg').append('text').text("Distribution of Top 100 Tennis Players")
-.attr("transform", "translate(" + width/2 + "," + 24 + ")")
+var mainTitle = d3.select('.svgForMap').append('text').text("Distribution of Top 100 Tennis Players")
+.attr("transform", "translate(" + width/1.3 + "," + height/1.1 + ")")
 .attr('font-size','24px')
 .attr('text-anchor','middle')
+.attr('fill','#5E545D')
 // .attr('x',width/2).attr('y',25).fill("black")
 
 
@@ -323,53 +390,6 @@ var divContainer = d3.select('body').append('div').attr("id","try")
 
 
 var xAxis = d3.svg.axis().orient('bottom').scale(xScale).ticks(26).tickFormat(d3.format("d"))
-
-
-
-// var xScale = d3.scale.linear().domain([1982,2016]).range([20,width-20])
-
-// var rectWidth = d3.scale.ordinal().domain(yearArray).rangeRoundBands([20,width-20],0.1)
-// var xScale = d3.time.scale().domain([new Date,2016]).range([0,width])
-
-// .ticks(34).tickFormat(d3.format("d"))
-// .tickPadding(10)
-
-
-// var xAxis = d3.svg.axis().orient('bottom').scale(timescale).ticks(d3.time.years,1).tickFormat(d3.time.format('%Y'))
-// Create slider axes of years.
-// slider.append("g", ".track-overlay")
-//     .attr("class", "ticks")
-//     // .attr("transform", "translate(0," + 120 + ")")
-
-//   .selectAll("text")
-//   .data(xYear.ticks(35))
-//   .enter().append("text")
-//     .attr("x", xYear)
-//     .attr("text-anchor", "middle")
-//     .text(function(d) { return d; })
-//     .attr('font-size','9px')
-//     .attr("class",'year')
-//     .on('click',function(d){
-//       circleLocation(d)
-//       updateMapColor(d)
-//     })
- 
-
-// Create cirular marker for the silder. 
-// var circle =  slider.insert("circle", ".track-overlay")
-//     .attr("class", "handle")
-//     .attr("r", 7)
-//     .attr("cx",xYear(1980))
-//     .attr("cy",85)
-//     .attr('fill','steelblue')
-//     .style('opacity',0.7)
-
-// function to update circle location
-// var circleLocation = function (y){
-//   year = y
-//   circle.attr('cx',xYear(year))
-// }
-  
 
 
 minYear = d3.min(tennis, function(d){
@@ -495,105 +515,9 @@ initialFlag = true;
 
 var heightScale = d3.scale.pow().exponent(0.8).domain([1,maxValue]).rangeRound([15,100])
 
-// var heightScale = d3.scale.linear().domain([0,maxValue]).range([80,0])
-console.log(heightScale(5))
-console.log(heightScale(10))
-// var heightScale = d3.scale.linear().domain([0,maxValue]).range([0,60])
 var rectHeight = 60;
-// var rectWidth = 40;
-
 
 var histogramTitle ="Number of Tennis Players from"
-
-// function loadHistogram(d){
-//         // console.log(event['path'][0]['__data__']['name'])
-//         selectCountryName = event['path'][0]['__data__']['name']
-//         selectCountry = d.id      
-//         countryArray = d3.values(tennis).filter(function(d){
-//             return d.COUNTRY_ID == selectCountry
-//         })
-        
-
-      
-//         var x = svg.select('.nations').selectAll('.year')
-//                   .data(countryArray)
-//                   x.exit().remove();
-         
-//           x.enter()
-//             // .append('rect')
-//             // .attr('width',0)
-//             // .attr('height',0)
-
-//             x.transition()
-//             .duration(1500)
-//                .attr('x',function(d,i){     
-//                   return rectWidth(d.DATE)
-//                 // if (d.COUNT==null){
-//                 //   console.log(rectWidth(yearArray[i]))
-//                 //   return rectWidth(yearArray[i])
-//                 // }
-//                 // else{return rectWidth(d.DATE)}
-//                  })
-//                 .attr('y',function(d){
-//                     return (heightScale(d.COUNT))
-//                     // return ((rectHeight+50)-heightScale(d.COUNT))
-
-//                 })
-//                 .attr('width',function(d){
-//                   return rectWidth.rangeBand()}) 
-//                 .attr('height',function(d){
-//                     return (rectHeight+50) - heightScale(d.COUNT)
-//                 })
-//                 .attr("fill",'steelblue')
-
-
-
-//         var y =  svg.select('.nations').selectAll('.count').data(countryArray)
-//           y.exit().remove();
-//             // svg.select('.nations').selectAll('.xAxis').remove()
-//         y.enter()
-//         .append('text')
-
-//          y.transition()
-//             .duration(1500)
-//         .attr({
-//           class:"count",
-//           x: function(d,i){ 
-//             // console.log(rectWidth(d.DATE))
-//             console.log(d.COUNT)
-            
-//              // if (d.COUNT==null){
-//              //    console.log(yearArray[i])
-//              //      return rectWidth(yearArray[i])
-//              //    }
-//              //    else{
-//              //      // console.log(yearArray[i])
-//                   console.log(d.DATE)
-//                   // console.log(rectWidth(yearArray[i]))
-//                   // console.log(rectWidth(d.DATE))
-//                   return rectWidth(d.DATE)
-//                 // }
-                 
-//             // (rectWidth(d.DATE)) + (0.5) )
-//          },
-//           y: function(d){ 
-//                 return (heightScale(d.COUNT))
-//               },
-//           fill: 'white',
-//           'font-size': '11px'
-//           })
-//         .attr("font-family", "sans-serif")
-//         .text(function(d){
-//           return d.COUNT
-//           })
-
-//         // nations.append('g').attr("class","xAxis").attr("transform", "translate(0," + (rectHeight+0) + ")").call(xAxis)
-//         // nations.select('.nations').append('text').text("Country: " + selectCountryName).attr('x',20).attr('y',30)
-
-//         nations.append('text').text("Country: " + selectCountryName).attr('x',20).attr('y',30)
-//   }
-
-
 
 
  var coloredWorldMap = g.selectAll("path")
@@ -611,30 +535,10 @@ var histogramTitle ="Number of Tennis Players from"
       .on('mouseout',tip.hide)
       .on('click', function(d){
         drawBarChart(d)
-        highlightPlayers(d)
+        // highlightPlayers(d)
         //loadHistogram(d)
             
       })
-      // .on('mouseover',function(d){
-      //     selectCountry = d.id
-      //     var playerList = d3.values(tennis).filter(function(d){
-      //       return (d.COUNTRY_ID == selectCountry & d.DATE == year)
-      //   })
-      //     console.log(playerList[0].players)
-      //   var players = svgInDivContainer.selectAll('text').data(playerList[0].players).enter()
-      //   var addPlayers = players.append('text').text(function(d){
-      //       console.log(d.PLAYER_NAME) 
-      //      return d.PLAYER_NAME})
-      //   .attr('x',30).attr('y',function(d,i){return 50+i*13}).attr('fill','white')
-      //   d3.select('.divContainer').style('display','block')
-      // })
-      // .on('mouseout',function(d){
-      //   empty=[]
-      //   d3.select('.divContainer').style('display','none')
-      //   d3.select('.divContainer').selectAll('text').remove()
-      //   console.log()
-
-      // })
       updateMapColor(1982)
 
 var containerWidth = 300;
@@ -707,7 +611,7 @@ function drawBarChart(d){
 
 */
 console.log(countryArray)
-  var addRect = d3.select('g.nations').selectAll('rect')
+  var addRect = d3.select('g.nations').selectAll('.countryRect')
                   .data(countryArray)
                   
                   console.log(addRect.exit().remove())
@@ -732,7 +636,9 @@ console.log(countryArray)
                 return heightScale(d.COUNT)
               },
             fill: 'steelblue'
-        }).attr('class','countryRect')
+        }).attr('class','countryRect').attr('id',function(d){
+          return ('year' + d.DATE)
+        })
               addRect.on('mouseover',function(d){
   
         console.log(d)
@@ -784,16 +690,20 @@ console.log(countryArray)
         })
         .attr('text-anchor','middle')
 
-// histogramNationName.text("Country: " + selectCountryName)
+histogramNationName.text("Country: ").append('tspan').text(selectCountryName) 
 }
 
    
 
 /* 
 Working code for Histogram
+The length of entire histogram = main svg width(1200) -150 = 1050
+
+
 */
+
     var padding_right = 8
-    var nations = svg.append('g').attr("class","nations").attr('transform','translate('+ 30 +',10)')
+    var nations = svgHistogram.append('g').attr("class","nations").attr('transform','translate('+ 50 +',40)')
 
     var histSelection = nations.selectAll('rect.countryRect')
               .data(function(){
@@ -822,8 +732,8 @@ Working code for Histogram
         }).on('mouseover',function(d){
   
         console.log(d)
-        d3.select('.divContainer').style('left',this.x.baseVal.value).style('left',this.x.baseVal.value + 'px').style('display','block')
-        divContainer.style('top',this.y.baseVal.value).style('top',(this.y.baseVal.value+90) +'px')
+        d3.select('.divContainer').style('left',this.x.baseVal.value + 50 + 'px').style('display','block')
+        divContainer.style('top',this.y.baseVal.value).style('top',(this.y.baseVal.value+120) +'px')
   
         var playerList = d.players;
         playerList.sort(function(a,b){ return a.RANKING - b.RANKING})
@@ -880,30 +790,7 @@ Working code for Histogram
         })
         .attr('text-anchor','middle')
      var x_axis = nations.append('g').attr("class","xAxis").attr("transform", "translate(0," + (rectHeight+50) + ")").call(xAxis)
-        //    // Add year to at the top of each bar
-        // nations.selectAll('.year')
-        // .data(function(){
-        //     return d3.values(tennis).filter(function(d){
-        //       return d.COUNTRY_ID == 840;
-        //     })
-        // })
-        // .enter()
-        // .append('text')
-        // .attr('class',function(d){
-        //   return 'year'+d.DATE
-        // })
-        // .attr('x',function(d,i){
-        //     return(xScale(d.DATE) + ((width-150)/yearArray.length)/2)
-        // })
-        // .attr('y', function(d){
-        //   return heightScale(d.COUNT)+18
-        // })
-        // .text(function(d){
-        //     return d.COUNT
-        // })
-        // .attr('text-anchor','middle')
-
-
+      
 
       //adjust tick location (shift to right so that tick is placed under the middle of each bar)
         
@@ -1007,8 +894,8 @@ Working code for Histogram
   
   */
       // histogramNationName.text("Country: " + selectCountryName).attr('x',20).attr('y',30)
-        var histogramNationName = nations.append('text')
-        histogramNationName.text("Country: United States of America").attr('x',width-280).attr("y",25)
+        var histogramNationName = nations.append('text').attr("class",'histogramNationName')
+        histogramNationName.text("Country: ").attr('x',0).attr("y",-20).append('tspan').text("United States of America")
 
         
 
@@ -1017,10 +904,10 @@ Working code for Histogram
  // var yearListBackground = d3.select(".yearListBackground").append('svg').append("g")
    
    var yearListGruopBackground = svg.append('g').attr('class','yearListBackground')
-   yearListGruopBackground.append('rect').attr('width','42px').attr('height',560).attr("transform", "translate(0," + (150) + ")").attr('fill','#F0F0F0').attr('x',35).style('opacity','0.8')
+   yearListGruopBackground.append('rect').attr('width','42px').attr('height',580).attr("transform", "translate(0," + (height/10) + ")").attr('fill','#F0F0F0').attr('x',35).style('opacity','0.8')
    
 
-var yearListGroup = svg.append('g').attr('class','yearListGroup').attr("transform", "translate(0," + (170) + ")").selectAll('text').data(yearArray).enter() 
+var yearListGroup = yearListGruopBackground.append('g').attr('class','yearListGroup').attr("transform", "translate(0," + (95) + ")").selectAll('text').data(yearArray).enter() 
 
     yearListGroup.append('text').text(function(d){return d}).attr('x','40').attr('y',function(d,i){ return 16*i }).attr('font-size','13px').attr('class','year').attr("id",function(d){return "y"+d})
     .attr('fill','black')
