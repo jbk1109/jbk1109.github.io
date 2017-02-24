@@ -13,7 +13,24 @@ body {
   width: 90%;
   /*width: 1500px;*/
 }
+button{
+  position: absolute;
+  z-index: 999;
+  top: 850px;
+  left: 85px;
+  width: 13em;
+  padding: 0.6em 0.6em 0.5em 0.5em;
+  text-align: center;
 
+}
+#credit{
+  position: absolute;
+  margin-top: 64%;
+  margin-left: 61.5%;
+  color: #555;
+  font-size: 10px;
+
+}
 text.count{
   fill: #ccc;
 }
@@ -446,37 +463,27 @@ var colorScale = d3.scale.linear().domain([minValue,maxValue]).range(['#9ecae1',
 
 var initialFlag = false;
 
- var updateMapColor = function (y){
+var updateMapColor = function (y){
   year = y;
-  // tennisInfoofYear = d3.values(tennis).filter(function(d){
-  //             return d.DATE == year;
-  //         });
-
   var rankingList ={}
 
-  coloredWorldMap.transition().duration(700).attr('fill',function(d){
-      a = d;
-
-      
+  coloredWorldMap.transition().delay(270).ease('circle',0.7,'out-in').duration(850).attr('fill',function(d){
+      a = d;    
       x = d3.values(tennis).filter(function(d){
           return (d.DATE == year)
-      }) 
-      
+      })       
       rankingList = x;
 
       x = d3.values(x).filter(function(d){
         return (d.COUNTRY_ID == a.id)
       })
-      
-
 
       if (x.length != 0){
               if(x[0].COUNT == 0){
                 return "#fff"
               }
               else{
-              return colorScale(x[0].COUNT)}
-              
+              return colorScale(x[0].COUNT)}     
           }
 
           else{
@@ -485,8 +492,6 @@ var initialFlag = false;
 
     return colorScale(x[0].COUNT)
   })
-
-// rankingListArray['year'] = year;
 
 
 rankingListArray = [];
@@ -502,7 +507,7 @@ rankingList.forEach(function(d){
 rankingListArray.sort(function(a,b){
   return a.RANKING - b.RANKING
 })
-console.log(rankingListArray)
+
 
 
 
@@ -942,18 +947,81 @@ The length of entire histogram = main svg width(1200) -150 = 1050
    
    var yearListGruopBackground = svg.append('g').attr('class','yearListBackground')
    yearListGruopBackground.append('rect').attr('width','42px').attr('height',580).attr("transform", "translate(0," + (height/10) + ")").attr('fill','#F0F0F0').attr('x',35).style('opacity','0.8')
-   
+ 
+var animateMapButton = d3.select('body').append('button').attr({   
+                                            class: "button",
+                                            id: "animateMap"})
+                                  .text("Animate the map")
+                                  
+animateMapButton.on("click", animateTheMap)
+
+var animateTimer;
+
+function animateTheMap(arg){
+
+                                        animateMapButton.text("Stop the Animation")
+                                        animateMapButton.on('click',function(){
+                                          stopAnimateTheMap(i)
+                                        })
+                        
+                                        // If the selected current year is the last year, then the animation should begin from the year 1982 (i=0)
+                                        // But, anitmation should stop when the year reaches the last year and resume only when there is more year to go.
+                                        currentYear = parseInt(d3.select('text.selected').attr('id').substr(-4,4)) ;
+                                        i = currentYear - 1982;
+                                        
+                                        // if the current year is 2016, the last year with available info, then reset the index to 0
+                                        // so the aniamtion will begin from 1982
+
+                                        if (i == yearArray.length-1){
+                                          i =0;
+                                        }
+                                        
+                                        animateTimer = setInterval(function(){
+                                    
+                                            if(i<yearArray.length){
+                                                 
+                                                 d3.select('text.selected').classed('selected',false)
+                                                 d3.select('#year'+yearArray[i]).classed('selected',true)
+                                                 updateMapColor(yearArray[i])
+                                                 i++;
+                                                
+                                              }
+                                            else{
+                                              //Animation has run its course
+                                              console.log("Reached the end")
+                                              clearInterval(animateTimer)
+                                              // Set next Animation to the beginning.
+                                              // i=0;
+                                              animateMapButton.text("Animate the map").on('click',animateTheMap)
+                                            }
+                                          },2100)
+                              }
+
+
+ function stopAnimateTheMap(arg){
+                                      // arg is the index of the yearArray at which the animation was stopped
+                                      // It can be passed to animateTheMap so that the animation can be resumed from the paused year.
+
+                                    // var pausedYear = parseInt(d3.select('text.selected').attr('id').substr(-4,4));
+                                      clearInterval(animateTimer)                                    
+                                      animateMapButton.text("Animate the map")
+                                      animateMapButton.on("click",function(){
+                                        animateTheMap()
+                                      })
+                                  }
+
+
 
 var yearListGroup = yearListGruopBackground.append('g').attr('class','yearListGroup').attr("transform", "translate(0," + (95) + ")").selectAll('text').data(yearArray).enter() 
 
-    yearListGroup.append('text').text(function(d){return d}).attr('x','40').attr('y',function(d,i){ return 16*i }).attr('font-size','13px').attr('class','year').attr("id",function(d){return "y"+d})
+    yearListGroup.append('text').text(function(d){return d}).attr('x','40').attr('y',function(d,i){ return 16*i }).attr('font-size','13px').attr('class','year').attr("id",function(d){return "year"+d})
     .attr('fill','black')
     .on('click',function(d){ 
         d3.select("text.selected").classed('selected',false)
       d3.select(this).classed('selected',true)
       updateMapColor(d)})
 
-    d3.select('#y1982').classed('selected',true)
+    d3.select('#year1982').classed('selected',true)
 
     // yearListGroup.append('text').text("ANIMATE THE MAP!").attr('x',40).attr('y',450).on('click',animate)
 
@@ -961,27 +1029,6 @@ var yearListGroup = yearListGruopBackground.append('g').attr('class','yearListGr
 var antartica = document.getElementsByClassName('Antarctica')[0]
 console.log(document.getElementsByClassName('Antarctica'))
 antartica.parentNode.removeChild(antartica)
-
-function animate(){
-    i=0;
-    
-    setInterval(function(){
-      if (i != 0){
-        d3.select(d3.selectAll(".year")[0][i-1]).attr("fill","black")
-      }
-      
-      d3.select(d3.selectAll(".year")[0][i]).attr("fill","red")
-      // d3.selectAll(".year")[i].attr('fill','red')
-        myInterval = updateMapColor(yearArray[i])
-
-         i++; 
-      if(yearArray.length == i){
-        i=0
-        clearInterval(myInterval);
-      }
-
-}, 3000)
-    }
 
 
 
@@ -998,9 +1045,10 @@ d3.select('.sliderGroup').call(d3.slider())
 
 }
 
-     
+    
 </script>
-<div id="slider">
-</div>
+<p id="credit">
+Data Source: https://data.world/sixmanguru/mens-year-end-atp-rankings
+</p>
 </body>
 </html>
