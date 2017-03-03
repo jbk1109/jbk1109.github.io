@@ -4,6 +4,8 @@
 <link rel="stylesheet" href="d3.slider.css" />  
 </head>
 <style>
+
+
 body {
   font: 12px sans-serif;
   background-color:  #f1f1f1;
@@ -58,32 +60,43 @@ text.count{
 }
 
 .countryRect:hover{
-  opacity: 0.8;
+  fill: steelblue;
+  /*opacity: 0.8;*/
 }
 
 .divContainer{
   /*display:none;*/
   /*top: 200px;*/
+  width: 18em;
   padding-top: 5px;
   padding-bottom: 5px;
   /*padding-left: 10px;*/
   /*padding-right: 10px;*/
-  background-color: #222;
-  opacity:0.8;
+  background-color: #111;
+  opacity:0.9;
   position: absolute;
   color: #f0f0f0;
-  font-size: 12px;
+  font-size: 13px;
   /*top:50px;
   left:50px;*/
 }
 
+table{
+  width: 100%;
+  /*border-color: red;*/
+  border-collapse: collapse;
+}
 td{
   padding:0.3em;
-  border-color: red;
+  
 }
 tr{
   border-width: 2px;
+  border-color: red;
   
+}
+th{
+  text-transform: uppercase;
 }
 th.name{
   text-align: left;
@@ -100,7 +113,7 @@ th.ranking{
   text-align: left;
 }
 tr:nth-child(even) {
-    background-color: #101010;
+    background-color: #505050;
 }
 /*.divcontainer{
   display:block;
@@ -181,6 +194,7 @@ h1{
   /*display: none;*/
 }
 
+
 text.year:hover{
   font-weight: bold;
   cursor: pointer;
@@ -205,19 +219,46 @@ text.year:hover{
 }
 
 #tip{
-/*  height: 25px;
-  width: 25px;*/
-  background-color: rgba(0, 0, 0, 0.8);
+
+  background-color: rgba(0, 0, 0, 0.9);
   color: #fff;
-  padding: 10px;
+  padding-top: 1px;
+  /*padding-bottom: 2px;*/
+  padding: 2px 15px 2px 15px;
+  /*padding: 5px;*/
   line-height: 1.2;
-  border-radius: 2px;
+  /*border-radius: 2px;*/
 
 }
 
 
+#tip p{
+  padding: 4px 3px 4px 3px;
+  margin: 12px 0px 12px 0px;
+  color: #ddd;
+  font-size: 14px;
+  font-weight: light;
+  letter-spacing: 0.01em;
+
+}
+
+span#countryName{
+  color: #ff984d;
+  font-size: 24px;
+  text-transform: uppercase;
+  /*margin-bottom: 40px;*/
+}
+
+p #year, p #playerCount{
+  color: #ff984d;
+
+font-weight: bold;
+}
+
+
+
 .svgForMap{
-  background: #ddd;
+  background: #eee;
   position: absolute;
   top:190px;
 
@@ -266,6 +307,7 @@ path:hover{
    /*stroke: #000;*/
 
 }
+
 
 h1 {
   position: absolute;
@@ -335,7 +377,7 @@ var g = svg.append("g");
 
 
 var yearArray = d3.range(1982,2017)
-var xScale = d3.scale.linear().domain([1982,2017]).range([0,width-100])
+var xScale = d3.scale.linear().nice().domain([1982,2017]).rangeRound([0,width-100])
 
     // .attr("transform", "translate(" + margin.left + "," + height / 2 + ")");
 
@@ -377,7 +419,7 @@ mainTitleGroup.append('text').text("DISTRIBUTION OF TOP 100 TENNIS PLAYERS").att
   var countries = topojson.feature(topology, topology.objects.countries).features;
 
 
-var countryCodeMap = {"Canada": 124, "Moldova": 498, "Sao Tome and Principe": 678, "Guinea-Bissau": 624, "United States": 840, "Lithuania": 440, "Cambodia": 116, "Saint Helena, Ascension and Tristan da Cunha": 654, "Switzerland": 756, "Ethiopia": 231, "Aruba": 533, "Saint Martin (French part)": 663, "Solomon Islands": 90, "Argentina": 32, "Cameroon": 120, "Burkina Faso": 854, "Turkmenistan": 795, "Ghana": 288, "Saudi Arabia": 682, "Rwanda": 646, "Togo": 768, "Japan": 392, "American Samoa": 16, "United States Minor Outlying Islands": 581, "Cocos (Keeling) Islands": 166, "Pitcairn": 612, "Guatemala": 320, "Bosnia and Herzegovina": 70, "Kuwait": 414, "Russia": 643, "Jordan": 400, "Bonaire, Sint Eustatius and Saba": 535, "Dominica": 212, "Liberia": 430, "Maldives": 462, "Jamaica": 388, "Oman": 512, "Martinique": 474, "Cabo Verde": 132, "Christmas Island": 162, "French Guiana": 254, "Niue": 570, "Monaco": 492, "Wallis and Futuna": 876, "New Zealand": 554, "Yemen": 887, "Jersey": 832, "Andorra": 20, "Albania": 8, "Samoa": 882, "Norfolk Island": 574, "United Arab Emirates": 784, "Cote d'Ivoire": 384, "India": 356, "Azerbaijan": 31, "Lesotho": 426, "Saint Vincent and the Grenadines": 670, "Kenya": 404, "Macao": 446, "Guam": 316, "Turkey": 792, "Afghanistan": 4, "Virgin Islands (British)": 92, "Bangladesh": 50, "Mauritania": 478, "Congo": 180, "Turks and Caicos Islands": 796, "Saint Lucia": 662, "San Marino": 674, "French Polynesia": 258, "France": 250, "Svalbard and Jan Mayen": 744, "Syrian Arab Republic": 760, "Bermuda": 60, "Slovakia": 703, "Somalia": 706, "Peru": 604, "Swaziland": 748, "Nauru": 520, "Seychelles": 690, "Norway": 578, "Malawi": 454, "Cook Islands": 184, "Benin": 204, "Reunion": 638, "Western Sahara": 732, "Cuba": 192, "Montenegro": 499, "Falkland Islands (Malvinas)": 238, "Mayotte": 175, "Heard Island and McDonald Islands": 334, "China": 156, "Armenia": 51, "Timor Leste": 626, "Dominican Republic": 214, "Bolivia": 68, "Ukraine": 804, "Bahrain": 48, "Tonga": 776, "Finland": 246, "Libya": 434, "Macedonia": 807, "Cayman Islands" : 136, "Central African Republic": 140, "New Caledonia": 540, "Mauritius": 480, "Tajikistan": 762, "Liechtenstein": 438, "Australia": 36, "Mali": 466, "Sweden": 752, "Bulgaria": 100, "Palestine, State of": 275, "North Korea": 408, "Romania": 642, "Angola": 24, "French Southern Territories": 260, "Chad": 148, "South Africa": 710, "Tokelau": 772, "Cyprus": 196, "South Georgia and the South Sandwich Islands": 239, "Brunei Darussalam": 96, "Qatar": 634, "Malaysia": 458, "Austria": 40, "Mozambique": 508, "Uganda": 800, "Asland Islands": 248, "Hungary": 348, "Niger": 562, "Isle of Man": 833, "Brazil": 76, "Virgin Islands (U.S.)": 850, "Faroe Islands": 234, "Guinea": 324, "Panama": 591, "Costa Rica": 188, "Luxembourg": 442, "Bahamas": 44, "Gibraltar": 292, "Ireland": 372, "Pakistan": 586, "Palau": 585, "Nigeria": 566, "Ecuador": 218, "Czech Republic": 203, "Viet Nam": 704, "Belarus": 112, "Vanuatu": 548, "Algeria": 12, "Slovenia": 705, "El Salvador": 222, "Tuvalu": 798, "Saint Pierre and Miquelon": 666, "Iran": 364, "Marshall Islands": 584, "Chile": 152, "Puerto Rico": 630, "Belgium": 56, "Kiribati": 296, "Haiti": 332, "Belize": 84, "Hong Kong": 344, "South Korea": 410, "Georgia": 268, "Lao People's Democratic Republic": 418, "Gambia": 270, "Philippines": 608, "Morocco": 504, "Croatia": 191, "Mongolia": 496, "Guernsey": 831, "Thailand": 764, "Namibia": 516, "Grenada": 308, "Taiwan, Province of China": 158, "Venezuela": 862, "Iraq": 368, "Tanzania": 834, "Portugal": 620, "Estonia": 233, "Uruguay": 858, "Curacao": 531, "Saint Barthelemy": 652, "Equatorial Guinea": 226, "Lebanon": 422, "Sierra Leone": 694, "Uzbekistan": 860, "Tunisia": 788, "Djibouti": 262, "Greenland": 304, "Antigua and Barbuda": 28, "Spain": 724, "Colombia": 170, "Burundi": 108, "Fiji": 242, "Barbados": 52, "Madagascar": 450, "Italy": 380, "Bhutan": 64, "Sudan": 729, "Nepal": 524, "Malta": 470, "Netherlands": 528, "Northern Mariana Islands": 580, "Suriname": 740, "United Kingdom of Great Britain and Northern Ireland": 826, "Anguilla": 660, "Micronesia (Federated States of)": 583, "Holy See": 336, "Israel": 376, "Indonesia": 360, "Iceland": 352, "Zambia": 894, "Senegal": 686, "Papua New Guinea": 598, "Saint Kitts and Nevis": 659, "Trinidad and Tobago": 780, "Zimbabwe": 716, "Germany": 276, "Denmark": 208, "Kazakhstan": 398, "Poland": 616, "Eritrea": 232, "Kyrgyzstan": 417, "British Indian Ocean Territory": 86, "Montserrat": 500, "Mexico": 484, "Sri Lanka": 144, "Latvia": 428, "South Sudan": 728, "Guyana": 328, "Guadeloupe": 312, "Honduras": 340, "Myanmar": 104, "Bouvet Island": 74, "Egypt": 818, "Nicaragua": 558, "Singapore": 702, "Serbia": 688, "Botswana": 72, "Antarctica": 10, "Congo": 178, "Sint Maarten (Dutch part)": 534, "Greece": 300, "Paraguay": 600, "Gabon": 266, "Comoros": 174}
+var countryCodeMap = {"Canada": 124, "Moldova": 498, "Sao Tome and Principe": 678, "Guinea-Bissau": 624, "United States": 840, "Lithuania": 440, "Cambodia": 116, "Saint Helena, Ascension and Tristan da Cunha": 654, "Switzerland": 756, "Ethiopia": 231, "Aruba": 533, "Saint Martin (French part)": 663, "Solomon Islands": 90, "Argentina": 32, "Cameroon": 120, "Burkina Faso": 854, "Turkmenistan": 795, "Ghana": 288, "Saudi Arabia": 682, "Rwanda": 646, "Togo": 768, "Japan": 392, "American Samoa": 16, "United States Minor Outlying Islands": 581, "Cocos (Keeling) Islands": 166, "Pitcairn": 612, "Guatemala": 320, "Bosnia and Herzegovina": 70, "Kuwait": 414, "Russia": 643, "Jordan": 400, "Bonaire, Sint Eustatius and Saba": 535, "Dominica": 212, "Liberia": 430, "Maldives": 462, "Jamaica": 388, "Oman": 512, "Martinique": 474, "Cabo Verde": 132, "Christmas Island": 162, "French Guiana": 254, "Niue": 570, "Monaco": 492, "Wallis and Futuna": 876, "New Zealand": 554, "Yemen": 887, "Jersey": 832, "Andorra": 20, "Albania": 8, "Samoa": 882, "Norfolk Island": 574, "United Arab Emirates": 784, "Cote d'Ivoire": 384, "India": 356, "Azerbaijan": 31, "Lesotho": 426, "Saint Vincent and the Grenadines": 670, "Kenya": 404, "Macao": 446, "Guam": 316, "Turkey": 792, "Afghanistan": 4, "Virgin Islands (British)": 92, "Bangladesh": 50, "Mauritania": 478, "Congo": 180, "Turks and Caicos Islands": 796, "Saint Lucia": 662, "San Marino": 674, "French Polynesia": 258, "France": 250, "Svalbard and Jan Mayen": 744, "Syrian Arab Republic": 760, "Bermuda": 60, "Slovakia": 703, "Somalia": 706, "Peru": 604, "Swaziland": 748, "Nauru": 520, "Seychelles": 690, "Norway": 578, "Malawi": 454, "Cook Islands": 184, "Benin": 204, "Reunion": 638, "Western Sahara": 732, "Cuba": 192, "Montenegro": 499, "Falkland Islands (Malvinas)": 238, "Mayotte": 175, "Heard Island and McDonald Islands": 334, "China": 156, "Armenia": 51, "Timor Leste": 626, "Dominican Republic": 214, "Bolivia": 68, "Ukraine": 804, "Bahrain": 48, "Tonga": 776, "Finland": 246, "Libya": 434, "Macedonia": 807, "Cayman Islands" : 136, "Central African Republic": 140, "New Caledonia": 540, "Mauritius": 480, "Tajikistan": 762, "Liechtenstein": 438, "Australia": 36, "Mali": 466, "Sweden": 752, "Bulgaria": 100, "Palestine, State of": 275, "North Korea": 408, "Romania": 642, "Angola": 24, "French Southern Territories": 260, "Chad": 148, "South Africa": 710, "Tokelau": 772, "Cyprus": 196, "South Georgia and the South Sandwich Islands": 239, "Brunei Darussalam": 96, "Qatar": 634, "Malaysia": 458, "Austria": 40, "Mozambique": 508, "Uganda": 800, "Asland Islands": 248, "Hungary": 348, "Niger": 562, "Isle of Man": 833, "Brazil": 76, "Virgin Islands (U.S.)": 850, "Faroe Islands": 234, "Guinea": 324, "Panama": 591, "Costa Rica": 188, "Luxembourg": 442, "Bahamas": 44, "Gibraltar": 292, "Ireland": 372, "Pakistan": 586, "Palau": 585, "Nigeria": 566, "Ecuador": 218, "Czech Republic": 203, "Viet Nam": 704, "Belarus": 112, "Vanuatu": 548, "Algeria": 12, "Slovenia": 705, "El Salvador": 222, "Tuvalu": 798, "Saint Pierre and Miquelon": 666, "Iran": 364, "Marshall Islands": 584, "Chile": 152, "Puerto Rico": 630, "Belgium": 56, "Kiribati": 296, "Haiti": 332, "Belize": 84, "Hong Kong": 344, "South Korea": 410, "Georgia": 268, "Lao People's Democratic Republic": 418, "Gambia": 270, "Philippines": 608, "Morocco": 504, "Croatia": 191, "Mongolia": 496, "Guernsey": 831, "Thailand": 764, "Namibia": 516, "Grenada": 308, "Taiwan, Province of China": 158, "Venezuela": 862, "Iraq": 368, "Tanzania": 834, "Portugal": 620, "Estonia": 233, "Uruguay": 858, "Curacao": 531, "Saint Barthelemy": 652, "Equatorial Guinea": 226, "Lebanon": 422, "Sierra Leone": 694, "Uzbekistan": 860, "Tunisia": 788, "Djibouti": 262, "Greenland": 304, "Antigua and Barbuda": 28, "Spain": 724, "Colombia": 170, "Burundi": 108, "Fiji": 242, "Barbados": 52, "Madagascar": 450, "Italy": 380, "Bhutan": 64, "Sudan": 729, "Nepal": 524, "Malta": 470, "Netherlands": 528, "Northern Mariana Islands": 580, "Suriname": 740, "United Kingdom": 826, "Anguilla": 660, "Micronesia (Federated States of)": 583, "Holy See": 336, "Israel": 376, "Indonesia": 360, "Iceland": 352, "Zambia": 894, "Senegal": 686, "Papua New Guinea": 598, "Saint Kitts and Nevis": 659, "Trinidad and Tobago": 780, "Zimbabwe": 716, "Germany": 276, "Denmark": 208, "Kazakhstan": 398, "Poland": 616, "Eritrea": 232, "Kyrgyzstan": 417, "British Indian Ocean Territory": 86, "Montserrat": 500, "Mexico": 484, "Sri Lanka": 144, "Latvia": 428, "South Sudan": 728, "Guyana": 328, "Guadeloupe": 312, "Honduras": 340, "Myanmar": 104, "Bouvet Island": 74, "Egypt": 818, "Nicaragua": 558, "Singapore": 702, "Serbia": 688, "Botswana": 72, "Antarctica": 10, "Congo": 178, "Sint Maarten (Dutch part)": 534, "Greece": 300, "Paraguay": 600, "Gabon": 266, "Comoros": 174}
 
 //Add country names to Topojson object. 
 countries.map(function(d){
@@ -403,6 +445,15 @@ var year;
 
 var tip = d3.tip()
             .attr('class','tooltip')
+            // .offset([-5,0])
+            // .offset(function(){
+            //   // event.clientX
+            //   // event.clientY
+            //   // console.log(this)
+            //   // return [this.getBBox().height / 10, -5]
+            //   // console.log(event.top)
+
+            // })
             .offset([-10,0])
             .direction('se')
             .html(function(d){
@@ -414,13 +465,17 @@ var tip = d3.tip()
                 });
                             
               if (selectCountry.length==0){
-                  returnVal = " <div id=\"tip\">" + d.name +" <br> year: " + year + "<br>" + "count: " + 0 +"</div>"
+                    returnVal = "<div id=\"tip\">  <p> <span id=\"countryName\"> " + d.name + "</span> </p>" +
+                        "<p> had <span id=\"playerCount\">" + "NO" + "</span> players ranked in top 100 in\t" + "<span id=\"year\">" + year + "</span>. </p> </div>"
                 }
               
               else{ 
                   for (var key in countryCodeMap){              
-                    if (countryCodeMap[key] == d.id){                    
-                  returnVal = " <div id=\"tip\">" + d.name +" <br> year: " + year + "<br>" + "count: " +selectCountry[0].COUNT +"</div>"
+                    if (countryCodeMap[key] == d.id){           
+                 returnVal = "<div id=\"tip\">  <p> <span id=\"countryName\">" + d.name + "</span>  </p>" +
+                        "<p>had <span id=\"playerCount\">" + selectCountry[0].COUNT + "</span> \tplayers ranked in top 100 in <span id=\"year\">" + year + "</span>. </p> </div>"     
+
+                  // returnVal = " <div id=\"tip\">" + d.name +" <br> year: " + year + "<br>" + "count: " +selectCountry[0].COUNT +"</div>"
                   }
  
               }
@@ -458,8 +513,8 @@ maxValue =  d3.max(tennis, function(d){
 //  })
 minValue =1;
 
-var colorScale = d3.scale.linear().domain([minValue,maxValue]).range(['#9ecae1','#08519c'])
-
+// var colorScale = d3.scale.log().domain([minValue,maxValue]).range(['#ddedf4','#489fc5'])
+var colorScale = d3.scale.log().domain([minValue,maxValue]).range(['#fff1eb','#ff4c00'])
 
 var initialFlag = false;
 
@@ -467,7 +522,7 @@ var updateMapColor = function (y){
   year = y;
   var rankingList ={}
 
-  coloredWorldMap.transition().delay(270).ease('circle',0.7,'out-in').duration(850).attr('fill',function(d){
+  coloredWorldMap.transition().delay(100).ease('circle',0.7,'out-in').duration(650).attr('fill',function(d){
       a = d;    
       x = d3.values(tennis).filter(function(d){
           return (d.DATE == year)
@@ -551,7 +606,8 @@ initialFlag = true;
 }
 
 
-var heightScale = d3.scale.pow().exponent(0.8).domain([1,maxValue]).rangeRound([15,100])
+var heightScale = d3.scale.pow().exponent(1.2).domain([1,maxValue]).rangeRound([15,100])
+// var heightScale = d3.scale.log().domain([1,maxValue]).rangeRound([15,100])
 
 var rectHeight = 60;
 
@@ -661,31 +717,44 @@ function drawBarChart(d){
               addRect.enter()
               .append('rect')
               
-              addRect.transition().duration(650)
+              addRect
               .attr({
                           x: function(d,i){ 
                                 return(xScale(d.DATE))
                                 // return (rectWidth(d.DATE)) 
                               },
                           y: function(d){ 
-                             return (rectHeight + 50) - heightScale(d.COUNT) 
+                             return (rectHeight + 50) 
                           },
                           width: function(d){ 
                                 return (width-150)/yearArray.length
                                 // return rectWidth.rangeBand()
                               },
-            height: function(d){ 
-                return heightScale(d.COUNT)
-              },
+                          height: 0,
+            
             fill: 'steelblue'
-        }).attr('class','countryRect').attr('id',function(d){
+        })
+              .transition().duration(300).ease('linear').attr("height",function(d){ 
+                return heightScale(d.COUNT)
+              })
+              .attr('y',function(d){
+                return (rectHeight + 50) - heightScale(d.COUNT) 
+              })
+          .attr('class','countryRect').attr('id',function(d){
           return ('year' + d.DATE)
         })
-              addRect.on('mouseover',function(d){
-  
+      
+
         
-        d3.select('.divContainer').style('left',this.x.baseVal.value + 'px').style('display','block')
-        divContainer.style('top',this.y.baseVal.value).style('top',(this.y.baseVal.value+90) +'px')
+
+      addRect.on('mouseover',function(d){
+        console.log(this.getBBox().x)
+        var xCoord = (this.x.baseVal.value) + 20;
+      // var xCoord = (this.getBBox().x)+50
+      
+  
+        d3.select('.divContainer').style('display','block')
+        divContainer.style('left', xCoord + 'px').style('top',(190) +'px')
   
         var playerList = d.players;
         playerList.sort(function(a,b){ return a.RANKING - b.RANKING})
@@ -715,22 +784,24 @@ function drawBarChart(d){
       var y = d3.select('g.nations').selectAll('text.count')
             .data(countryArray)
 
-            y.exit().remove()
+            y.exit().transition().duration(200).style('opacity',0).remove()
 
         y.enter()
         .append('text')
-        y.transition().duration(650)
-        .attr('class','count')
-        .attr('x',function(d,i){
+        
+        y.attr('class','count').style('opacity',0).text(function(d){
+            return d.COUNT
+        })
+        .attr('text-anchor','middle')
+        
+        y.attr('x',function(d,i){
             return(xScale(d.DATE) + ((width-150)/yearArray.length)/2)
         })
         .attr('y', function(d){
           return (rectHeight + 50) - heightScale(d.COUNT) + 11
         })
-        .text(function(d){
-            return d.COUNT
-        })
-        .attr('text-anchor','middle')
+        .attr("pointer-events", "none")
+        .transition().duration(850).style('opacity',1)
 
 histogramNationName.text("Country: ").append('tspan').text(selectCountryName) 
 }
@@ -745,7 +816,7 @@ The length of entire histogram = main svg width(1200) -150 = 1050
 */
 
     var padding_right = 8
-    var nations = svgHistogram.append('g').attr("class","nations").attr('transform','translate('+ 50 +',40)')
+    var nations = svgHistogram.append('g').attr("class","nations").attr('transform','translate(50,40)')
 
     var histSelection = nations.selectAll('rect.countryRect')
               .data(function(){
@@ -773,9 +844,14 @@ The length of entire histogram = main svg width(1200) -150 = 1050
             fill: 'steelblue'
         }).on('mouseover',function(d){
   
-        console.log(d)
-        d3.select('.divContainer').style('left',this.x.baseVal.value + 50 + 'px').style('display','block')
-        divContainer.style('top',this.y.baseVal.value).style('top',(this.y.baseVal.value+120) +'px')
+        
+
+
+        var xCoord = parseInt(this.x.baseVal.value)+20
+  
+  
+        d3.select('.divContainer').style('left', xCoord + 'px').style('display','block')
+        divContainer.style('top',this.y.baseVal.value).style('top',(190) +'px')
   
         var playerList = d.players;
         playerList.sort(function(a,b){ return a.RANKING - b.RANKING})
@@ -790,13 +866,13 @@ The length of entire histogram = main svg width(1200) -150 = 1050
         var eachCell1 = eachRow.append('td').attr('class','rankingCell').html(function(d){return d.RANKING})
         var eachCell2 =  eachRow.append('td').attr('class','nameCell').html(function(d){return d.PLAYER_NAME})
 
+
         // var addPlayers = players.append('text').text(function(d){
           // return d.PLAYER_NAME
         
   })
   .on('mouseout',function(d){
       d3.select('.divContainer').style('display','none')
-      // console.log(d3.select('.divContainer'))
         d3.select('.divContainer').select('table').remove()
   })
 
@@ -831,6 +907,7 @@ The length of entire histogram = main svg width(1200) -150 = 1050
             return d.COUNT
         })
         .attr('text-anchor','middle')
+        .attr("pointer-events", "none")
      var x_axis = nations.append('g').attr("class","xAxis").attr("transform", "translate(0," + (rectHeight+50) + ")").call(xAxis)
       
 
@@ -937,7 +1014,7 @@ The length of entire histogram = main svg width(1200) -150 = 1050
   */
       // histogramNationName.text("Country: " + selectCountryName).attr('x',20).attr('y',30)
         var histogramNationName = nations.append('text').attr("class",'histogramNationName')
-        histogramNationName.text("Country: ").attr('x',0).attr("y",-20).append('tspan').text("United States of America")
+        histogramNationName.text("Country: ").attr('x',0).attr("y",-20).append('tspan').text("United States")
 
         
 
@@ -946,7 +1023,7 @@ The length of entire histogram = main svg width(1200) -150 = 1050
  // var yearListBackground = d3.select(".yearListBackground").append('svg').append("g")
    
    var yearListGruopBackground = svg.append('g').attr('class','yearListBackground')
-   yearListGruopBackground.append('rect').attr('width','42px').attr('height',580).attr("transform", "translate(0," + (height/10) + ")").attr('fill','#F0F0F0').attr('x',35).style('opacity','0.8')
+   yearListGruopBackground.append('rect').attr('width','42px').attr('height',580).attr("transform", "translate(0," + (height/10) + ")").attr('fill','#d8d8d8').attr('x',35).style('opacity','0.8')
  
 var animateMapButton = d3.select('body').append('button').attr({   
                                             class: "button",
@@ -1043,10 +1120,17 @@ d3.select()
 d3.select('.sliderGroup').call(d3.slider())
 
 
-}
+
 
     
+
+}
+
+
 </script>
+
+
+
 <p id="credit">
 Data Source: https://data.world/sixmanguru/mens-year-end-atp-rankings
 </p>
