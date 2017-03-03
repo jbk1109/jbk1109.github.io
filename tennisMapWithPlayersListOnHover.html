@@ -13,6 +13,10 @@ body {
   margin-right: auto;
   padding: 0px;
   width: 90%;
+  text-rendering: optimizeLegibility !important;
+
+-webkit-font-smoothing: antialiased !important;
+
   /*width: 1500px;*/
 }
 button{
@@ -41,7 +45,7 @@ text.count{
   font-size: 13px;
 }
 .histogramNationName tspan{
-  font-weight: bold;
+  font-weight: bolder;
  
 }
 .container{
@@ -68,10 +72,6 @@ text.count{
   /*display:none;*/
   /*top: 200px;*/
   width: 18em;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  /*padding-left: 10px;*/
-  /*padding-right: 10px;*/
   background-color: #111;
   opacity:0.9;
   position: absolute;
@@ -84,33 +84,45 @@ text.count{
 table{
   width: 100%;
   /*border-color: red;*/
+
   border-collapse: collapse;
+  font-weight: lighter;
+  letter-spacing: 0.06em;
 }
 td{
+  font-weight: lighter;
   padding:0.3em;
+  padding-top: 0.35em;
+  padding-bottom: 0.35em;
   
 }
-tr{
-  border-width: 2px;
-  border-color: red;
-  
-}
+
 th{
+  background-color: #000;
+  font-weight: lighter;
+  color: #588ebb;
   text-transform: uppercase;
+  padding:0.5em;
 }
 th.name{
+  padding-left: 0.4em;
   text-align: left;
 
   /*background-color: #fff*/
 }
 th.ranking{
+  padding-right: 0.5em;
   text-align: right;
 }
 .rankingCell{
  text-align: right; 
+ padding-right: 0.5em;
+
 }
 .nameCell{
+  padding-left: 0.4em;
   text-align: left;
+  /*width: 18em*/
 }
 tr:nth-child(even) {
     background-color: #505050;
@@ -196,7 +208,7 @@ h1{
 
 
 text.year:hover{
-  font-weight: bold;
+  font-weight: bolder;
   cursor: pointer;
   /*fill: steelblue;*/
   opacity:0.7;
@@ -237,7 +249,7 @@ text.year:hover{
   margin: 12px 0px 12px 0px;
   color: #ddd;
   font-size: 14px;
-  font-weight: light;
+  font-weight: lighter;
   letter-spacing: 0.01em;
 
 }
@@ -252,7 +264,7 @@ span#countryName{
 p #year, p #playerCount{
   color: #ff984d;
 
-font-weight: bold;
+font-weight: 900;
 }
 
 
@@ -454,8 +466,8 @@ var tip = d3.tip()
             //   // console.log(event.top)
 
             // })
-            .offset([-10,0])
-            .direction('se')
+            .offset([0,40])
+            .direction('e')
             .html(function(d){
               id = d.id
               returnVal ='Nation Info Unavailable';
