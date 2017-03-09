@@ -9,30 +9,35 @@
 body {
   font: 12px sans-serif;
   background-color:  #f1f1f1;
-  margin-left: auto;
+  /*background-color: yellow;*/
+  position: relative;
   margin-right: auto;
+  margin-left: auto;
   padding: 0px;
-  width: 90%;
+  
   text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
 
--webkit-font-smoothing: antialiased !important;
-
-  /*width: 1500px;*/
 }
+
+
 button{
   position: absolute;
-  z-index: 999;
-  top: 850px;
-  left: 85px;
+  /*float: left;*/
+  /*z-index: 999;*/
+  top: 85%;
+  left: 35px;
   width: 13em;
   padding: 0.6em 0.6em 0.5em 0.5em;
   text-align: center;
 
 }
 #credit{
-  position: absolute;
-  margin-top: 64%;
-  margin-left: 61.5%;
+  height: 20px;
+  position: relative;
+  float:right;
+  /*margin-top: 90%;*/
+  margin-left: 70%;
   color: #555;
   font-size: 10px;
 
@@ -49,6 +54,11 @@ text.count{
  
 }
 .container{
+  /*background-color: green;*/
+  background-color:  #f1f1f1;
+  height: 1000px;
+  width: 1200px;
+  position: relative;
   margin-left: auto;
   margin-right: auto;
   
@@ -64,72 +74,126 @@ text.count{
 }
 
 .countryRect:hover{
-  fill: steelblue;
-  /*opacity: 0.8;*/
+  fill: #23415a;
+  opacity: 0.8;
 }
 
+.upperArrow{
+  position: absolute;
+  display: inline;
+  
+}
 .divContainer{
-  /*display:none;*/
-  /*top: 200px;*/
-  width: 18em;
-  background-color: #111;
+  /*background-color: lightblue;*/
   opacity:0.9;
   position: absolute;
   color: #f0f0f0;
   font-size: 13px;
-  /*top:50px;
-  left:50px;*/
+  /*padding: 0.2em;*/
+  display: none;
 }
-
-table{
+/*.divContainer:after{
+  content:"\25B2";   
+  box-sizing: border-box;
+  display: inline;
+  font-size: 20px;
   width: 100%;
-  /*border-color: red;*/
-
-  border-collapse: collapse;
-  font-weight: lighter;
-  letter-spacing: 0.06em;
-}
-td{
-  font-weight: lighter;
-  padding:0.3em;
-  padding-top: 0.35em;
-  padding-bottom: 0.35em;
+  line-height: 1;
+  color: rgba(1, 1, 1, 0.9);
+  position: absolute;
+  top:-25px;
+  margin: 10px 0px 0px 0px;
+  left:45%;
+  border-radius: 2px;
   
 }
+*/
+table{
+  position: relative;
+  /*background-color: steelblue;*/
+  background-color: #070d12;
+  /*background-color: #0e1a24;*/
+  opacity: 0.95;
+  float: left;
+  border-right: 15px solid #070d12;
+  /*margin-left: 7px;*/
+  border-collapse: collapse;
+  padding-right: 10px;
+  padding-left:0;
+  padding-top:0;
+  padding-bottom:0;
+  /*border-right: 5px solid black;*/
+  /*border: 15px solid black;*/
+  font-weight: lighter;
+  letter-spacing: 0.02em;
+
+}
+
+table:first-child{
+  margin-left: 0;
+  padding-left: 0
+}
+
+table:last-child{
+  margin-right: 0;
+  padding-right: 0;
+  border:0;
+}
+
+
+tr{  
+  padding-left: 1em;
+}
+tr:nth-child(even) {
+background-color: #0e1a24;
+background-color: #263039;
+  /*background-color: #1d1d1d;*/
+    /*background-color: #505050;*/
+}
+
 
 th{
   background-color: #000;
-  font-weight: lighter;
+  /*border-right: 15px solid #070d12;*/
+  font-weight: normal;
   color: #588ebb;
   text-transform: uppercase;
-  padding:0.5em;
+  padding:0.6em;
 }
-th.name{
-  padding-left: 0.4em;
-  text-align: left;
 
-  /*background-color: #fff*/
+th td{
+   margin-right: auto;
+   margin-left: auto;
+  text-align: middle !important;
 }
-th.ranking{
-  padding-right: 0.5em;
-  text-align: right;
+
+td{
+  /*border: 1px red solid;*/
+  border:0;
+  /*margin: 0;*/
+  padding-top: 0.4em; 
+  padding-bottom: 0.4em;
+  padding-left: 1.2em;
+  padding-right: 1.2em;
 }
 .rankingCell{
  text-align: right; 
- padding-right: 0.5em;
+ padding-right: 0.35em;
+ /*padding-left: 2em;
+ padding-right: 0.8em;
+*/
+}
 
-}
 .nameCell{
-  padding-left: 0.4em;
   text-align: left;
-  /*width: 18em*/
+  font-weight: 600;
+  padding-left: 0.35em;
+  /*padding-top: 0.35em;*/
+  /*padding-bottom: 0.35em;*/
+  /*padding-right: 1em;*/
 }
-tr:nth-child(even) {
-    background-color: #505050;
-}
-/*.divcontainer{
-  display:block;
-}*/
+
+
 svg{
   position: absolute;
   margin-left: auto;
@@ -143,25 +207,8 @@ svg{
   left: 100px;*/
   /*display:none;*/
 }
-.divContainer{
-  display:none;
-}
-.divContainer:after{
-  content:"\25B2";   
-  box-sizing: border-box;
-  display: inline;
-  font-size: 20px;
-  width: 100%;
-  line-height: 1;
-  color: rgba(0, 0, 0, 0.8);
-  /*content: "\25C0";*/
-  position: absolute;
-  /*text-align: center;*/
-  top:-25px;
-  margin: 10px 0px 0px 0px;
-  left:45%;
-  border-radius: 2px;
-}
+
+
 #try{
 position: absolute;
 height: 200px;
@@ -214,35 +261,58 @@ text.year:hover{
   opacity:0.7;
   
 }
-#tip:after {
+.d3-tip{
+ background-color: rgba(0, 0, 0, 0.9);
+  padding-top: 1px;
+  padding: 2px 15px 2px 15px;
+  line-height: 1.2;
+  
+  
+}
+.d3-tip:after{
+  width: 100%;
+  color: rgba(0, 0, 0, 0.9);
   box-sizing: border-box;
   display: inline;
-  font-size: 15px;
-  width: 100%;
-  line-height: 1;
-  color: rgba(0, 0, 0, 0.8);
+  font-size: 20px;
+  line-height: 1.2;
+  /*text-align: center;*/
+    border-radius: 15px;
+}
+
+.d3-tip.e:after {
+  /*font-size: 15px;*/
+  /*color: white;*/
   content: "\25C0";
   position: absolute;
-  /*text-align: center;*/
-  top:20%;
-  margin: 0px 0px 0px -10px;
+  top:15%;
+  margin: 0px 0px 0px -14px;
   left:0%;
-  border-radius: 2px;
-}
-
-#tip{
-
-  background-color: rgba(0, 0, 0, 0.9);
-  color: #fff;
-  padding-top: 1px;
-  /*padding-bottom: 2px;*/
-  padding: 2px 15px 2px 15px;
-  /*padding: 5px;*/
-  line-height: 1.2;
-  /*border-radius: 2px;*/
 
 }
 
+
+.d3-tip.s:after {
+  position: absolute;
+  content: '\25B2';
+  text-align: center;
+  top:-15%;
+  margin: -2px 0px 0px 0px;
+  left:20%;
+ 
+}
+
+.d3-tip.w:after {
+  /*content:"adf";*/
+  position: absolute;
+  display: inline;
+  
+  content: '\25B6';
+  top:20%;
+  margin: 0px -16px 0px 0px;
+  left:99%;
+ 
+}
 
 #tip p{
   padding: 4px 3px 4px 3px;
@@ -276,13 +346,19 @@ font-weight: 900;
 
 }
 .histogramContainer{
-  position: absolute;
+  /*background-color: red;*/
+  /*position: absolute;*/
+  /*position:relative;*/
   margin-left: auto;
   margin-right: auto;
-  width: 90%;
+  /*width: 87%;*/
+  width: 1040px;
+
 }
+
 .svgHistogram{
-  position: absolute;
+  /*width: 90%;*/
+  /*background-color: blue;*/
   margin-left: auto;
   margin-right: auto;
 }
@@ -350,23 +426,19 @@ var width = 1200,
 var HeightForSvgHistogram = 170; 
 
 var projection = d3.geo.kavrayskiy7()
-    .scale(230)
+    .scale(225)
     .translate([width / 2, height / 2])
     .precision(.1);
-
-// var projection = d3.geo.mercator()
-//     .center([-80, 50 ])
-//     .scale(190)
-//     .rotate([-180,0]);
 
 
 var container = d3.select('body').append('div').attr('class','container')
 
 var histogramContainer = d3.select('.container').append('div').attr('class','histogramContainer')
 
+var WidthForSvgHistogram = width-160
 var svgHistogram = d3.select('body').select('.histogramContainer').append('svg')
                         .attr({
-                          "width": width,
+                          "width": WidthForSvgHistogram,
                           'height': HeightForSvgHistogram
                         })
                         .attr('class','svgHistogram')
@@ -389,7 +461,7 @@ var g = svg.append("g");
 
 
 var yearArray = d3.range(1982,2017)
-var xScale = d3.scale.linear().nice().domain([1982,2017]).rangeRound([0,width-100])
+var xScale = d3.scale.linear().nice().domain([1982,2017]).rangeRound([0,width-160])
 
     // .attr("transform", "translate(" + margin.left + "," + height / 2 + ")");
 
@@ -456,18 +528,42 @@ var year;
 
 
 var tip = d3.tip()
-            .attr('class','tooltip')
-            // .offset([-5,0])
-            // .offset(function(){
-            //   // event.clientX
-            //   // event.clientY
-            //   // console.log(this)
-            //   // return [this.getBBox().height / 10, -5]
-            //   // console.log(event.top)
+            .attr('class','d3-tip')            
+            .offset(function(d){
+                if (event.clientX > 0.6* width && d.id != 643){
+                    return [40,-40];
+              }
+                else{
+                  return [60,40];
+              }
+            })
+            .direction(function(d){
+              console.log(d)
+              /*
+              if the position of mouse cursor is greater than 70% of the width, then
+              return 'w'
+              */
+              if ((event.clientX > 0.6* width) && (event.clientY > 0.5* height)){
+                d3.select('.d3-tip').classed('s',false)
+                  d3.select('.d3-tip').classed('e',false)
+                return 'w';
+              }
+              if ((event.clientX > 0.6* width) && (event.clientY < 0.5 * height) || d.id == 643){
+                    d3.select('.d3-tip').classed('e',false)
+                  d3.select('.d3-tip').classed('w',false)
+                return 's';
+              }
 
-            // })
-            .offset([0,40])
-            .direction('e')
+
+                else{
+                  d3.select('.d3-tip').classed('s',false)
+                  d3.select('.d3-tip').classed('w',false)
+                return 'e';
+              }
+              console.log(event.clientX)
+              console.log(width)
+            
+            })
             .html(function(d){
               id = d.id
               returnVal ='Nation Info Unavailable';
@@ -497,6 +593,7 @@ var tip = d3.tip()
              
             })
 
+
 svg.call(tip)
 
 // d3.select('body').append('div').attr("id","try").html(function(){ return "adsfs"})
@@ -525,8 +622,21 @@ maxValue =  d3.max(tennis, function(d){
 //  })
 minValue =1;
 
+// #d15e1d
+// #d1471c
+// #cc4d04
+// #fff1eb
+// #ffe4d8
+
 // var colorScale = d3.scale.log().domain([minValue,maxValue]).range(['#ddedf4','#489fc5'])
-var colorScale = d3.scale.log().domain([minValue,maxValue]).range(['#fff1eb','#ff4c00'])
+// var colorScale = d3.scale.log().domain([minValue,maxValue]).range(['#fff1eb','#ff4c00'])
+
+var color = d3.scale.linear()
+    .domain([minValue, maxValue])
+    .range(['#fff1eb','#af4e23'])
+    // .range(["hsl(222,10%,100%)", "hsl(222,30%,20%)"]);
+
+var colorScale = color.interpolate(d3.interpolateHsl)
 
 var initialFlag = false;
 
@@ -637,7 +747,9 @@ var histogramTitle ="Number of Tennis Players from"
         // console.log(d)
       })
       .attr("fill","#ddd")
-      coloredWorldMap.on('mouseover',tip.show)
+      coloredWorldMap.on('mouseover',function(d,i){
+        return tip.show(d,i)
+      })
       .on('mouseout',tip.hide)
 
       d3.selectAll('path')
@@ -739,7 +851,7 @@ function drawBarChart(d){
                              return (rectHeight + 50) 
                           },
                           width: function(d){ 
-                                return (width-150)/yearArray.length
+                                return (width-250)/yearArray.length
                                 // return rectWidth.rangeBand()
                               },
                           height: 0,
@@ -757,39 +869,124 @@ function drawBarChart(d){
         })
       
 
+    
+    addRect.on('mouseover',function(d){
+  
+        var upperArrow = "▲";
+        // console.log(d3.select('.histogramContainer').style('top'))
+        // console.log(d3.select('.svgHistogram'))
+        // console.log(d3.select('.histogramContainer')[0][0].offsetLeft)
+        // var xCoord = this.getBoundingClientRect().left - (this.getBoundingClientRect().width)/2
+        // var yCoord = this.getBoundingClientRect().bottom+25
+        // style('top',this.y.baseVal.value).
+        // console.log(d3.select('.xAxis line')[0])
+        var xCoord = d3.select('.container')[0][0].offsetLeft + d3.select('.histogramContainer')[0][0].offsetLeft + (this.x.baseVal.value ) - 50
+        // var xCoord = this.x.baseVal.value+50;
+        var yCoord = 180;
+        var arrowOffset = 55;
+        
+  
+        divContainer.style('display','block').style('left', xCoord + 'px')
+        divContainer.style('top',yCoord +'px')
+
+        divContainer.append('div').attr('class','upperArrow').style('left', arrowOffset+ 'px').style('top',-20 +'px').html(upperArrow).style('font-size','24px').style('color','#111')
         
 
-      addRect.on('mouseover',function(d){
-        console.log(this.getBBox().x)
-        var xCoord = (this.x.baseVal.value) + 20;
-      // var xCoord = (this.getBBox().x)+50
-      
-  
-        d3.select('.divContainer').style('display','block')
-        divContainer.style('left', xCoord + 'px').style('top',(190) +'px')
-  
-        var playerList = d.players;
+        var playerList=[]
+        var i = 0;
+        while(d.players[i]){
+          playerList[i] = d.players[i];
+          i++;
+        }
+
         playerList.sort(function(a,b){ return a.RANKING - b.RANKING})
-  
-        var table = divContainer.append('table')
-        var headerRow = table.append('tr')
-        headerRow.append('th').html("Ranking").attr("class",'ranking')
-        headerRow.append('th').html("Name").attr("class",'name')
-  
-        var players = table.append('tbody').selectAll('tr').data(playerList).enter()
-        var eachRow = players.append('tr')
-        var eachCell1 = eachRow.append('td').attr('class','rankingCell').html(function(d){return d.RANKING})
-        var eachCell2 =  eachRow.append('td').attr('class','nameCell').html(function(d){return d.PLAYER_NAME})
 
-        // var addPlayers = players.append('text').text(function(d){
-          // return d.PLAYER_NAME
-        
+var tempList = playerList;
+
+// playerList.splice(0,20)
+
+var num = parseInt(playerList.length / 15);
+
+var dataArray =[]
+
+  //There are AT LEAST 15 elements
+var j = 0;
+var numOfElements;
+
+for (i=0; i <= num; i++){
+  // split array into num pieces 
+  // index 0~14, 15~29, 30~44, 45
+
+  //Find out if there are at least 15 elements. If more than 15 elements, numOfElements can be 15
+  //  if fewer than 15 elements are remaining, than the remainder of total number of elements / 15 = numOfElements
+  if (playerList.length >= 15){
+      numOfElements = 15;
+        dataArray.push(playerList.splice(0,numOfElements));
+  }
+  else if (playerList.length % 15 > 0) {
+      numOfElements = playerList.length % 15;
+        dataArray.push(playerList.splice(0,numOfElements));
+  }
+}
+
+
+var tables = divContainer.selectAll('table').data(dataArray).enter().append('table')
+
+var tablesHeader = tables.append('tr')
+tablesHeader.append('th').attr('class','headerCell').attr('colspan', 2).append('td').html("Ranking / Name")
+// tablesHeader.append('th').attr('class','rankingCell').append('td').html("Ranking")
+// tablesHeader.append('th').attr('class','nameCell').append('td').html('Name')
+
+// tables.selectAll(".tableRows").data(function(d){console.log(d3.select(this.parentNode).datum())}).enter()
+
+var tableRows = tables.selectAll(".tableRows").data(function(d){ return d3.select(this.parentNode).datum()}).enter()
+.append('tr').attr('class','tableRows')
+tableRows.append('td').attr('class','rankingCell').html(function(d) {return d.RANKING})
+tableRows.append('td').attr('class','nameCell').html(function(d) {return d.PLAYER_NAME})
+
   })
   .on('mouseout',function(d){
       d3.select('.divContainer').style('display','none')
-      // console.log(d3.select('.divContainer'))
-        d3.select('.divContainer').select('table').remove()
+      d3.select('.divContainer').select('.upperArrow').remove()
+      // d3.select('body').select('.divContainer').remove()
+      d3.selectAll('table').selectAll('tr').data([]).exit().remove()
+        d3.select('.divContainer').selectAll('table').data([]).exit().remove()
   })
+
+      
+
+
+  //     addRect.on('mouseover',function(d){
+  //       console.log(this.getBBox().x)
+  //       var xCoord = (this.x.baseVal.value) + 15;
+  //     // var xCoord = (this.getBBox().x)+50
+      
+  
+  //       d3.select('.divContainer').style('display','block')
+  //       divContainer.style('left', xCoord + 'px').style('top',(190) +'px')
+  
+  //       var playerList = d.players;
+  //       playerList.sort(function(a,b){ return a.RANKING - b.RANKING})
+  
+  //       var table = divContainer.append('table')
+  //       var headerRow = table.append('tr')
+  //       headerRow.append('th').html("Ranking").attr("class",'ranking')
+  //       headerRow.append('th').html("Name").attr("class",'name')
+  
+  //       var players = table.append('tbody').selectAll('tr').data(playerList).enter()
+  //       var eachRow = players.append('tr')
+  //       var eachCell1 = eachRow.append('td').attr('class','rankingCell').html(function(d){return d.RANKING})
+  //       var eachCell2 =  eachRow.append('td').attr('class','nameCell').html(function(d){return d.PLAYER_NAME})
+
+  //       // var addPlayers = players.append('text').text(function(d){
+  //         // return d.PLAYER_NAME
+        
+  // })
+  // .on('mouseout',function(d){
+  //     d3.select('.divContainer').style('display','none')
+  //     // console.log(d3.select('.divContainer'))
+  //       d3.select('.divContainer').select('table').remove()
+  // })
 
 
 
@@ -828,7 +1025,7 @@ The length of entire histogram = main svg width(1200) -150 = 1050
 */
 
     var padding_right = 8
-    var nations = svgHistogram.append('g').attr("class","nations").attr('transform','translate(50,40)')
+    var nations = svgHistogram.append('g').attr("class","nations").attr('transform','translate(0,40)')
 
     var histSelection = nations.selectAll('rect.countryRect')
               .data(function(){
@@ -848,44 +1045,94 @@ The length of entire histogram = main svg width(1200) -150 = 1050
                               return (rectHeight + 50) - heightScale(d.COUNT)
                             },
                           width: function(d){ 
-                                return (width-150)/yearArray.length
+                                return (width-250)/yearArray.length
                                 // return rectWidth.rangeBand()
                               },
             height: function(d){ 
                return heightScale(d.COUNT)},
             fill: 'steelblue'
-        }).on('mouseover',function(d){
+        })
+        .on('mouseover',function(d){
   
+        var upperArrow = "▲";
+        // console.log(d3.select('.histogramContainer').style('top'))
+        // console.log(d3.select('.svgHistogram'))
+        // console.log(d3.select('.histogramContainer')[0][0].offsetLeft)
+        // var xCoord = this.getBoundingClientRect().left - (this.getBoundingClientRect().width)/2
+        // var yCoord = this.getBoundingClientRect().bottom+25
+        // style('top',this.y.baseVal.value).
+        // console.log(d3.select('.xAxis line')[0])
+        var xCoord = d3.select('.container')[0][0].offsetLeft + d3.select('.histogramContainer')[0][0].offsetLeft + (this.x.baseVal.value ) - 50
+        // var xCoord = this.x.baseVal.value+50;
+        var yCoord = 180;
+        var arrowOffset = 55;
+        console.log(d3.select('histogramContainer'))
+  
+        divContainer.style('display','block').style('left', xCoord + 'px')
+        divContainer.style('top',yCoord +'px')
+
+        divContainer.append('div').attr('class','upperArrow').style('left', arrowOffset+ 'px').style('top',-20 +'px').html(upperArrow).style('font-size','24px').style('color','#111')
         
 
+        var playerList=[]
+        var i = 0;
+        while(d.players[i]){
+          playerList[i] = d.players[i];
+          i++;
+        }
 
-        var xCoord = parseInt(this.x.baseVal.value)+20
-  
-  
-        d3.select('.divContainer').style('left', xCoord + 'px').style('display','block')
-        divContainer.style('top',this.y.baseVal.value).style('top',(190) +'px')
-  
-        var playerList = d.players;
         playerList.sort(function(a,b){ return a.RANKING - b.RANKING})
-  
-        var table = divContainer.append('table')
-        var headerRow = table.append('tr')
-        headerRow.append('th').html("Ranking").attr("class",'ranking')
-        headerRow.append('th').html("Name").attr("class",'name')
-  
-        var players = table.append('tbody').selectAll('tr').data(playerList).enter()
-        var eachRow = players.append('tr')
-        var eachCell1 = eachRow.append('td').attr('class','rankingCell').html(function(d){return d.RANKING})
-        var eachCell2 =  eachRow.append('td').attr('class','nameCell').html(function(d){return d.PLAYER_NAME})
+
+var tempList = playerList;
+
+// playerList.splice(0,20)
+
+var num = parseInt(playerList.length / 15);
+
+var dataArray =[]
+
+  //There are AT LEAST 15 elements
+var j = 0;
+var numOfElements;
+
+for (i=0; i <= num; i++){
+  // split array into num pieces 
+  // index 0~14, 15~29, 30~44, 45
+
+  //Find out if there are at least 15 elements. If more than 15 elements, numOfElements can be 15
+  //  if fewer than 15 elements are remaining, than the remainder of total number of elements / 15 = numOfElements
+  if (playerList.length >= 15){
+      numOfElements = 15;
+        dataArray.push(playerList.splice(0,numOfElements));
+  }
+  else if (playerList.length % 15 > 0) {
+      numOfElements = playerList.length % 15;
+        dataArray.push(playerList.splice(0,numOfElements));
+  }
+}
 
 
-        // var addPlayers = players.append('text').text(function(d){
-          // return d.PLAYER_NAME
-        
+var tables = divContainer.selectAll('table').data(dataArray).enter().append('table')
+
+var tablesHeader = tables.append('tr')
+tablesHeader.append('th').attr('class','headerCell').attr('colspan', 2).append('td').html("Ranking / Name")
+// tablesHeader.append('th').attr('class','rankingCell').append('td').html("Ranking")
+// tablesHeader.append('th').attr('class','nameCell').append('td').html('Name')
+
+// tables.selectAll(".tableRows").data(function(d){console.log(d3.select(this.parentNode).datum())}).enter()
+
+var tableRows = tables.selectAll(".tableRows").data(function(d){ return d3.select(this.parentNode).datum()}).enter()
+.append('tr').attr('class','tableRows')
+tableRows.append('td').attr('class','rankingCell').html(function(d) {return d.RANKING})
+tableRows.append('td').attr('class','nameCell').html(function(d) {return d.PLAYER_NAME})
+
   })
   .on('mouseout',function(d){
       d3.select('.divContainer').style('display','none')
-        d3.select('.divContainer').select('table').remove()
+      d3.select('.divContainer').select('.upperArrow').remove()
+      // d3.select('body').select('.divContainer').remove()
+      d3.selectAll('table').selectAll('tr').data([]).exit().remove()
+        d3.select('.divContainer').selectAll('table').data([]).exit().remove()
   })
 
       
@@ -1037,7 +1284,7 @@ The length of entire histogram = main svg width(1200) -150 = 1050
    var yearListGruopBackground = svg.append('g').attr('class','yearListBackground')
    yearListGruopBackground.append('rect').attr('width','42px').attr('height',580).attr("transform", "translate(0," + (height/10) + ")").attr('fill','#d8d8d8').attr('x',35).style('opacity','0.8')
  
-var animateMapButton = d3.select('body').append('button').attr({   
+var animateMapButton = d3.select('.container').append('button').attr({   
                                             class: "button",
                                             id: "animateMap"})
                                   .text("Animate the map")
@@ -1152,8 +1399,11 @@ d3.select('.sliderGroup').call(d3.slider())
 </script>
 
 
+
+</body>
+<footer>
 <p id="credit">
 Data Source: https://data.world/sixmanguru/mens-year-end-atp-rankings
 </p>
-</body>
+</footer>
 </html>
