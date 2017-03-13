@@ -92,7 +92,7 @@ text.count{
   color: #f0f0f0;
   font-size: 13px;
   /*padding: 0.2em;*/
-  display: none;
+  /*display: none;*/
 }
 /*.divContainer:after{
   content:"\25B2";   
@@ -503,6 +503,24 @@ var projection = d3.geo.kavrayskiy7()
     .precision(.1);
 
 
+var zoom =  d3.behavior.zoom()
+                  .scale(300)
+                  .translate([width / 2, height / 2])
+                  .scaleExtent([225,225*5])                  
+                  .size([width-200,height-200])
+                  .on('zoom',zoomed)
+
+
+function zoomed(){
+  // console.log(d3.event.scale )
+  projection.scale(zoom.scale())
+  projection.translate(zoom.translate())
+  d3.select(".svgForMap").selectAll('path').attr('d',path)
+  if(d3.event.scale == 225){
+    console.log("asdfs")
+    // projection.translate([width/5,height/5])
+  }
+}
 var container = d3.select('body').append('div').attr('class','container')
 
 var histogramContainer = d3.select('.container').append('div').attr('class','histogramContainer')
@@ -521,6 +539,7 @@ var svg = d3.select("body").select('.container').append("svg")
     .attr("height", height)
     .attr('class','svgForMap')
     
+    d3.select(".svgForMap").call(zoom)
     // .attr("transform","translate(0," + HeightForSvgHistogram + 100  +")")
 
 var xYear = d3.scale.linear().domain([1982,2016])
@@ -1027,7 +1046,9 @@ tableRows.append('td').attr('class','nameCell').html(function(d) {return d.PLAYE
 
   })
   .on('mouseout',function(d){
-      d3.select('.divContainer').style('display','none')
+
+      // d3.select('.divContainer').style('display','none')
+      
       d3.select('.divContainer').select('.upperArrow').remove()
       // d3.select('body').select('.divContainer').remove()
       d3.selectAll('table').selectAll('tr').data([]).exit().remove()
@@ -1367,8 +1388,7 @@ tableRows.append('td').attr('class','nameCell').html(function(d) {return d.PLAYE
 
    // yearListGruopBackground.append('rect').attr('width','48px').attr('height',580).attr('fill','#d8d8d8').attr('x',35).style('opacity','0.9')
 
-var pseudoContainer = d3.select('body').append('div').attr('class','pesudo')
- 
+
 
 var yearListGroupContainer = d3.select('.container').append('div').attr('class','yearListGroupContainer')
 
