@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+
+</head>
+<style>
+
+
+body {
+  font: 12px sans-serif;
+  background-color:  #f1f1f1;
+  /*background-color: yellow;*/
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0px;
+  
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+
+}
+
+
+button{
+  position: absolute;
+  /*float: left;*/
+  /*z-index: 999;*/
+  top: 84%;
+  left: 1%;
+  width: 13em;
+  padding: 0.6em 0.6em 0.5em 0.5em;
+  text-align: center;
+
+}
+#credit{
+  height: 20px;
+  position: absolute;
+  float:right;
+  /*margin-top: 90%;*/
+  top: 85%;
+  left: 65%;
+  color: #555;
+  font-size: 10px;
+
+}
+text.count{
+  /*fill: #ccc;*/
+  fill: #e8e5e5;
+}
+.histogramNationName{
+  fill: #5E545D;
+  font-size: 13px;
+}
+.histogramNationName tspan{
+  font-weight: bolder;
+ 
+}
+.container{
+  /*background-color: green;*/
+  background-color:  #f1f1f1;
+  height: 1000px;
+  width: 1200px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
+.rankingList:not(.selectedPlayers){
+  opacity: 1;
+}
+
+.countryRect{
+  /*fill: #404040;*/
+  fill: #737373;
+}
+
+.countryRect:hover{
+  fill: #23415a;
+  opacity: 0.8;
+}
+
+.upperArrow{
+  position: absolute;
+  display: inline;
+  
+}
+.divContainer{
+  background-color: red;
+  opacity:1;
+  position: absolute;
+  z-index: 999;
+  color: #f0f0f0;
+  font-size: 13px;
+  /*padding: 0.2em;*/
+  /*display: none;*/
+}
+/*.divContainer:after{
+  content:"\25B2";   
+  box-sizing: border-box;
+  display: inline;
+  font-size: 20px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(1, 1, 1, 0.9);
+  position: absolute;
+  top:-25px;
+  margin: 10px 0px 0px 0px;
+  left:45%;
+  border-radius: 2px;
+  
+}
+*/
+table{
+  position: relative;
+  width: 18em;
+  /*background-color: steelblue;*/
+  background-color: #070d12;
+  /*background-color: #0e1a24;*/
+  opacity: 0.95;
+  float: left;
+  border-right: 15px solid #070d12;
+  /*margin-left: 7px;*/
+  border-collapse: collapse;
+  padding-right: 5px;
+  padding-left:0;
+  padding-top:0;
+  padding-bottom:0;
+  /*border-right: 5px solid black;*/
+  /*border: 15px solid black;*/
+  font-weight: lighter;
+  letter-spacing: 0.02em;
+
+}
+
+table:first-child{
+  margin-left: 0;
+  padding-left: 0
+}
+
+table:last-child{
+  margin-right: 0;
+  padding-right: 0;
+  border:0;
+
+}
+
+
+tr{  
+  padding-left: 1em;
+}
+tr:nth-child(even) {
+background-color: #0e1a24;
+background-color: #263039;
+  /*background-color: #1d1d1d;*/
+    /*background-color: #505050;*/
+}
+
+
+th{
+  background-color: #000;
+  /*border-right: 15px solid #070d12;*/
+  font-weight: normal;
+  color: #588ebb;
+  text-transform: uppercase;
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+}
+
+th td{
+   margin-right: auto;
+   margin-left: auto;
+  text-align: middle !important;
+}
+
+td{
+  /*border: 1px red solid;*/
+  border:0;
+  font-family: 'Helvetica';
+  font-size: 14px;
+  /*margin: 0;*/
+  padding-top: 0.4em; 
+  padding-bottom: 0.4em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+.rankingCell{
+ text-align: right; 
+ padding-right: 0.35em;
+ /*padding-left: 2em;
+ padding-right: 0.8em;
+*/
+}
+
+.nameCell{
+  text-align: left;
+  font-weight: 600;
+  padding-left: 0.35em;
+  /*padding-top: 0.35em;*/
+  /*padding-bottom: 0.35em;*/
+  /*padding-right: 1em;*/
+}
+
+
+svg{
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+}
+.svgInDivContainer{
+  background-color: #111;
+  opacity: 0.9;
+  position: absolute;
+  /*top: 50px;
+  left: 100px;*/
+  /*display:none;*/
+}
+
+
+#try{
+position: absolute;
+height: 200px;
+left: 50px;
+top: 100px;
+}
+.selectedPlayers{
+  opacity: 0.5;
+}
+
+.pseudo{
+  top: 0px;
+  left: 50px;
+  margin-right: auto;
+  margin-left: auto;
+}
+div.yearListGroupContainer{
+
+position: absolute;
+/*z-index: 999;*/
+top: 478px;
+background-color: #d8d8d8;
+opacity: 0.9;
+/*background-color: green;*/
+left:1%;
+width: 140px;
+padding-top: 10px;
+padding-bottom: 10px;
+/*margin-right: auto;
+  margin-left: auto;*/
+}
+
+div.yearListGroup{
+
+  width: 125px;
+  /*background-color: red;*/
+  /*max-width: 50px;*/
+  margin-right: auto;
+  margin-left: auto;
+}
+li{
+
+  /*float: left;*/
+  /*clear:both;*/
+  width: 30px;
+  display:inline-block;
+  padding: 0.4em;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+  text-align: center;
+  list-style: none;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin: 0.1em 0em;
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+
+li:nth-child(3n){
+  border-right: none;
+}
+li:nth-last-child(2){
+  border-bottom: none;
+
+}
+li:last-child{
+ border-bottom: none;
+}
+text.year{
+  font-weight: 200;
+  font-size: 12px;
+}
+text.year.selected{
+  /*fill: orange;*/
+  fill: #000;
+  font-weight: bold;
+}
+
+text.year:not(.selected){
+  fill: #555;
+}
+
+.Antarctica{
+  /*display: none;*/
+}
+h1{
+  /*position: absolute;*/
+  display: block;
+  background-color: white;
+  margin-top: 20px;
+  float: right;
+  /*top: 100px;
+  width: 200px;*/
+  /*left: 10%;*/
+}
+.tick line{
+  /*stroke: black;*/
+  /*display: none;*/
+}
+
+
+text.year:hover{
+  font-weight: bolder;
+  cursor: pointer;
+  /*fill: steelblue;*/
+  opacity:0.7;
+  
+}
+.d3-tip{
+ background-color: rgba(0, 0, 0, 0.9);
+  padding-top: 1px;
+  padding: 2px 15px 2px 15px;
+  line-height: 1.2;
+  
+  
+}
+.d3-tip:after{
+  width: 100%;
+  color: rgba(0, 0, 0, 0.9);
+  box-sizing: border-box;
+  display: inline;
+  font-size: 20px;
+  line-height: 1.2;
+  /*text-align: center;*/
+    border-radius: 15px;
+}
+
+.d3-tip.e:after {
+  /*font-size: 15px;*/
+  /*color: white;*/
+  content: "\25C0";
+  position: absolute;
+  top:15%;
+  margin: 0px 0px 0px -14px;
+  left:0%;
+
+}
+
+
+.d3-tip.s:after {
+  position: absolute;
+  content: '\25B2';
+  text-align: center;
+  top:-15%;
+  margin: -2px 0px 0px 0px;
+  left:20%;
+ 
+}
+
+.d3-tip.w:after {
+  /*content:"adf";*/
+  position: absolute;
+  display: inline;
+  
+  content: '\25B6';
+  top:20%;
+  margin: 0px -16px 0px 0px;
+  left:99%;
+ 
+}
+
+#tip p{
+  padding: 4px 3px 4px 3px;
+  margin: 12px 0px 12px 0px;
+  color: #ddd;
+  font-size: 14px;
+  font-weight: lighter;
+  letter-spacing: 0.01em;
+
+}
+
+span#countryName{
+  color: #ff984d;
+  font-size: 24px;
+  text-transform: uppercase;
+  /*margin-bottom: 40px;*/
+}
+
+p #year, p #playerCount{
+  color: #ff984d;
+
+font-weight: 900;
+}
+
+
+
+.svgForMap{
+  background: #eee;
+  position: absolute;
+  top:190px;
+
+}
+.histogramContainer{
+  /*background-color: red;*/
+  /*position: absolute;*/
+  /*position:relative;*/
+  margin-left: auto;
+  margin-right: auto;
+  /*width: 87%;*/
+  width: 1040px;
+
+}
+
+.svgHistogram{
+  /*width: 90%;*/
+  /*background-color: blue;*/
+  margin-left: auto;
+  margin-right: auto;
+}
+
+path {
+  stroke: #222;
+  stroke-width: 0.25px;
+}
+
+
+path:hover{
+  fill: #969696;
+  opacity: 0.8;
+  /*stroke: #969696;*/
+  /*stroke-width: 1px;*/
+}
+
+.xAxis line{
+  stroke: black;
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+}
+
+.xAxis line:last-child{
+  display:none;
+  stroke: red;
+  stroke-width: 2px;
+}
+.xAxis path{
+  fill: none;
+  stroke: black;
+  stroke-width: 1px;
+
+   /*stroke: #000;*/
+
+}
+
+
+h1 {
+  position: absolute;
+  top: 500px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  text-align: center;
+  width: 960px;
+}
+</style>
+<body>
+
+
+<!-- <h1>
+Distribution of Top 100 Tennis Players
+</h1>
+ -->
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="//d3js.org/queue.v1.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
+<script src="//d3js.org/d3.geo.projection.v0.min.js"></script>
+<script src = "http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+<script>
+var width = 1200,
+    height = 700;
+
+var HeightForSvgHistogram = 170; 
+
+var projection = d3.geo.kavrayskiy7()
+    .scale(225)
+    .translate([width / 2, height / 2])
+    .precision(.1);
+
+
+
+var zoom =  d3.behavior.zoom()
+                  .scale(300)
+                  .translate([width / 2, height / 2])
+                  .scaleExtent([225,225*5])                  
+                  .size([width-200,height-200])
+                  .on('zoom',zoomed)
+
+
+function zoomed(){
+  // console.log(d3.event.scale )
+  projection.scale(zoom.scale())
+  projection.translate(zoom.translate())
+  d3.select(".svgForMap").selectAll('path').attr('d',path)
+  if(d3.event.scale == 225){
+    console.log("asdfs")
+    // projection.translate([width/5,height/5])
+  }
+}
+var container = d3.select('body').append('div').attr('class','container')
+
+var histogramContainer = d3.select('.container').append('div').attr('class','histogramContainer')
+
+var WidthForSvgHistogram = width-160
+var svgHistogram = d3.select('body').select('.histogramContainer').append('svg')
+                        .attr({
+                          "width": WidthForSvgHistogram,
+                          'height': HeightForSvgHistogram
+                        })
+                        .attr('class','svgHistogram')
+
+
+var svg = d3.select("body").select('.container').append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr('class','svgForMap')
+    
+    d3.select(".svgForMap").call(zoom)
+    // .attr("transform","translate(0," + HeightForSvgHistogram + 100  +")")
+
+var xYear = d3.scale.linear().domain([1982,2016])
+                    .range([20,width-20])
+
+var path = d3.geo.path()
+    .projection(projection);
+
+var g = svg.append("g");
+
+
+var yearArray = d3.range(1982,2017)
+var xScale = d3.scale.linear().nice().domain([1982,2017]).rangeRound([0,width-160])
+
+    // .attr("transform", "translate(" + margin.left + "," + height / 2 + ")");
+
+
+    // .call(d3.drag()
+    //     .on("start.interrupt", function() { slider.interrupt(); })
+    //     .on("start drag", function() { hue(x.invert(d3.event.x)); }));
+
+
+
+
+
+queue()
+    .defer(d3.json, "world-110m2.json")
+    .defer(d3.json, "tennis-data1.json")
+    .await(ready);
+
+
+
+// // load and display the World
+function ready(error, topology, tennis) {
+  loc = width/2
+var mainTitleGroup = d3.select('.svgForMap').append('g').attr('class','mainTitleGroup').attr("transform", "translate(" + width/1.4   + "," + (height - 55) + ")")
+
+
+
+mainTitleGroup.append('text').text("DISTRIBUTION OF TOP 100 TENNIS PLAYERS").attr('font-size','28px')
+.attr('text-anchor','middle').attr('fill','#5E545D').attr('font-weight','100')
+
+// var mainTitleBackground = mainTitleGroup.append('rect').attr('class','mainTitleBackground').attr('height','48px').attr('width','300px').attr('fill','#666').style('opacity','0.8').attr('x',0).attr('y',0)
+
+
+// .attr("transform", "translate(" + width/1.3 + "," + height/1.1 + ")")
+
+// .attr('x',width/2).attr('y',25).fill("black")
+
+
+
+  var countries = topojson.feature(topology, topology.objects.countries).features;
+
+
+var countryCodeMap = {"Canada": 124, "Moldova": 498, "Sao Tome and Principe": 678, "Guinea-Bissau": 624, "United States": 840, "Lithuania": 440, "Cambodia": 116, "Saint Helena, Ascension and Tristan da Cunha": 654, "Switzerland": 756, "Ethiopia": 231, "Aruba": 533, "Saint Martin (French part)": 663, "Solomon Islands": 90, "Argentina": 32, "Cameroon": 120, "Burkina Faso": 854, "Turkmenistan": 795, "Ghana": 288, "Saudi Arabia": 682, "Rwanda": 646, "Togo": 768, "Japan": 392, "American Samoa": 16, "United States Minor Outlying Islands": 581, "Cocos (Keeling) Islands": 166, "Pitcairn": 612, "Guatemala": 320, "Bosnia and Herzegovina": 70, "Kuwait": 414, "Russia": 643, "Jordan": 400, "Bonaire, Sint Eustatius and Saba": 535, "Dominica": 212, "Liberia": 430, "Maldives": 462, "Jamaica": 388, "Oman": 512, "Martinique": 474, "Cabo Verde": 132, "Christmas Island": 162, "French Guiana": 254, "Niue": 570, "Monaco": 492, "Wallis and Futuna": 876, "New Zealand": 554, "Yemen": 887, "Jersey": 832, "Andorra": 20, "Albania": 8, "Samoa": 882, "Norfolk Island": 574, "United Arab Emirates": 784, "Cote d'Ivoire": 384, "India": 356, "Azerbaijan": 31, "Lesotho": 426, "Saint Vincent and the Grenadines": 670, "Kenya": 404, "Macao": 446, "Guam": 316, "Turkey": 792, "Afghanistan": 4, "Virgin Islands (British)": 92, "Bangladesh": 50, "Mauritania": 478, "Congo": 180, "Turks and Caicos Islands": 796, "Saint Lucia": 662, "San Marino": 674, "French Polynesia": 258, "France": 250, "Svalbard and Jan Mayen": 744, "Syrian Arab Republic": 760, "Bermuda": 60, "Slovakia": 703, "Somalia": 706, "Peru": 604, "Swaziland": 748, "Nauru": 520, "Seychelles": 690, "Norway": 578, "Malawi": 454, "Cook Islands": 184, "Benin": 204, "Reunion": 638, "Western Sahara": 732, "Cuba": 192, "Montenegro": 499, "Falkland Islands (Malvinas)": 238, "Mayotte": 175, "Heard Island and McDonald Islands": 334, "China": 156, "Armenia": 51, "Timor Leste": 626, "Dominican Republic": 214, "Bolivia": 68, "Ukraine": 804, "Bahrain": 48, "Tonga": 776, "Finland": 246, "Libya": 434, "Macedonia": 807, "Cayman Islands" : 136, "Central African Republic": 140, "New Caledonia": 540, "Mauritius": 480, "Tajikistan": 762, "Liechtenstein": 438, "Australia": 36, "Mali": 466, "Sweden": 752, "Bulgaria": 100, "Palestine, State of": 275, "North Korea": 408, "Romania": 642, "Angola": 24, "French Southern Territories": 260, "Chad": 148, "South Africa": 710, "Tokelau": 772, "Cyprus": 196, "South Georgia and the South Sandwich Islands": 239, "Brunei Darussalam": 96, "Qatar": 634, "Malaysia": 458, "Austria": 40, "Mozambique": 508, "Uganda": 800, "Asland Islands": 248, "Hungary": 348, "Niger": 562, "Isle of Man": 833, "Brazil": 76, "Virgin Islands (U.S.)": 850, "Faroe Islands": 234, "Guinea": 324, "Panama": 591, "Costa Rica": 188, "Luxembourg": 442, "Bahamas": 44, "Gibraltar": 292, "Ireland": 372, "Pakistan": 586, "Palau": 585, "Nigeria": 566, "Ecuador": 218, "Czech Republic": 203, "Viet Nam": 704, "Belarus": 112, "Vanuatu": 548, "Algeria": 12, "Slovenia": 705, "El Salvador": 222, "Tuvalu": 798, "Saint Pierre and Miquelon": 666, "Iran": 364, "Marshall Islands": 584, "Chile": 152, "Puerto Rico": 630, "Belgium": 56, "Kiribati": 296, "Haiti": 332, "Belize": 84, "Hong Kong": 344, "South Korea": 410, "Georgia": 268, "Lao People's Democratic Republic": 418, "Gambia": 270, "Philippines": 608, "Morocco": 504, "Croatia": 191, "Mongolia": 496, "Guernsey": 831, "Thailand": 764, "Namibia": 516, "Grenada": 308, "Taiwan, Province of China": 158, "Venezuela": 862, "Iraq": 368, "Tanzania": 834, "Portugal": 620, "Estonia": 233, "Uruguay": 858, "Curacao": 531, "Saint Barthelemy": 652, "Equatorial Guinea": 226, "Lebanon": 422, "Sierra Leone": 694, "Uzbekistan": 860, "Tunisia": 788, "Djibouti": 262, "Greenland": 304, "Antigua and Barbuda": 28, "Spain": 724, "Colombia": 170, "Burundi": 108, "Fiji": 242, "Barbados": 52, "Madagascar": 450, "Italy": 380, "Bhutan": 64, "Sudan": 729, "Nepal": 524, "Malta": 470, "Netherlands": 528, "Northern Mariana Islands": 580, "Suriname": 740, "United Kingdom": 826, "Anguilla": 660, "Micronesia (Federated States of)": 583, "Holy See": 336, "Israel": 376, "Indonesia": 360, "Iceland": 352, "Zambia": 894, "Senegal": 686, "Papua New Guinea": 598, "Saint Kitts and Nevis": 659, "Trinidad and Tobago": 780, "Zimbabwe": 716, "Germany": 276, "Denmark": 208, "Kazakhstan": 398, "Poland": 616, "Eritrea": 232, "Kyrgyzstan": 417, "British Indian Ocean Territory": 86, "Montserrat": 500, "Mexico": 484, "Sri Lanka": 144, "Latvia": 428, "South Sudan": 728, "Guyana": 328, "Guadeloupe": 312, "Honduras": 340, "Myanmar": 104, "Bouvet Island": 74, "Egypt": 818, "Nicaragua": 558, "Singapore": 702, "Serbia": 688, "Botswana": 72, "Antarctica": 10, "Congo": 178, "Sint Maarten (Dutch part)": 534, "Greece": 300, "Paraguay": 600, "Gabon": 266, "Comoros": 174}
+
+//Add country names to Topojson object. 
+countries.map(function(d){
+  for(key in countryCodeMap){
+    if (countryCodeMap[key] == d.id){
+      d.name = key
+
+    }
+}
+})
+
+console.log(tennis)
+
+d3.values(tennis).forEach(function(d){      
+      d.COUNTRY_ID = +d.COUNTRY_ID
+      d.DATE = +d.DATE;
+      d.COUNT = +d.COUNT;      
+  })
+
+// Make the year selected available to all functions.
+var year;
+
+
+var tip = d3.tip()
+            .attr('class','d3-tip')            
+            .offset(function(d){
+                if (event.clientX > 0.6* width && d.id != 643){
+                    return [40,-40];
+              }
+                else{
+                  return [60,40];
+              }
+            })
+            .direction(function(d){
+              
+              /*
+              if the position of mouse cursor is greater than 70% of the width, then
+              return 'w'
+              */
+              if ((event.clientX > 0.6* width) && (event.clientY > 0.5* height)){
+                d3.select('.d3-tip').classed('s',false)
+                  d3.select('.d3-tip').classed('e',false)
+                return 'w';
+              }
+              if ((event.clientX > 0.6* width) && (event.clientY < 0.5 * height) || d.id == 643){
+                    d3.select('.d3-tip').classed('e',false)
+                  d3.select('.d3-tip').classed('w',false)
+                return 's';
+              }
+
+
+                else{
+                  d3.select('.d3-tip').classed('s',false)
+                  d3.select('.d3-tip').classed('w',false)
+                return 'e';
+              }
+              console.log(event.clientX)
+              console.log(width)
+            
+            })
+            .html(function(d){
+              id = d.id
+              returnVal ='Nation Info Unavailable';
+              
+              selectCountry = d3.values(tennis).filter(function(d){
+                    return ((d.DATE == year) && (d.COUNTRY_ID == id));
+                });
+                            
+              if (selectCountry.length==0){
+                    returnVal = "<div id=\"tip\">  <p> <span id=\"countryName\"> " + d.name + "</span> </p>" +
+                        "<p> had <span id=\"playerCount\">" + "NO" + "</span> players ranked in top 100 in\t" + "<span id=\"year\">" + year + "</span>. </p> </div>"
+                }
+              
+              else{ 
+                  for (var key in countryCodeMap){              
+                    if (countryCodeMap[key] == d.id){           
+                 returnVal = "<div id=\"tip\">  <p> <span id=\"countryName\">" + d.name + "</span>  </p>" +
+                        "<p>had <span id=\"playerCount\">" + selectCountry[0].COUNT + "</span> \tplayers ranked in top 100 in <span id=\"year\">" + year + "</span>. </p> </div>"     
+
+                  // returnVal = " <div id=\"tip\">" + d.name +" <br> year: " + year + "<br>" + "count: " +selectCountry[0].COUNT +"</div>"
+                  }
+ 
+              }
+            }
+
+              return returnVal;
+             
+            })
+
+
+svg.call(tip)
+
+// d3.select('body').append('div').attr("id","try").html(function(){ return "adsfs"})
+// var divContainer = d3.select('body').append('div').attr("id","try")
+
+// var svgInDiv = divContainer.append('svg').attr('class','divSvgContainer')
+// svgInDiv.append('rect').attr('x',20).attr('y',30).attr('width','300').attr('height','150').attr('fill','blue')
+
+
+var xAxis = d3.svg.axis().orient('bottom').scale(xScale).ticks(26).tickFormat(d3.format("d"))
+
+
+minYear = d3.min(tennis, function(d){
+      return d.DATE
+  })
+
+maxYear = d3.max(tennis, function(d){
+    return d.DATE
+
+})
+maxValue =  d3.max(tennis, function(d){
+              return d.COUNT })
+
+// minValue = d3.min(tennis, function(d){
+//   return d.COUNT
+//  })
+minValue =1;
+
+// #d15e1d
+// #d1471c
+// #cc4d04
+// #fff1eb
+// #ffe4d8
+// #ff9102
+// #af4e23
+
+// #f46a25
+// var colorScale = d3.scale.log().domain([minValue,maxValue]).range(['#ddedf4','#489fc5'])
+// var colorScale = d3.scale.log().domain([minValue,maxValue]).range(['#fff1eb','#ff4c00'])
+
+var color = d3.scale.linear()
+    .domain([minValue, maxValue])
+    .range(['#fcf3f2','#a03c1b'])
+    // .range(["hsl(222,10%,100%)", "hsl(222,30%,20%)"]);
+
+var colorScale = color.interpolate(d3.interpolateHcl)
+
+var initialFlag = false;
+
+var updateMapColor = function (y){
+  year = y;
+  var rankingList ={}
+
+  coloredWorldMap.transition().delay(100).ease('circle',0.7,'out-in').duration(650).attr('fill',function(d){
+      a = d;    
+      x = d3.values(tennis).filter(function(d){
+          return (d.DATE == year)
+      })       
+      rankingList = x;
+
+      x = d3.values(x).filter(function(d){
+        return (d.COUNTRY_ID == a.id)
+      })
+
+      if (x.length != 0){
+              if(x[0].COUNT == 0){
+                return "#fff"
+              }
+              else{
+                if (x[0].COUNT < 3){
+                  d3.select(this).style('opacity','0.7')
+                }
+                if (x[0].COUNT > 4 && x[0].COUNT < 8){
+                  d3.select(this).style('opacity','0.9')
+                }
+              return colorScale(x[0].COUNT)}     
+          }
+
+          else{
+              return '#fff'
+          }
+
+    return colorScale(x[0].COUNT)
+  })
+
+
+rankingListArray = [];
+
+rankingList.forEach(function(d){
+  nationality = d.COUNTRY
+  d.players.forEach(function(d){
+        d['NATIONALITY']= nationality;
+  })
+  rankingListArray = rankingListArray.concat(d.players)
+})
+
+rankingListArray.sort(function(a,b){
+  return a.RANKING - b.RANKING
+})
+
+
+
+
+
+if (initialFlag != false){
+  var y = d3.select('g.rankingList').selectAll('text').data(rankingListArray)
+  y.exit().remove();
+  console.log(y)
+
+y.enter().append('text')
+y.attr('x',0).attr('y',function(d,i){
+  return 15*i
+}).text(function(d){return (d.PLAYER_NAME +"("+d.NATIONALITY+')'+ + d.RANKING)}).attr('class',function(d){
+  return d.NATIONALITY
+})
+
+d3.select('.rankingListYear').text(function(d){
+  return 'Year: ' + year})
+
+}
+
+
+
+else if (initialFlag == false){
+
+  var rankingListWrapper = d3.select('svg').append('g').attr('class','rankingListWrapper').attr('transform','translate(0,750)')
+  rankingListWrapper.append('text').text(function(d){ return 'Year: ' + year}).attr('class','rankingListYear')
+
+  var rankingList = rankingListWrapper.append('g').attr('class','rankingList').attr('transform','translate(0,15)')
+
+var x = rankingList.selectAll('text').data(rankingListArray)
+
+x.enter().append('text')
+x.attr('x',0).attr('y',function(d,i){
+  return 15*i
+}).text(function(d){return (d.PLAYER_NAME +"("+d.NATIONALITY+')'+ + d.RANKING)}).attr('class',function(d){
+  return d.NATIONALITY
+})}
+
+initialFlag = true;
+}
+
+
+var heightScale = d3.scale.pow().exponent(1.2).domain([1,maxValue]).rangeRound([15,100])
+// var heightScale = d3.scale.log().domain([1,maxValue]).rangeRound([15,100])
+
+var rectHeight = 60;
+
+var histogramTitle ="Number of Tennis Players from"
+
+
+ var coloredWorldMap = g.selectAll("path")
+      .data(countries)
+      .enter()  
+      .append("path")
+      .attr("d", path)
+      .attr("class",function(d){
+
+        return d.name
+        // console.log(d)
+      })
+      .attr("fill","#ddd")
+      coloredWorldMap.on('mouseover',function(d,i){
+        return tip.show(d,i)
+      })
+      .on('mouseout',tip.hide)
+
+      d3.selectAll('path')
+      .on('click', function(d){
+        
+        drawBarChart(d)
+        // highlightPlayers(d)
+        //loadHistogram(d)
+            
+      })
+      updateMapColor(1982)
+
+var containerWidth = 300;
+var containerHeight = 400
+var divContainer = d3.select('body').append('div').attr('class','divContainer')
+// var svgInDivContainer = divContainer.append('svg').attr('width',200).attr('class','svgInDivContainer').attr('x',50).attr('y',100).style('position','absolute')
+
+
+var selectedCountry = d3.select('.America').classed('selected',true)
+    
+
+var playersListRemoveTimer;
+
+function removePlayersList(){
+
+  playersListRemoveTimer= setTimeout(remove,200)
+
+function remove (){  var upperArrow = d3.select('.divContainer').select('.upperArrow')
+      upperArrow.remove()
+      // d3.select('body').select('.divContainer').remove()
+      d3.selectAll('table').selectAll('tr').remove()
+        d3.select('.divContainer').selectAll('table').data([]).exit().remove()}
+
+}
+
+
+
+
+var playersListRemoveTimer2;
+
+
+/*
+Make hover menu stay longer
+*/
+// d3.selectAll('.playersListTable')
+
+// tables.on('mouseover',function(d){
+//   console.log("table mousover")
+//   clearTimeout(playersListRemoveTimer)
+//   // d3.select('this').style('display','block')
+// })
+
+// var x = d3.selectAll('td')
+// console.log(x)
+// tables.on('mouseout',function(d){ 
+// console.log("table mouseout")
+//   removePlayersList()
+
+//   // playersListRemoveTimer2 = setTimeout(
+//   //     removePlayersList,3000)
+// })      
+
+function drawBarChart(d){
+        selectCountryName = d.name
+        // selectCountryName = event['path'][0]['__data__']['name']
+        selectCountry = d.id    
+
+        countryArray = d3.values(tennis).filter(function(d){
+            return d.COUNTRY_ID == selectCountry
+        })
+
+/*
+1. Select existing bars
+2. Need the data array of existing bars.
+2. remove the data.
+3. remove the bar (the svg element)
+
+*/
+
+  var addRect = d3.select('g.nations').selectAll('.countryRect')
+                  .data(countryArray)
+                  
+                  addRect.exit().remove()
+                  
+              addRect.enter()
+              .append('rect')
+              
+              addRect
+              .attr({
+                          x: function(d,i){ 
+                                return(xScale(d.DATE))
+                                // return (rectWidth(d.DATE)) 
+                              },
+                          y: function(d){ 
+                             return (rectHeight + 50) 
+                          },
+                          width: function(d){ 
+                                return (width-250)/yearArray.length
+                                // return rectWidth.rangeBand()
+                              },
+                          height: 0,
+            
+            fill: 'steelblue'
+        })
+              .transition().duration(300).ease('linear').attr("height",function(d){ 
+                return heightScale(d.COUNT)
+              })
+              .attr('y',function(d){
+                return (rectHeight + 50) - heightScale(d.COUNT) 
+              })
+          .attr('class','countryRect').attr('id',function(d){
+          return ('year' + d.DATE)
+        })
+      
+
+    
+    addRect.on('mouseover',function(d){
+      // console.log(this)
+      // this refers to the element
+      addPlayersList(d,this);
+  })
+  .on('mouseout',function(d){
+    console.log("inside mouseout of addrect")
+      playersListRemoveTimer = setTimeout(removePlayersList,3000)
+    
+})
+
+
+      var y = d3.select('g.nations').selectAll('text.count')
+            .data(countryArray)
+
+            y.exit().transition().duration(200).style('opacity',0).remove()
+
+        y.enter()
+        .append('text')
+        
+        y.attr('class','count').style('opacity',0).text(function(d){
+            return d.COUNT
+        })
+        .attr('text-anchor','middle')
+        
+        y.attr('x',function(d,i){
+            return(xScale(d.DATE) + ((width-150)/yearArray.length)/2)
+        })
+        .attr('y', function(d){
+          return (rectHeight + 50) - heightScale(d.COUNT) + 11
+        })
+        .attr("pointer-events", "none")
+        .transition().duration(850).style('opacity',1)
+
+histogramNationName.text("Country: ").append('tspan').text(selectCountryName) 
+}
+
+   
+
+/* 
+Working code for Histogram
+The length of entire histogram = main svg width(1200) -150 = 1050
+
+
+*/
+
+    var padding_right = 8
+    var nations = svgHistogram.append('g').attr("class","nations").attr('transform','translate(0,40)')
+
+    var histSelection = nations.selectAll('rect.countryRect')
+              .data(function(){
+                        return d3.values(tennis).filter(function(d){
+                              return d.COUNTRY_ID == 840;
+                              })
+                }).enter()
+
+              histSelection.append('rect')
+              .attr({
+                      class: function(d){return "countryRect"},
+                          x: function(d,i){ 
+                                return(xScale(d.DATE))
+                                // return (rectWidth(d.DATE)) 
+                              },
+                          y: function(d){ 
+                              return (rectHeight + 50) - heightScale(d.COUNT)
+                            },
+                          width: function(d){ 
+                                return (width-250)/yearArray.length
+                                // return rectWidth.rangeBand()
+                              },
+            height: function(d){ 
+               return heightScale(d.COUNT)},
+            fill: 'steelblue'
+        })
+        .on('mouseover',addPlayersList)
+        .on('mouseout',removePlayersList)
+  
+
+
+function addPlayersList(d,i){
+  console.log(d3.select(this))
+  // var d = d;
+  var e = this;
+
+        var upperArrow = "▲";
+        var xCoord = d3.select('.container')[0][0].offsetLeft + d3.select('.histogramContainer')[0][0].offsetLeft + (e.x.baseVal.value ) - 50
+        // var xCoord = this.x.baseVal.value+50;
+        var yCoord = 150;
+        var arrowOffset = 55;
+        
+  
+        divContainer.style('display','block').style('left', xCoord + 'px')
+        divContainer.style('top',yCoord +'px')
+
+        divContainer.append('div').attr('class','upperArrow').style('left', arrowOffset+ 'px').style('top',20 +'px').html(upperArrow).style('font-size','24px').style('color','#111')
+        
+
+        var playerList=[]
+        var i = 0;
+        while(d.players[i]){
+          playerList[i] = d.players[i];
+          i++;
+        }
+
+        playerList.sort(function(a,b){ return a.RANKING - b.RANKING})
+
+var tempList = playerList;
+
+// playerList.splice(0,20)
+
+var num = parseInt(playerList.length / 15);
+
+var dataArray =[]
+
+  //There are AT LEAST 15 elements
+var j = 0;
+var numOfElements;
+
+for (i=0; i <= num; i++){
+  // split array into num pieces 
+  // index 0~14, 15~29, 30~44, 45
+
+  //Find out if there are at least 15 elements. If more than 15 elements, numOfElements can be 15
+  //  if fewer than 15 elements are remaining, than the remainder of total number of elements / 15 = numOfElements
+  if (playerList.length >= 15){
+      numOfElements = 15;
+        dataArray.push(playerList.splice(0,numOfElements));
+  }
+  else if (playerList.length % 15 > 0) {
+      numOfElements = playerList.length % 15;
+        dataArray.push(playerList.splice(0,numOfElements));
+  }
+}
+
+
+var tables = divContainer.selectAll('table').data(dataArray).enter().append('table').attr("class","playersListTable")
+
+
+divContainer.on('mouseover',removeTimer)
+divContainer.on('mouseout', removePlayersList)
+
+var tablesHeader = tables.append('tr')
+tablesHeader.append('th').attr('class','headerCell').attr('colspan', 2).append('td').html("Ranking / Name")
+
+
+var tableRows = tables.selectAll(".tableRows").data(function(d){ return d3.select(this.parentNode).datum()}).enter()
+.append('tr').attr('class','tableRows')
+tableRows.append('td').attr('class','rankingCell').html(function(d) {return d.RANKING})
+tableRows.append('td').attr('class','nameCell').html(function(d) {return d.PLAYER_NAME})
+
+
+}
+
+function removeTimer(d,i){
+  clearTimeout(playersListRemoveTimer)
+}
+     
+
+              // Add player count to at the top of each bar
+
+        var countLabel = d3.select('g.nations').selectAll('text.count')
+        .data(function(){
+            return d3.values(tennis).filter(function(d){
+              return d.COUNTRY_ID == 840;
+            })
+        })
+
+        countLabel.enter()
+        .append('text')
+        .attr('class','count')
+        .attr('x',function(d,i){
+            return(xScale(d.DATE) + ((width-150)/yearArray.length)/2)
+        })
+        .attr('y', function(d){
+          return (rectHeight + 50) -heightScale(d.COUNT) +11
+        })
+        .text(function(d){
+            return d.COUNT
+        })
+        .attr('text-anchor','middle')
+        .attr("pointer-events", "none")
+     var x_axis = nations.append('g').attr("class","xAxis").attr("transform", "translate(0," + (rectHeight+50) + ")").call(xAxis)
+      
+
+      //adjust tick location (shift to right so that tick is placed under the middle of each bar)
+        
+
+        d3.selectAll('.tick line').attr('x1',function(d){ return ((width-150)/yearArray.length)/2}).attr('x2',function(d){ return ((width-150)/yearArray.length)/2})
+        d3.selectAll('.tick text').attr('x',function(d){ return ((width-150)/yearArray.length)/2})
+
+
+
+// var selectRect = d3.select('g.nations').selectAll('.countryRect')
+// selectRect.on('mouseover',function(d){
+  
+//         console.log(d)
+//         d3.select('.divContainer').style('left',this.x.baseVal.value).style('left',this.x.baseVal.value + 'px').style('display','block')
+//         divContainer.style('top',this.y.baseVal.value).style('top',(this.y.baseVal.value+90) +'px')
+  
+//         var playerList = d.players;
+//         playerList.sort(function(a,b){ return a.RANKING - b.RANKING})
+  
+//         var table = divContainer.append('table')
+//         var headerRow = table.append('tr')
+//         headerRow.append('th').html("Ranking").attr("class",'ranking')
+//         headerRow.append('th').html("Name").attr("class",'name')
+  
+//         var players = table.append('tbody').selectAll('tr').data(playerList).enter()
+//         var eachRow = players.append('tr')
+//         var eachCell1 = eachRow.append('td').attr('class','rankingCell').html(function(d){return d.RANKING})
+//         var eachCell2 =  eachRow.append('td').attr('class','nameCell').html(function(d){return d.PLAYER_NAME})
+
+//         // var addPlayers = players.append('text').text(function(d){
+//           // return d.PLAYER_NAME
+        
+//   })
+//   .on('mouseout',function(d){
+//       d3.select('.divContainer').style('display','none')
+//       // console.log(d3.select('.divContainer'))
+//         d3.select('.divContainer').select('table').remove()
+//   })
+
+// var selectRect = d3.selectAll('rect')
+// selectRect.on('mouseover',function(d){ 
+//         var playerList = d.players
+//         playerList.sort(function(a,b){ return a.RANKING - b.RANKING})
+        
+//         svgInDivContainer.style('left',this.x.baseVal.value).style('top',this.y.baseVal.value+80)
+//         svgInDivContainer.attr('height',function(d){
+//           console.log(playerList.length)
+//           return ((playerList.length *16)+36)
+//         })
+//        var players = svgInDivContainer.selectAll('text').data(playerList).enter()
+//         var addPlayers = players.append('text').text(function(d){
+//             console.log(d.PLAYER_NAME) 
+//            return d.PLAYER_NAME + ' '+ d.RANKING})
+//         .attr('x',30).attr('y',function(d,i){return 30+i*16}).attr('fill','white')
+//         d3.select('.divContainer').style('display','block')
+// })
+// .on('mouseout',function(d){
+
+//         d3.select('.divContainer').style('display','none')
+//         d3.select('.divContainer').selectAll('text').remove()
+// })
+
+/*      
+    Wait until rectangle works correctly.
+
+        var textSelection = nations.selectAll('.count')
+              .data(function(){
+              return d3.values(tennis).filter(function(d){
+                  return d.COUNTRY_ID == 840;
+              })
+          })
+
+        textSelection.enter()
+        .append('text')
+        .attr({
+          class:"count",
+          x: function(d,i){ 
+
+            
+                return rectWidth(d.DATE)
+                
+                 
+            // console.log(rectWidth(yearArray[i])+ 11)
+            // return (rectWidth(yearArray[i])+ 11)
+            
+             },
+                // return (i*40)+(2*i)+17 },
+          y: function(d){ 
+                return (heightScale(d.COUNT)+20)
+                // return rectHeight-10
+              },
+          fill: 'white',
+          'font-size': '11px'
+          })
+        .attr("font-family", "sans-serif")
+        .text(function(d){
+          console.log(d)
+              return d.COUNT
+          })
+        .attr("text-anchor", "middle")
+  
+  */
+      // histogramNationName.text("Country: " + selectCountryName).attr('x',20).attr('y',30)
+        var histogramNationName = nations.append('text').attr("class",'histogramNationName')
+        histogramNationName.text("Country: ").attr('x',0).attr("y",-20).append('tspan').text("United States")
+
+        
+
+  
+
+ // var yearListBackground = d3.select(".yearListBackground").append('svg').append("g")
+   
+   // var yearListGruopBackground = svg.append('g').attr('class','yearListBackground')
+   //                                         .attr("transform", "translate(0," + (height/10) + ")")
+
+   // yearListGruopBackground.append('rect').attr('width','48px').attr('height',580).attr('fill','#d8d8d8').attr('x',35).style('opacity','0.9')
+
+
+
+var yearListGroupContainer = d3.select('.container').append('div').attr('class','yearListGroupContainer')
+
+var listOfYears = yearListGroupContainer.append('div').attr('class','yearListGroup').selectAll('li').data(yearArray).enter().append('li')
+
+listOfYears.append('text').text(function(d){return d}).attr('class','year').attr("id",function(d){return "year"+d}).attr("font-size",'10px').on('click',function(d){ 
+        d3.select("text.selected").classed('selected',false)
+      d3.select(this).classed('selected',true)
+      updateMapColor(d)})
+
+    d3.select('#year1982').classed('selected',true)
+
+
+
+
+
+
+
+
+
+
+
+
+var animateMapButton = d3.select('.container').append('button').attr({   
+                                            class: "button",
+                                            id: "animateMap"})
+                                  .text("Animate the map")
+                                  
+animateMapButton.on("click", animateTheMap)
+
+var animateTimer;
+
+function animateTheMap(arg){
+
+                                        animateMapButton.text("Stop the Animation")
+                                        animateMapButton.on('click',function(){
+                                          stopAnimateTheMap(i)
+                                        })
+                        
+                                        // If the selected current year is the last year, then the animation should begin from the year 1982 (i=0)
+                                        // But, anitmation should stop when the year reaches the last year and resume only when there is more year to go.
+                                        currentYear = parseInt(d3.select('text.selected').attr('id').substr(-4,4)) ;
+                                        i = currentYear - 1982;
+                                        
+                                        // if the current year is 2016, the last year with available info, then reset the index to 0
+                                        // so the aniamtion will begin from 1982
+
+                                        if (i == yearArray.length-1){
+                                          i =0;
+                                        }
+                                        
+                                        animateTimer = setInterval(function(){
+                                    
+                                            if(i<yearArray.length){
+                                                 
+                                                 d3.select('text.selected').classed('selected',false)
+                                                 d3.select('#year'+yearArray[i]).classed('selected',true)
+                                                 updateMapColor(yearArray[i])
+                                                 i++;
+                                                
+                                              }
+                                            else{
+                                              //Animation has run its course
+                                              console.log("Reached the end")
+                                              clearInterval(animateTimer)
+                                              // Set next Animation to the beginning.
+                                              // i=0;
+                                              animateMapButton.text("Animate the map").on('click',animateTheMap)
+                                            }
+                                          },1700)
+                              }
+
+
+ function stopAnimateTheMap(arg){
+                                      // arg is the index of the yearArray at which the animation was stopped
+                                      // It can be passed to animateTheMap so that the animation can be resumed from the paused year.
+
+                                    // var pausedYear = parseInt(d3.select('text.selected').attr('id').substr(-4,4));
+                                      clearInterval(animateTimer)                                    
+                                      animateMapButton.text("Animate the map")
+                                      animateMapButton.on("click",function(){
+                                        animateTheMap()
+                                      })
+                                  }
+
+
+    // yearListGroup.append('text').text("ANIMATE THE MAP!").attr('x',40).attr('y',450).on('click',animate)
+
+
+var antartica = document.getElementsByClassName('Antarctica')[0]
+console.log(document.getElementsByClassName('Antarctica'))
+antartica.parentNode.removeChild(antartica)
+
+
+
+
+
+
+
+
+
+    
+
+}
+
+
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-62986733-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+</body>
+<footer>
+<p id="credit">
+Data Source: https://data.world/sixmanguru/mens-year-end-atp-rankings
+</p>
+</footer>
+</html>
