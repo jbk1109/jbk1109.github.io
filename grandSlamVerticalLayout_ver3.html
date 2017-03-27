@@ -1,0 +1,1200 @@
+<html>
+
+<head>
+<style>
+
+body{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	/*background-color: yellow;*/
+	background-color: #1f2223;
+	width: 1300px;
+
+}
+
+
+h1{
+	color: #00aeef;
+	letter-spacing: 0.2;
+	font-weight: 200;
+}
+
+h2{
+	color: #00aeef;
+	letter-spacing: 0.2;
+	font-weight: 200;
+}
+.logoWrapper{
+
+}
+
+div.leftColumn{
+	float: left;
+	width: 50%;
+	background-color: #1a1a1a;
+
+}
+
+.svgMain{
+	/*background-color: #f1f1f1;*/
+	/*background-color: #1f2223;*/
+	margin-top: 10px;
+	padding-top: 1em;
+
+}
+
+
+
+.xAxisContainer{
+	/*position: absolute;*/
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	margin: 0;
+	/*padding-bottom: 10px;*/
+	/*opacity: 0.8;*/
+	/*background-color: #1a1a1a;*/
+	opacity: 0.8;
+	/*background-color: rgba(221,221,221,0.8);*/
+	box-shadow: 0px 1px 1px #101010;
+}
+
+.xAxisContainer text{
+	fill: #00aeef ;
+	font-size: 12px;
+
+}
+
+
+.svgContainer{
+	/*background-color: #1f2223;*/
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: 800px;
+	/*width: 750px;*/
+	padding: 0;
+	/*margin-top: 10px;*/
+	/*width: 50% ;*/
+}
+
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+.svgContainer{
+/*    scrollbar-face-color: #367CD2;
+    scrollbar-shadow-color: #FFFFFF;
+    scrollbar-highlight-color: #FFFFFF;
+    scrollbar-3dlight-color: #FFFFFF;
+    scrollbar-darkshadow-color: #FFFFFF;
+    scrollbar-track-color: #1f2223;
+    scrollbar-arrow-color: #FFFFFF;*/
+}
+
+
+
+ 
+/* Track */
+::-webkit-scrollbar-track {
+
+/*    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.8); 
+    -webkit-border-radius: 10px;*/
+    background-color: #1f2223;
+    /*border-radius: 10px;*/
+}
+
+.svgContainer::-webkit-scrollbar-thumb {
+    /*-webkit-border-radius: 10px;*/
+    /*border-radius: 10px;*/
+    /*background-color: #1a1a1a; */
+    background-color: #1d1d1d; 
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2); */
+}
+
+div.name{
+	border-bottom: 1px solid #586970;
+	padding: 10px;
+	/*margin: 10px;*/
+}
+.name p{
+	color: #00aeef;
+	margin: 0;
+	/*margin-bottom: px;*/
+}
+.name p.firstName{
+	font-size: 24px;
+	letter-spacing: -1.25px;
+}
+
+
+.name p.lastName{
+    font-size: 53px;
+    letter-spacing: -3.5px;
+    line-height: 60px;
+}
+
+
+div.pieChartContainer{
+ background-color: #1f2223;
+ margin: 12px;
+}
+h2.pieChartTitle{
+	/*font-size: 24px;*/
+	/*letter-spacing: 0.07em;*/
+	/*color: #00aeef;*/
+	/*font-weight: 300;*/
+}
+div.pieChartTip{
+	display: none;
+	position: absolute;
+	/*z-index: 999;*/
+	background: #eee;              
+    box-shadow: 1px 1px 1px #ccc; 
+    /*opacity: 0.9;*/
+	/*background-color: #f5f5f5;*/
+}
+
+
+div.pieChartTip p{
+	margin:0;
+	padding:0.4em 0.8em;
+	display: none;
+	letter-spacing: 0.07em;
+	font-weight: 300;
+	font-size: 12px;
+	font-family: "Helvetica Neue";
+	border-bottom: 0.5px solid #dfdfdf;
+}
+div.pieChartTip p:first-child{
+	font-weight: 500;
+}
+
+div.pieChartTip p:last-child{*/
+	/*border: none;*/
+
+}
+
+div.logo{
+	display: inline-block;
+}
+img{
+	width: 50px;
+	margin: 0px 50px;
+}
+
+.playerInfoContainer{
+	margin-top: 100px;
+	margin-left: 2%;
+	width: 600px;
+	/*margin-right: 200px;*/
+	/*width: 300px;*/
+	float: left;
+	/*position: absolute;*/
+	/*z-index: 9999;*/
+	/*margin: 10px;*/
+	background-color: #1a1a1a;
+}
+
+
+.playerInfoSVG{	
+	width: 90%;
+	height: 40%;
+	background-color: #1f2223;
+	margin: 10px;
+	/*background-color: #1f2223;*/
+	/*background-color: #f0f0f0;*/
+}
+
+.arcGroup path:hover{
+
+	opacity: 0.5;
+	/*stroke: #fff;*/
+	stroke-width: 4px;
+
+}
+
+.toolTip{
+	display:none;
+ background-color: rgba(0, 0, 0, 0.9);
+ color: #fff;
+  /*padding-top: 1px;*/
+  /*padding: 2px 15px 2px 15px;*/
+  padding: 1em 1.5em;
+  line-height: 1.2;
+  position: absolute;
+  top: 30px;
+  left: 50px;
+  z-index: 999;
+
+}
+.imageContainer{
+	cursor: pointer;
+}
+
+text{
+	font-family: 'Helvetica Neue';
+	
+}
+.yAxis text{
+	font-size: 16px;
+	fill: #00aeef;
+	transform: rotate(270deg);
+}
+
+
+text.totalCount{
+	fill: #fff;	
+	font-size: 40;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+}
+
+text.textDescription{
+	/*fill: #fff;*/
+	letter-spacing: 0.25em;
+	fill: #cfcfcf;
+	font-size: 9;
+}
+
+text.legendText{
+	fill: #cfcfcf;
+	font-size: 12;
+	font-weight: 300;
+	letter-spacing: 0.09em;
+	font-style: normal;
+}
+
+text.tournamentCount{
+	/* tournament count value inside the pie chart*/
+	fill: #fff;
+	font-size: 15px;
+	font-weight: 300;
+
+}
+
+
+.images:hover{
+
+}
+.images:hoverimage:after{
+	height: 30px;
+	width: 100px;
+	content: attr(data-name);
+	background-color: steelblue;
+	color: white;
+	position: absolute;
+	top:0;
+	left: 30px;
+	opacity: 0.2;
+	z-index: 9999;
+/*	position: absolute;
+	
+/*	width: 10%;
+	height: 10%;*/
+	/*zoom: 150%;*/
+}
+
+.images{
+	opacity: 1;
+
+}
+
+
+.images.selected{
+	opacity: 1;
+	
+	
+}
+.images.notSelected{
+	opacity: 0.2;
+}
+
+path, line{
+	stroke:none;
+}
+
+g.xAxis path{
+	stroke: none;
+}
+
+.xAxisContainer svg{
+	margin-bottom: 0.5em;
+}
+g.xAxis .tick text{
+	text-anchor: middle;
+	font-size: 14px;
+}
+
+
+path{
+	/*stroke: #ffffff;*/
+	/*stroke-width: 1px;*/
+}
+
+
+#playerGSrecordcontainer{
+	position: absolute;
+	margin-top: 500px;
+	margin-left: 110px;
+}
+
+#playerGSrecordcontainer img{
+	width: 300px;
+}
+/*.one.two{
+	width: 100px;
+	height: 150px;
+	background-color: black;
+	position: absolute;
+	z-index: 999;
+}*/
+</style>
+<!-- <link rel="stylesheet" type="text/css" href="grandSlam.css"> -->
+<script src="jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<div class = 'leftColumn'>
+		<h1 class ="grandSlamWinnersHeading">
+		Grand Slam Winners 1985-2017
+		</h1>
+		<div class='xAxisContainer'>
+
+			<div class= "logoWrapper">
+				<div class='logo' id="ao">
+				<img src="/img/export/aoLogo.png">
+				</div>
+				<div class='logo' id="fo">
+				<img src="/img/export/foLogo.png">
+				</div>
+				<div class='logo' id="wimbledon">
+				<img src="/img/export/wimbledonLogo.png">
+				</div>
+				<div class='logo' id="usopen">
+				<img src="/img/export/usopenLogo.png">
+				</div>
+			</div>
+	</div>
+	
+		<div class='svgContainer'>
+		</div>
+	
+
+
+
+</div>	
+
+
+<div class="rightColumn">
+		<div class="playerInfoContainer">
+		<h1 class="playerHeading">
+		Player
+		</h1>
+			<div class="name">
+				<p class="firstName"> Pete  </p>
+				<p class="lastName"> Sampras </p>
+			</div>
+			<div class="pieChartContainer">
+				<h2 class="pieChartTitle">
+					Grand Slam Titles Breakdown
+				</h2>
+				<svg class = "playerInfoSVG">
+				</svg>
+			</div>
+		</div>
+
+</div>
+<div class="pieChartTip">
+<p> Year</p>
+</div>
+
+<div class="toolTip">
+</div>
+<!-- <div class="one two">
+</div>
+ -->
+
+
+<div id="playerGSrecordcontainer">
+<!-- <iframe width="460" height="315" src="https://www.youtube.com/embed/KHbzD0Na6X4" frameborder="0"></iframe> -->
+<!-- <iframe width = "560" height="315" src="https://www.youtube.com/watch?v=KHbzD0Na6X4" frameborder="0"> </iframe> -->
+</div>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+
+
+<script>
+
+
+var verticalPadding = 25;
+var horizontalPadding =110;
+var height = 1800;
+var width = 600
+// var width = 1800;
+// var height = 450;
+
+d3.csv('output_cleaned1.csv',function(data){
+
+	// data.forEach(function(d){
+	// 	// console.log(type(d.Year))
+	// 	// d.Year = +d.Year;
+	// 	console.log(d)
+	// 	console.log(d.Year)
+	// })
+
+
+var min = d3.min(data, function(d){
+	return d.Year;
+})
+
+var max = d3.max(data, function(d){
+	return d.Year
+})
+
+var ordinalValues = ["Australian Open", "French Open", "Wimbledon", "US Open"]
+// var max = d3.max(data, function(d)
+// 	console.log(d);
+// 	return d.Year; 
+// })
+
+// console.log(new Date(min,0,1,0))
+// console.log(max)
+
+// var xAxisScale = d3.scaleLinear()
+// 							.domain([min,max])
+// 							.rangeRound([0,width])
+
+
+// Use d3.scaleTime() to create x axis with ticks.
+
+// var xAxisScale = d3.scaleTime().domain([new Date(2005, 0, 2), new Date(2015, 0, 2)])
+// 								.ticks(d3.timeYear.every(1))
+
+var yAxisScale  = d3.scaleTime()
+    .domain([new Date(min, 0, 1, 0), new Date(max, 0, 1, 0)])
+    .rangeRound([0,height])
+
+yAxisScale.ticks(d3.timeYear.every(1));
+
+var imageScale = d3.scaleBand().rangeRound([0,width]).paddingInner(0.3)
+
+imageScale.domain(data.map(function(d,i){
+	return d.Winner
+}))
+
+
+var xAxisScale = d3.scaleBand()
+					.domain(ordinalValues)
+					.rangeRound ([horizontalPadding,width])
+
+var xAxis = d3.axisBottom()
+					.scale(xAxisScale);
+
+
+var yAxis = d3.axisLeft()
+					.scale(yAxisScale);
+
+var svg = d3.select('body').select('.svgContainer').append('svg')
+					.attr("class","svgMain")
+					.attr("height",height+verticalPadding)
+					.attr('width',width+horizontalPadding)
+
+
+// svg.append('g')
+// 			.attr("transform","translate(0,"+verticalPadding+")")
+// 			.call(xAxis)
+
+
+// var xAxisContainer = d3.select('body').append('div').attr("class","xAxisContainer")
+
+var xAxisContainer = d3.select('div.xAxisContainer')	
+xAxisContainer.append('svg').attr('width',width).attr('height',50).append('g').attr("class","xAxis")
+			.attr("transform","translate(0,"+verticalPadding+")")
+			.call(xAxis)
+
+// Y Axis need to be translated 0.5 * image height vertically to be centered at middle of the image.
+svg.append('g').attr("transform","translate("+horizontalPadding+",-5)").attr("class","yAxis")
+			.call(yAxis.ticks(d3.timeYear)).attr("class","yAxis")
+
+
+var imageWidth = 250;
+var imageHeight = 100;
+var imageMargin = 30;
+
+
+var imageHover = new Image ()
+
+var imageGroup=svg.selectAll('g.imageContainer')
+					.data(data)
+					.enter()
+					.append('g')
+					.attr("class","imageContainer")
+		
+var images=	imageGroup.append('svg:image')
+					.attr('y',function(d,i){
+						// console.log(d.Year)
+						return (yAxisScale(new Date(d.Year, 0, 1, 0)))						
+					})
+					.attr('x',function(d,i){					
+						return(xAxisScale(d.Tournament)+30)
+					})
+
+					// .attr('height',imageHeight)
+					// .attr('width',imageWidth)
+					.attr("width",function(d,i){					
+						return imageScale.bandwidth()*6
+					})
+
+					.attr("xlink:href",function(d,i){
+						var filename = d.Winner;
+						// console.log(filename)
+						var position = filename.indexOf("(")
+						if (position != -1)
+							filename = filename.slice(0,position)
+						position = filename.indexOf(":")
+						if (position != -1)
+							filename = filename.slice(position+1,filename.length)
+						filename=filename.replace(/\s/g,'')						
+
+						// setID(this,filename)
+
+						// console.log(this) //this points to the <image>
+
+						// return "/img/Rafael Nadal.jpg"
+						return "/img/export/" + filename + ".jpg"
+
+					})
+					.attr("id",function(d,i){
+						
+						var idName = parseName(d)
+						idName=idName.replace(/\s/g,'')						
+
+						
+
+						// console.log(this) //this points to the <image>
+
+					
+						return idName
+					})
+					.attr("class","images")
+					.on('mouseover',function(d){
+						var name = parseName(d)
+						var toolTip = d3.select('div.toolTip')
+						toolTip.style("display","block")
+						xCoord = parseInt(d3.select(this).attr('x'))+ parseInt(imageScale.bandwidth()*23)
+						yCoord = d3.select(this).attr('y')
+						toolTip.style('top',yCoord)
+						toolTip.style('left',xCoord)
+						toolTip.html(name)
+						// console.log(d3.select(this))
+						// console.log()
+
+					})
+					.on('mouseout',function(d){
+						d3.select('.toolTip').style("display",'none')
+					})
+					// .attr("data-name",function(d,i){
+					// 	var name = d.Winner;
+					// 	var position = name.indexOf("(")
+					// 	if (position != -1)
+					// 		name = name.slice(0,position)
+					// 	position = name.indexOf(":")
+					// 	if (position != -1)
+					// 		name = name.slice(position+1,name.length)
+					// 	return name;
+						
+					// })
+			
+			var selectPlayer
+		
+
+		function parseName(d){
+						var name = d.Winner;
+						var position = name.indexOf("(")
+						if (position != -1)
+							name = name.slice(0,position)
+						position = name.indexOf(":")
+						if (position != -1)
+							name = name.slice(position+1,name.length)
+						return name;
+
+			}
+
+					d3.selectAll(".imageContainer").on("click",function(d,i){	
+						d3.event.stopPropagation();				
+						var winnerName = d.Winner;	
+						var position = winnerName.indexOf("(")
+						if (position != -1)
+							winnerName = winnerName.slice(0,position)
+						position = winnerName.indexOf(":")
+						if (position != -1)
+							winnerName = winnerName.slice(position+1,winnerName.length)
+						var winnerName_preserved = winnerName;
+						winnerName=winnerName.replace(/\s/g,'')		
+						console.log(d.Winner)
+						drawPieChart(d.Winner);
+						
+						// console.log(d3.select(this))
+						// console.log(this) // "this" points to the DOM that invoked this function. In this case <image>
+
+						// <div class = "name1 name2"></div> 
+						// considered having two classes: name1 and name2
+						// to select them .name1.name2
+						// console.log(d3.select(this).select('.images').attr('class'))
+
+						var classStatus = d3.select(this).select('.images').attr("class")
+						console.log(classStatus)
+						
+						switch (classStatus == "selected" || classStatus == "images selected") {
+							case true:
+									console.log("class is selected")
+									d3.selectAll(".selected").classed("selected",false)
+									d3.selectAll(".notSelected").classed("notSelected",false)
+									// d3.select(this).classed("selected",false)
+									
+									// d3.selectAll(".")
+									break;
+							case false:
+							// this is a case where this element is one of unselected elements or
+							// this element is clicked at the default case. 
+							// assign class name "selected" to the selection and remove "selected" from the selected elements
+							// class name of this element becomes "images selected"
+							// set opacity of this element to 1
+							// set opacity of the rest of elements to 0.4
+
+									// d3.selectAll(".images.selected").classed("selected",false)
+									// d3.selectAll(".images").filter(".selected").classed("selected",false)
+									// d3.selectAll(".names.selected").classed("selected",false)
+									
+
+									//select all the images of the selected player
+									var idName = d3.select(this).select(".images").attr("id")
+									d3.selectAll(".images").classed("notSelected",true)
+									d3.selectAll(".names").classed("notSelected",true)
+									d3.selectAll("#"+idName).classed("notSelected",false).classed("selected",true)
+									
+									
+									
+									// d3.selectAll(".names").style("opacity","0.4")
+									// d3.selectAll(".images").style("opacity","0.4")
+									
+									// d3.selectAll(".images.selected").style("opacity","1")
+									// d3.selectAll(".names.selected").style("opacity","1")
+
+									// d3.selectAll("g").style("opacity","0")
+									// d3.selectAll(".images").filter(".selected").style("opacity","1")
+									// d3.selectAll(".images").style("opacity","0")
+									break;
+
+						}
+						console.log(this)
+						// addPlayerRecord(this, winnerName_preserved)
+
+
+
+					})
+
+	svg.on('click',function(d){	
+		d3.selectAll('.selected').classed("selected",false)
+		d3.selectAll('.notSelected').classed("notSelected",false)
+		
+
+	})
+
+
+	// imageGroup.append("text")
+	// 		.text(function(d,i){
+	// 			var winnerName = d.Winner;
+	// 					var position = winnerName.indexOf("(")
+	// 					if (position != -1)
+	// 						winnerName = winnerName.slice(0,position)
+	// 					position = winnerName.indexOf(":")
+	// 					if (position != -1)
+	// 						winnerName = winnerName.slice(position+1,winnerName.length)
+	// 		//Split the name at the last white space
+	// 		// First part in the first line
+	// 		// Second line in the second line
+	// 			return winnerName
+	// 		})
+	// 		.attr("y",function(d,i){
+	// 			var yCoord = yAxisScale(new Date(d.Year, 0, 1, 0));
+	// 			xcoord = (yCoord + (imageScale.bandwidth()*5)/2)
+	// 			return yCoord
+	// 			// return (xAxisScale(new Date(d.Year, 0, 1, 0)))
+	// 		})
+	// 		.attr("x",function(d,i){
+	// 			return(xAxisScale(d.Tournament)+95)
+
+	// 		})
+	// 		.attr("id",function(d,i){
+	// 			var idName = d.Winner;
+	// 					var position = idName.indexOf("(")
+	// 					if (position != -1)
+	// 						idName = idName.slice(0,position)
+	// 					position = idName.indexOf(":")
+	// 					if (position != -1)
+	// 						idName = idName.slice(position+1,idName.length)
+	// 					idName=idName.replace(/\s/g,'')						
+
+	// 					// setID(this,filename)
+
+	// 					console.log(this) //this points to the <image>
+
+	// 					// return "/img/Rafael Nadal.jpg"
+	// 					return idName
+
+	// 		})
+	// 		.call(wrap)
+	// 		.attr("text-anchor","middle")
+	// 		.attr("font-size","10px")
+	// 		.attr("fill","black")
+	// 		.attr("class","names")
+					// The below is functioning code to toggle opacity of <image> upon click.
+					// d3.selectAll(".images").on("click",function(d,i){
+					// 	console.log(this)
+					// 	console.log(d.Winner)
+					// 	var winnerName = d.Winner;
+						
+					// 	var position = winnerName.indexOf("(")
+					// 	if (position != -1)
+					// 		winnerName = winnerName.slice(0,position)
+					// 	position = winnerName.indexOf(":")
+					// 	if (position != -1)
+					// 		winnerName = winnerName.slice(position+1,winnerName.length)
+					// 	winnerName=winnerName.replace(/\s/g,'')		
+						
+					// 	d3.selectAll(".images").style("opacity","0.4")
+
+					// 	d3.selectAll(".images").filter("#"+winnerName).style("opacity","1")						
+					// })
+
+
+		// svg.apppend('')
+
+	// var winners = svg.selectAll('.winners')
+	// 		.data(data)
+	// 		.enter()
+	// 		.append("g")
+	// 		.attr('class','winners')
+			
+	// svg.append('svg:image')
+	// 	.attr("xlink:href","/federer.jpg")
+	// 	.attr('x',110)
+	// 	.attr("y",120)
+	// 	.attr("height",100)
+	// 	.attr("width",100)
+
+
+	function wrap(text){
+		// console.log(text) // text parameter is an array of all the text elements of the players' names
+		text.each(function(){
+			// console.log(this) // this points to each text element
+			var text = d3.select(this)
+			var word
+			console.log(text) // text is an d3 object of each name
+			words = text.text().split(/\s+/).reverse()
+			x = text.attr('x')
+			y = text.attr('y')
+			dy = y
+
+			tspan = text.text(null).append("tspan").attr('x',x).attr('y',y).attr("dy",dy+'em')
+			line = [],
+			lineNumber = 0,
+			lineHeight = 1.1 // ems
+			// dy = y+10;
+
+			while (word = words.pop()){
+				line.push(word);
+      			tspan.text(line.join(" "));
+      			// if (tspan.node().getComputedTextLength() > width) {
+		        line.pop();
+		        tspan.text(line.join(" "));
+		        line = [word];
+		        tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+      
+			}
+		
+		}
+
+		)
+	}
+
+
+
+/*
+This section of code will add a grandslam record information of the player selected with click.
+1.Need to add a DOM (div?)
+2. Need to grasp the image of the player, hence the source path
+3. Need to display number of each grand slam titles and years
+
+*/
+
+$(document).ready(function(){
+	$.ajax({
+		type: 'GET',
+		url: 'gs_count.csv',
+		dataType: 'text',
+		success: function(data){
+			processData(data)
+		}
+
+	})
+
+})
+
+var lines = [];
+
+function processData(allText) {
+    var allTextLines = allText.split(/\r\n|\n/);
+    var headers = allTextLines[0].split(',');
+   //allTextLines = [line1,line2,line3....]
+    
+    for (var i=1; i<allTextLines.length; i++) {
+        var data = allTextLines[i].split(',');
+        if (data.length == headers.length) {
+            var tarrObj = new Object;
+            var obj = {};
+            for (var j=0; j<headers.length; j++) {
+      			
+      			obj[headers[j]] = data[j];
+                // tarr.push(headers[j]+":"+data[j]);
+            }
+            lines.push(obj);
+        }
+    }
+    
+}
+
+
+// function addPlayerRecord(img, winner_name){
+// 	// receives <g> </g> container
+
+// // Need player's name
+// // need path/filename to the image file
+// // need player's GS record
+// 	var winnerName = winner_name;
+// 	var index; 
+// 	// console.log($(img).children())  // returns jquery object
+// 	// console.log($(img).children()[0].href.baseVal)
+// 	imgAddress = $(img).children()[0].href.baseVal
+// 	//lines will contain all the info
+// 	// console.log(lines)
+// 	// console.log($.inArray("winnerName",lines))
+// // console.log(lines)
+// 	$.each(lines,function(d){
+
+// 		//what does "d" carry? 
+// 		for (i=0; i<lines.length; i++){
+// 			//if the name is found then stop the loop
+// 			if (lines[i][0].indexOf(winnerName) != -1){
+// 				index = i;
+
+// 			}
+// 		}
+// 	})
+
+// 	console.log(lines[index])
+
+// 	container = document.getElementById(playerGSrecordcontainer)
+// 	console.log($("#container"))
+// 	var info = lines[index]
+// 	console.log(typeof(info))
+// 	console.log(info)
+// 	$("#playerGSrecordcontainer").html("<img src="+ imgAddress +"> <p> " + lines[index].join("<br>") + " </p>")
+// 	// $("#playerGSrecordcontainer").html("<p>" +lines[0][1] +" </p>")
+
+// }
+
+
+
+/*
+Function to draw pie chart
+*/
+
+drawPieChart("Roger Federer")
+
+function drawPieChart(playerName){
+
+d3.select('.playerInfoSVG').remove()
+
+d3.select(".playerInfoContainer").select('div.pieChartContainer').append('svg').attr("class","playerInfoSVG")
+// Colors
+// Wimbledon : #197319
+// Austrailian Open: #67b5eb
+// French Open: #ff581a
+// US Open: #003366
+
+/*
+Break a name into last and first names.
+*/
+
+var nameArray  = playerName.split(" ")
+var lastName = nameArray.pop()
+var firstName = nameArray.join(" ")
+
+d3.select('p.firstName').html(firstName)
+d3.select('p.lastName').html(lastName)
+
+
+/*
+Draw pie chart for each player's grand slam record. 
+*/
+
+var x = countGrandSlamTitles(playerName)
+var radius = 130; 
+var radiusDelta = 55;
+var pie = d3.pie().sort(null).value(function(d){
+	// console.log(d)
+ return d.count })
+// d3.select('.playerInfoSVG').attr('transform','translate(50,50)')
+
+var pieChartGroup = d3.select('.playerInfoSVG').append('g').attr('class','pieChart')
+
+// pieChartGroup.append('text').text("asdf").attr('fill',"#fff").attr('x',2).attr('y',10)
+
+pieChartGroup.append("text").attr("class",'totalCount')											
+						.text(function(d){ 					
+								var totalCount = 0
+								// while(x[i]){
+								// 	totalCount = x[i].count + totalCount;
+								// }
+								x.forEach(function(d){						
+									totalCount = totalCount + d.count
+						})
+						return totalCount;
+					})
+					.attr('transform','translate(' + radius +','+radius + ')')
+					.attr('text-anchor','middle')
+					.attr('y','0.4em')
+				
+
+pieChartGroup.append('text').text("TOTAL").attr('class','textDescription')				
+				.attr('transform','translate(' + radius +','+radius + ')')
+				.attr('text-anchor','middle')
+				.attr("dy","-2.5em")
+				.attr("font-weight",300)
+
+
+
+pieChartGroup.append('text').text("TITLES").attr('class','textDescription')				
+				.attr('transform','translate(' + radius +','+radius + ')')
+				.attr('text-anchor','middle')
+				.attr("dy","3.6em")
+				.attr("font-weight",300)
+
+
+
+var pieArc = pieChartGroup.selectAll("g.arcGroup").data(pie(x)).enter()
+										.append('g').attr("class","arcGroup").attr('transform','translate(' + radius +','+radius + ')')
+
+
+
+
+
+var piePath = d3.arc().outerRadius(radius)
+						.innerRadius(radius-radiusDelta);
+
+var color = d3.scaleOrdinal().domain(ordinalValues).range(['#67b5eb','#ff581a','#197319','#003366'])						
+
+
+
+pieArc.append('path').attr("d",piePath)
+				.attr('fill',function(d){
+					console.log(d)
+					console.log(color(d.tournament))
+					return color(d.data.tournament)})
+				.attr('class','arcs')
+
+/*
+make a legend
+*/
+// #67b5eb','#ff581a','#197319','#003366'])						
+var colorObj = [{tournament: 'Australian Open', color: '#67b5eb'},{tournament: 'French Open', color: '#ff581a'}, {tournament: 'Wimbledon', color: '#197319'}, {tournament: 'US Open', color: '#003366'} ]
+
+var label = d3.arc().outerRadius(radius-60)
+					.innerRadius(radius)
+
+var legendRadius = 7
+var legendGroup = d3.select('.playerInfoSVG').append('g')
+							.attr('class','legendGroup')
+							.attr('transform','translate(350,170)')
+
+// console.log(color.map(function(d){return d}))
+legendGroup.selectAll('circle').data(colorObj).enter()
+											.append('circle').attr('class','legendCircle')
+											.attr('r',legendRadius)
+											.attr('cx',0)
+											.attr('cy',function(d,i){ return (legendRadius*3.3*i)})
+											.attr('fill',function(d){ console.log(d)
+											 return d.color})
+
+
+legendGroup.selectAll("text").data(colorObj).enter()
+											.append('text').attr('class','legendText')
+											.attr('x', 14)
+											.attr('y',function(d,i){ return (legendRadius*3.3*i)+legendRadius/2})
+											.text(function(d){return d.tournament})
+											// .attr('fill','#010101')
+
+
+// Add tooltip on each pie slice with years the player won the tournament.
+
+pieArc.on("mouseover",function(d){
+	var box = d3.select(this).node().getBBox();
+	console.log(d3.select(this))
+	console.log(parseInt(box.x))
+	var pos = d3.arc().outerRadius(radius)
+					.innerRadius(radius)
+
+	var xOffset, yOffset;
+	if(pos.centroid(d)[0] < 0){
+
+	}
+	if(pos.centroid(d)[1]<0){
+		yOffset *= -1 
+	}
+	var xcoord = 600+180+20 + pos.centroid(d)[0] -5
+	var ycoord = 180 + 180 +60 + pos.centroid(d)[1]+30
+	// var xcoord = parseInt(box.width) +180;
+	// var ycoord = parseInt((box.height)/3) +1830
+	console.log(pos.centroid(d))
+	console.log(d3.select(this).node().getBBox())
+
+	d3.select("div.pieChartTip").selectAll("p.years").data(d.data.years).enter()
+	.append('p').attr("class","years")
+	.html(function(d){return d})
+	d3.select("div.pieChartTip").style('display','block')
+	d3.selectAll("div.pieChartTip p").style('display','block')
+	d3.select("div.pieChartTip").style('left',xcoord)
+	d3.select("div.pieChartTip").style('top',ycoord)
+	
+
+})
+
+pieArc.on('mouseout',function(d){
+	d3.select("div.pieChartTip").selectAll("p.years").remove();
+	d3.select("div.pieChartTip").style('display','none');
+	d3.select(".pieChartTip p").style('display','none');
+})
+// arc.selectAll('text').data(function(d){ 
+// 	return d.data.count}).enter()
+
+
+
+										pieArc.append('text')
+										.attr("class","tournamentCount")
+										.attr("transform",function(d){ return 'translate(' + label.centroid(d) + ')'})
+										.text(function(d){
+											if (d.data.count == 0){
+												return ""
+											}
+											return d.data.count
+										})
+										
+										// .attr("x",0)
+										// .attr("y",0)
+										
+
+
+
+} 			// End of drawPieChart function
+
+
+
+
+
+
+/*
+calculates number of grand slam titles of the select player
+Will execute when a player image is clicked
+*/ 
+
+
+
+function countGrandSlamTitles(name){
+
+// var ordinalValues = ["Australian Open", "French Open", "Wimbledon", "US Open"]
+
+/*
+Filter the data by a select player's name -> will return an array container with info only of only this player
+Count the number of each element in ordinalValues, store in a variable...OR create an object...? Let's create an object....
+*/
+
+
+// console.log(data)
+// data is an array of objects
+	
+	console.log(name)
+				var record = data.filter(function(d){ 
+					//Will return array of objects. 
+
+					return d.Winner == name;
+				})
+
+				console.log(record)
+				var i = 0;
+				var count =0;
+				
+				var arrayOfRecords = [];
+
+				while (ordinalValues[i]){
+					var tempYearArray = [];
+					var recordObj ={};
+
+					temp = record.filter(function(d){
+						return d.Tournament == ordinalValues[i]
+					}) 
+					// .filter returns empty array [] (length = 0) if none matches 
+					// console.log(temp.length)
+					// if (temp == null){
+					// 	console.log(ordinalValues[i])
+						console.log(temp)
+					// 	console.log(temp.length)
+					// 	count = 0 
+					// }
+					// else{
+						count = temp.length						
+					// }
+					recordObj['tournament'] = ordinalValues[i];
+					recordObj['count'] = count;
+					temp.forEach(function(d){  
+						tempYearArray.push(d.Year) 
+						return d.Year})
+
+					recordObj['years'] = tempYearArray;					
+					arrayOfRecords.push(recordObj)
+					i++;
+				}
+
+				// console.log(recordObj)
+				// console.log(arrayOfRecords)
+				// var map1 = d3.map(record, function(d){ return d.Tournament})
+				// console.log(record)
+				// console.log(map1)
+				// temp = map1.get('US Open')
+				// console.log(temp)
+
+				// console.log(d3.keys(record))
+
+
+				return arrayOfRecords;
+
+		} // End of function countGrandSlamTitles(name)
+
+
+
+		// d3.csv('gs_count.csv',function(data){
+		// 	console.log(svg)
+		// 	// var svg = d3.select('body').append('svg')
+
+
+		// })
+
+})
+
+</script>
+</body>
+
+<!-- dr dx4503iw4 -->
+
+</html>
