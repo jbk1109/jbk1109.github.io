@@ -20,6 +20,9 @@ body {
 
 }
 
+.horizontalGrid path{
+  stroke-width: 0 ;
+}
 
 button{
   position: absolute;
@@ -243,14 +246,14 @@ width: 1000px;
 div.yearListGroupContainer{
 
 position: absolute;
-/*z-index: 999;*/
-top: 478px;
+z-index: 999;
+top: 468px;
 background-color: #d8d8d8;
 opacity: 0.9;
 /*background-color: green;*/
 left:1%;
 width: 140px;
-padding-top: 10px;
+/*padding-top: 10px;*/
 padding-bottom: 10px;
 /*margin-right: auto;
   margin-left: auto;*/
@@ -466,7 +469,29 @@ path:hover{
 
    /*stroke: #000;*/
 
+.axis path, .axis line{
+  fill: none;
+  stroke: blue;
+
 }
+
+}
+
+div.yearListGroupContainer p{
+  /*padding:0.4em;*/
+  margin: 0;
+  padding-left: 1em;
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  /*color: #ff984d;*/
+  /*font-weight: 700;*/
+  opacity: 1;
+  /*border-bottom: 1px solid #8e8e8e;*/
+  background-color: #c6c6c6;
+  /*position: relative;*/
+  
+}
+
 
 
 h1 {
@@ -481,6 +506,11 @@ h1 {
 <body>
 
 
+<div class="container">
+  <div class="yearListGroupContainer">
+     <p> Select Year: </p>
+  </div>
+</div>
 <!-- <h1>
 Distribution of Top 100 Tennis Players
 </h1>
@@ -521,7 +551,8 @@ function zoomed(){
     // projection.translate([width/5,height/5])
   }
 }
-var container = d3.select('body').append('div').attr('class','container')
+var container = d3.select('.container')
+// .append('div').attr('class','container')
 
 var histogramContainer = d3.select('.container').append('div').attr('class','histogramContainer')
 
@@ -830,6 +861,19 @@ initialFlag = true;
 
 var heightScale = d3.scale.pow().exponent(1.2).domain([1,maxValue]).rangeRound([15,100])
 // var heightScale = d3.scale.log().domain([1,maxValue]).rangeRound([15,100])
+
+
+// function horizontalGrid(){
+//   return d3.svg.axis().scale(xScale).orient('bottom').ticks(8) 
+// }
+
+// function verticalGrid(){
+//     return d3.svg.axis().scale(heightScale).orient('left').ticks(8)
+// }
+// d3.select('.histogramContainer svg').append('g').attr("transform", "translate(0," + 100 + ")").attr("class","horizontalGrid").call(horizontalGrid().tickSize(20))
+
+// d3.select(".histogramContainer svg").append('g').attr("transform","translate(0," + 100 + ")").attr('class',"verticalGrid").call(verticalGrid())
+
 
 var rectHeight = 60;
 
@@ -1390,7 +1434,9 @@ tableRows.append('td').attr('class','nameCell').html(function(d) {return d.PLAYE
 
 
 
-var yearListGroupContainer = d3.select('.container').append('div').attr('class','yearListGroupContainer')
+// var yearListGroupContainer = d3.select('.yearListGroupContainer').append('div').attr('class','yearListGroupContainer')
+
+var yearListGroupContainer = d3.select('.yearListGroupContainer')
 
 var listOfYears = yearListGroupContainer.append('div').attr('class','yearListGroup').selectAll('li').data(yearArray).enter().append('li')
 
