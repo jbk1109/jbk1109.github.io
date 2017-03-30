@@ -3,11 +3,17 @@
 <head>
 <style>
 
+/*
+for border color: #444444;
+
+*/
 body{
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "Helvetica Neue", Helveticxa, Arial, sans-serif;
 	/*background-color: yellow;*/
-	background-color: #1f2223;
+	background-color: #2a2a2a;
+	/*background-color: #1f2223;*/
 	width: 1200px;
+	/*margin: 0 auto;*/
 	/*overflow: hidden;*/
 
 }
@@ -15,7 +21,9 @@ body{
 h1,h2,h3{
 	font-family: Arial;
 	/*color: #12789e !important;*/
-	color: #546266 !important;
+	/*font-size: 90%;*/
+	color: #c9c9c9;
+	/*color: #546266 !important;*/
 	text-transform: uppercase;
 }
 
@@ -24,7 +32,7 @@ h1{
 	/*color: #00aeef;*/
 	letter-spacing: 0.05em;
 	font-weight: 200;
-	margin: 20px;
+	margin: 0px;
 	margin-left:10px;
 	margin-bottom: 0;
 }
@@ -34,8 +42,17 @@ h2{
 	/*color: #00aeef;*/
 	letter-spacing: 0.07em;
 	font-weight: 200;
+	margin: 15px;
 }
 
+h2.grandSlamWinnersHeading{
+	margin-bottom: 0;
+}
+
+h2.playerHeading{
+	margin-top: 0;
+	padding-top: 15px;
+}
 h3{
 	margin: 0;
 	color: #cfcfcf;
@@ -45,29 +62,40 @@ h3{
 
 
 .logoWrapper{
-	margin-left: 110px;
+
+	margin-left: 35px;
 }
 
 div.leftColumn{
 	float: left;
-	width: 650px;
+	width: 580px;
+	/*background-color: #2a2a2a;*/
+	/*background-color: #1b1c1f;*/
 	background-color: #1a1a1a;
-	margin-bottom: 20px;
-
+	margin: 15px;
+/*	margin-top: 15px;
+	margin-left: 15px;
+	margin-bottom: 15px;
+*/
 }
 
 div.leftColumn p.WhatToDo{
 	margin-top: 0;
-	margin-left: 12px;
+	margin-left: 15px;
 	margin-bottom: 60px;
 	/*color: #12789e;*/
-	color: #546266;
+	color: #cfcfcf;
+	/*color: #546266;*/
 	/*color: #cfcfcf;*/
 	font-size: 13px;
 	letter-spacing: 0.05em;
 }
 div.rightColumn{
 
+margin-top: 15px;
+margin-left: 615px;
+position: absolute;
+/*float: left;*/
 }
 
 .svgMain{
@@ -82,14 +110,11 @@ div.rightColumn{
 
 .xAxisContainer{
 	/*position: absolute;*/
-	width: 100%;
-	left: 0px;
-	top: 0px;
-	margin: 0;
+	/*width: 100%;*/
+	/*margin-left: -75px;*/
 	/*padding-bottom: 10px;*/
 	/*opacity: 0.8;*/
 	/*background-color: #1a1a1a;*/
-	opacity: 0.8;
 	/*background-color: rgba(221,221,221,0.8);*/
 	box-shadow: 0px 1px 1px #101010;
 }
@@ -106,8 +131,10 @@ div.rightColumn{
 	overflow-y: scroll;
 	overflow-x: hidden;
 	height: 650px;
+
 	/*width: 750px;*/
 	padding: 0;
+	margin-left: -80px;
 	/*margin-top: 10px;*/
 	/*width: 50% ;*/
 }
@@ -151,7 +178,7 @@ div.rightColumn{
 div.playerPhotoContainer{
 	float: left;
 	width : 240px;
-	margin: 10px;
+	margin: 15px;
 	/*margin-bottom: 50px;*/
 }
 div.playerPhotoContainer img{
@@ -182,14 +209,16 @@ div.name{
 	font-size: 38px;
     /*font-size: 45px;*/
     letter-spacing: 1.25px;
-    line-height: 60px;
+    margin-top: 0px;
+    /*line-height: -20px;*/
 }
 
 
 div.pieChartContainer{
 	/*clear: left;*/
- background-color: #1f2223;
- margin: 12px;
+ /*background-color: #1f2223;*/
+ /*margin: 15px;*/
+ margin-bottom: 0px;
  margin-top: 100px;
 }
 
@@ -216,7 +245,7 @@ div.pieChartTip p{
 	padding:0.4em 0.8em;
 	display: none;
 	letter-spacing: 0.07em;
-	color: darkorange;
+	color: #cfcfcf;
 	font-weight: 500;
 	font-size: 12px;
 	font-family: "Helvetica Neue";
@@ -244,12 +273,13 @@ img{
 }
 
 .playerInfoContainer{
-	margin-top: 100px;
-	margin-left: 2%;
+	/*margin-top: 100px;*/
+	
 	width: 460px;
+	padding-bottom: 15px;
 	/*margin-right: 200px;*/
 	/*width: 300px;*/
-	float: left;
+	/*float: left;*/
 	/*position: absolute;*/
 	/*z-index: 9999;*/
 	/*margin: 10px;*/
@@ -262,8 +292,10 @@ img{
 	height: 275px;
 /*	width: 90%;
 	height: 30%;
-*/	background-color: #1f2223;
-	margin: 10px;
+*/	
+	/*background-color: #1f2223;*/
+	margin: 15px;
+	margin-bottom: 0;
 	/*background-color: #1f2223;*/
 	/*background-color: #f0f0f0;*/
 }
@@ -325,7 +357,8 @@ text.textDescription{
 }
 
 text.legendText{
-	fill: #cfcfcf;
+	fill: #c9c9c9;
+	/*fill: #cfcfcf;*/
 	font-size: 11;
 	font-weight: 400;
 	letter-spacing: 0.08em;
@@ -348,15 +381,15 @@ div.logo img:hover{
 div.logo:hover::after{
 	/*height: 30px;*/
 	/*width: 100px;*/
-	/*content: "Click here to vist the website \A  in a new tab.";
+	content: "Click here to vist the website \A  in a new tab.";
 	white-space: pre;
 	background-color: steelblue;
 	color: white;
 	position: absolute;
-	top: 60px;
+	top: 80px;
 	padding: 0.5em;
 	font-size: 12px;
-	z-index: 9999;*/
+	z-index: 9999;
 
 /*	position: absolute;
 	
@@ -415,6 +448,7 @@ g.xAxis path{
 }
 
 .xAxisContainer svg{
+	margin-left: -75px;
 	margin-bottom: 0.5em;
 }
 g.xAxis .tick text{
@@ -451,9 +485,9 @@ path{
 </head>
 <body>
 <div class = 'leftColumn'>
-		<h1 class ="grandSlamWinnersHeading">
+		<h2 class ="grandSlamWinnersHeading">
 		Grand Slam Winners (1985-2017)
-		</h1>
+		</h2>
 		<p class = "whatToDo">
 		(click on the player's image to highlight the titles.)
 		</p>
@@ -601,7 +635,7 @@ var yAxis = d3.axisLeft()
 var svg = d3.select('body').select('.svgContainer').append('svg')
 					.attr("class","svgMain")
 					.attr("height",height+verticalPadding)
-					.attr('width',width+horizontalPadding)
+					.attr('width',width)
 
 
 // svg.append('g')
@@ -694,7 +728,7 @@ var images=	imageGroup.append('svg:image')
 						var name = parseName(d)
 						var toolTip = d3.select('div.toolTip')
 						toolTip.style("display","block")
-						xCoord = parseInt(d3.select(this).attr('x'))+ parseInt(imageScale.bandwidth())+75
+						xCoord = parseInt(d3.select(this).attr('x'))+ parseInt(imageScale.bandwidth())+15
 						yCoord = parseInt(d3.select(this).attr('y'))+260 -verticalScrollBarOffset;
 						console.log(yCoord)
 						console.log(d3.select(this))
