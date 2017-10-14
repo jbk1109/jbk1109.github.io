@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+body{
+	font-family: Helvetica;
+	font-size: 11px;
+}
+#map{
+	height: 600px;
+}
+
+.info {
+	padding: 6px 8px;
+	background: rgba(255,255,255,0.8);
+	font-size: 1.2em;
+	box-shadow: 2px 2px 3px rgba(0,0,0,0.5); 
+}
+
+.info h4 { 
+	margin: 0 0 5px; 
+	color: #777; 
+}
+
+.trail{
+	/* div container that contains trail information inside compareList*/
+	height: 70px;
+	background-color: #fdfdfd;
+}
+#compareList{
+	/*width: 500px;*/
+	height: 100px;
+	font-size: 1.2em;
+	background-color: #fff;
+	box-shadow: 2px 2px 3px rgba(0,0,0,0.5); 
+
+}
+
+
+#compareList div{
+	display: inline-block;
+	padding: 10px 10px;
+	border-left: 1px solid white;
+
+}
+
+.hide{
+	visibility: hidden;
+}
+.remove{
+	/*float: right;*/
+	position: absolute;
+	/*margin-right: 55px;*/
+	/*margin-top: 5px;*/
+}
+</style>
+
+<head>
+	<title>d3.js with leaflet.js</title>
+
+<!--    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="">
+ -->
+<!-- <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script> -->
+	
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"/>
+	<script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js">
+    </script>
+    
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="jquery-3.1.1.min.js"> </script>
+</head>
+
+<!-- End of <head> -->
+
+
+
+<body>
+<div id="map">
+</div>
+
+<div id="div1">
+</div>
+
+<div id="distanceFilterContainer">
+
+<input type="checkbox" name="checkboxField" class ="distanceFilter" id="short">
+<label> Under 3 miles </label>
+
+<input type="checkbox" name="checkboxField" class ="distanceFilter" id="medium">
+<label> 3-8 miles </label>
+
+<input type="checkbox" name="checkboxField" class ="distanceFilter" id="long">
+<label> 8-12 miles </label>
+
+</div>
+
+<div id="compareList"></div>
+
+<script src="hikingData.js"> </script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+
+var test ={
+			testFunction : testFunction
+}
+
+function testFunction (){ 
+	
+}
+
+test.testFunction()
+
+
+
+// url = "https://api.instagram.com/oauth/authorize/?client_id=d8a4a024838248448bbccf110404f319&redirect_uri=http://localhost:8000&response_type=token"
+
+// var request = new XMLHttpRequest();
+// request.open('GET',url,true)
+// var x = request.send()
+
+ // $("#div1").load("http://www.wta.org/go-hiking/hikes/high-rock div.latlong");
+
+// $.ajax({
+// 			url: "www.wta.org/go-hiking/hikes/high-rock div.latlong",
+// 			dataType: 'html',
+// 			type: "GET",
+// 			success: function(data){
+// 				console.log(data)
+// 			},
+// 			error: function(data){
+// 				console.log(data)
+// 				console.log("error!")
+// 			}
+
+// });
+
+
+
+var mymap = L.map('map').setView([47.606, -122.332], 7);
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=sk.eyJ1Ijoic252cGxheWVyIiwiYSI6ImNqN2pyN3YwbzI3M2oyd3F1NnpnMmJidW4ifQ.IPELluvMZZGLtQWvwtFigg', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.streets',
+    accessToken: 'sk.eyJ1Ijoic252cGxheWVyIiwiYSI6ImNqN2pyN3YwbzI3M2oyd3F1NnpnMmJidW4ifQ.IPELluvMZZGLtQWvwtFigg'
+}).addTo(mymap);
+
+
+var geojsonMarkerOptions = {
+    radius: 8,
+    fillColor: "#ff7800",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8,
+    // className: assignClass(feature)
+};
+
+function assignClass(){
+	console.log(feature)
+}
+
+geojson = L.geoJson(data,{
+	onEachFeature: featureEvent,
+	pointToLayer:function(feature, latlng){
+		// console.log(latlng.lat)
+		return L.circleMarker(latlng, geojsonMarkerOptions);
+	},
+	style: style
+}).addTo(mymap)
+
+
+function style(feature){
+	console.log(feature)
+	var length;
+	if (feature.properties.Length <= 3.0){
+		length = " short"
+	}
+	else if (feature.properties.Length > 3 && feature.properties.Length < 8)
+	{
+		length = " medium"
+	}
+	else if (feature.properties.Length >= 8.0){
+		length =" long"
+	}
+	console.log(feature.properties.Name + length)
+	return {className : feature.properties.Name + length}
+	
+}
+
+function featureEvent(feature,layer){
+	layer.on('click',displayInfo)	
+	
+}
+
+function displayInfo(e){
+	var layer = e.target;
+
+	info.update(layer.feature.properties);
+}
+
+var info = L.control();
+var compare = L.control('bottomleft');
+var filters = L.control({position:'topleft'});
+
+filters.onAdd = function(mymap){
+	console.log(this)
+	this._div = L.DomUtil.get('distanceFilterContainer')
+	return this._div
+}
+
+filters.addTo(mymap)
+
+L.DomEvent.on('div','checked',handleDistanceFilter)
+
+// filters.on('checked',function(e){
+// 	console.log(this)
+
+// })
+
+compare.onAdd = function(mymap){
+	this._div = L.DomUtil.create('div','compare')
+	return this._div
+}
+
+compare.setPosition('bottomleft')
+
+info.onAdd = function(mymap){
+	// 'this' returns 'e' object, where _div is a property
+	this._div = L.DomUtil.create('div', 'info');
+		this.update();
+		return this._div;
+}
+
+info.update = function (props) {
+		// var paragraph = L.control();
+		 
+		// paragraph.addTo(mymap)
+console.log(this)
+	this._div.innerHTML = '<h4>Trail Information</h4>' +  (props ?
+		'<div id="content">' + '<b>' + props.Name + '</b><br/>' + 'Elevation Gain: ' + props.ElevationGain +'ft' + '<br/>' + 'Highest Point: ' + props.HighestElevation +"ft" + '<br/>' + 'Length: ' + props.Length +' miles' + '<br/>' + "</div>" + '<div id="button1" > <i> Click to add to compare list. </i>  </div>'    : 'Click on a marker' 
+		)
+	var info1 = L.DomUtil.create('div','info1',this._div)
+
+	var button = L.DomUtil.get('button1')
+	console.log(button)
+	if (button != null){
+		L.DomEvent.on(button,'click',function(e){ addToCompareList(e,props)})
+	}
+	
+	// if(document.getElementById('button1') != null){
+	// 	document.getElementById('button1').addEventListener('click',addToCompareList(props))
+	// }
+};
+
+	// document.querySelector(".distanceFilter").addEventListener("change",handleDistanceFilter)
+	document.getElementById("short").addEventListener("change",handleDistanceFilter)
+	document.getElementById("medium").addEventListener("change",handleDistanceFilter)
+	document.getElementById("long").addEventListener("change",handleDistanceFilter)
+
+
+function handleElevationGainFilter(e){
+
+}
+
+function handleDistanceFilter(e){
+	var x = e.target.id
+	console.log(x)
+	if (!e.target.checked){
+		var filtered = document.getElementsByClassName(x)
+		console.log(x)
+		for (var i =0; i< filtered.length; i++){
+			filtered[i].classList.remove("hide")
+			// filtered[i].style.visibility = 'visible';
+		}
+	}
+	else{
+		var filtered = document.getElementsByClassName(x)
+		for (var i =0; i< filtered.length; i++){
+			console.log(x)
+			filtered[i].classList.add("hide")
+			// console.log(filtered)
+			// filtered[i].style.visibility = 'hidden';
+		}
+	}
+	// console.log(e.target.checked)
+
+}
+
+
+function addToCompareList(e,props){
+	console.log(event.target)
+	console.log(props)
+	console.log(this)
+	// console.log(temp.innerHTML)
+
+	var trailList = document.getElementById("compareList")
+	var textContent = document.getElementById("content").innerHTML
+	
+	var clone = document.getElementById("content").cloneNode(true)
+	clone.className ="trail";
+	clone.id= "";
+	var trail = document.createElement("div");
+	trail.className = "trail"
+	trail.innerHTML = textContent;
+
+	var remove = document.createElement("div");
+	remove.className = "remove"
+	remove.innerHTML = "X"
+	trailList.appendChild(clone)
+	clone.appendChild(remove)
+	
+
+
+	remove.addEventListener('click', removeFromCompareList)
+
+}
+
+function removeFromCompareList(e){
+	var elementToBeRemoved = e.target.parentElement;
+	e.target.parentElement.parentElement.removeChild(elementToBeRemoved);
+
+
+}
+
+info.addTo(mymap)
+
+compare.addTo(mymap)
+
+
+
+// var data = {
+// 	[{"coord":[48.4755, -121.0750],
+// 	"name": "camp muir"	
+// 	},
+// 	{"coord":[46.7860, -121.7350],
+// 	"name": "sahale arm"	
+// 	},
+// 	{"coord":[48.5162, -120.7354],
+// 	"name": "abcde"
+// 	}]
+// }
+
+// var coord = [[48.4755, -121.0750],[46.7860, -121.7350],[48.0293, -121.2893],[48.5162, -120.7354]];
+// var names = ['a','b','c']
+
+
+
+// for (var i = 0; i < coord.length; i++){
+// 	var marker = L.circleMarker([coord[i][0],coord[i][1]])
+// 	// L.DomUtil.addClass(marker._icon, "names[i]")
+// 	marker.on('click',displayInfo)
+
+// 	marker.addTo(mymap);
+// }
+
+// marker.on('click',displayInfo)
+
+
+// L.geoJson()
+// function displayInfo(e) {
+// 	console.log(e.target)
+
+// alert("s")
+
+// }
+
+
+// L.circleMarker([48.4755, -121.0750]).addTo(mymap);
+
+
+
+/* Initialize the SVG layer */
+mymap._initPathRoot()  
+
+var svg = d3.select('#map').select('svg')
+var mapData = data.features
+
+g = svg.append("g").attr("class", "rectGroup")
+    .attr("transform", "translate(0,200)");
+
+
+g.selectAll('rect').data(mapData).enter().append('rect')
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+</body>
+</html>
