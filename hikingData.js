@@ -1,4 +1,4 @@
-var data = {"type":"FeatureCollection","features":[
+var data1 = {"type":"FeatureCollection","features":[
 {"type":"Feature","id":"01","properties":{"Name":"Camp Muir","ElevationGain":4640, "HighestElevation" : 10080, "Length":8,"Type":"Round Trip"},"geometry":{"type":"Point","coordinates":[-121.7350,46.7860]}},
 {"type":"Feature","id":"02","properties":{"Name":"Cascade Pass & Sahale Arm","ElevationGain":4000, "HighestElevation" : 7570, "Length":12,"Type":"Round Trip"},"geometry":{"type":"Point","coordinates":[-121.0750,48.4755]}},
 {"type":"Feature","id":"03","properties":{"Name":"High Rock","ElevationGain":1365, "HighestElevation" : 5685, "Length":3.2,"Type":"Round Trip"},"geometry":{"type":"Point","coordinates":[-121.8913,46.6664]}},
