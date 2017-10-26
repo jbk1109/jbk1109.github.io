@@ -7,29 +7,100 @@ body{
 	font-size: 11px;
 }
 #map{
-	height: 600px;
+	height: 500px;
 }
 
-.info {
-	padding: 6px 8px;
+#info3{
+	border-bottom: #dddddd 1px solid;
+	padding-bottom: 8px;
+}
+
+#filterContainer h4{
+	display: inline-block;
+}
+#filterContainer{
+	padding-top: 8px;
+}
+
+input.slider-value{
+	width: 5em;
+	border: 0;
+	background-color: none;
+	/*background-color: rgba(255,255,255,0.8) !important ;*/
+}
+
+#max-distance, #max-elev-gain, #max-highest-point{
+	margin-left: 120px;
+	/*background-color: black;*/
+}
+.slider-value{
+	font-size: 14px;
+}
+.slider{
+	width: 240px;
+	margin: 0em 0em 2.1em 0;
+
+}
+#left-col{
+	/*width: 180px;*/
 	background: rgba(255,255,255,0.8);
-	font-size: 1.2em;
-	box-shadow: 2px 2px 3px rgba(0,0,0,0.5); 
+	width: 240px;
+	padding: 12px;
+	font-size: 11px !important;
 }
 
-.info h4 { 
-	margin: 0 0 5px; 
+#left-col h4{
+	font-size: 14px !important;
+	margin: 0 0 5px 5px;
+	padding: 3px !important;
 	color: #777; 
 }
 
+#info {
+	padding: 6px 8px;
+	background: rgba(255,255,255,0.8);
+	font-size: 1.2em;
+	/*box-shadow: 2px 2px 3px rgba(0,0,0,0.5); */
+}
+
+#info h4 { 
+	/*margin: 0 0 5px; */
+	color: #777; 
+
+}
+
+
+#trail-name{
+	font-weight: bold;
+
+}
 #d3{
 	position: absolute;
 	/*z-index: 100;*/
 }
 #filterContainer{
+	/*padding: 6px 8px;*/
+	/*background: rgba(255,255,255,0.8);*/
+	/*font-size: 1.2em;*/
+	/*box-shadow: 2px 2px 3px rgba(0,0,0,0.5); */
 	/*background-color: #fff;
 	opacity: 0.8*/;
+}
 
+#content{
+	font-size: 16px;
+}
+#content, #button{
+	margin: 0 0 8px 8px;
+}
+
+.button{
+	font-size: 14px;
+	margin: 0 0 0 8px;
+}
+
+#but-to-compare:hover{
+	opacity: 0.7;
 }
 .trail{
 	/* div container that contains trail information inside compareList*/
@@ -70,13 +141,13 @@ body{
 <!--    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="">
  -->
 <!-- <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script> -->
-	
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"/>
-	<script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js">
-    </script>
+	<script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
   
     <script src="https://d3js.org/d3.v4.min.js"></script>
-	<script src="jquery-3.1.1.min.js"> </script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <!-- End of <head> -->
@@ -90,46 +161,74 @@ body{
 <div id="div1">
 </div>
 
-<div id="filterContainer">
-	<div  id="distanceFilterContainer">
-		<h4> Distance </h4>
-		<input type="checkbox" name="checkboxField" data-length="short" class="filter" id="short">
-		<label> Under 3 miles </label>
-
-		<input type="checkbox" name="checkboxField" data-length="medium" class="filter" id="medium">
-		<label> 3-8 miles </label>
-
-		<input type="checkbox" name="checkboxField" data-length="long" class="filter" id="long">
-		<label> 8-12 miles </label>
-
+<div id="left-col">
+	<div id='info3'>
 	</div>
+	<div id="filterContainer">
 
-	<div  id="elevationGainFilterContainer">
-		<h4> Elevation Gain </h4>
-		<input type="checkbox" name="checkboxField" data-elevation-gain="low" class="elevation-gain-filter" id="low">
-		<label> Under 4000ft </label>
+		<h4>Trail Length  </h4>
+			<span class="slider-value" id="distance"> </span>
+			<!-- <span class="slider-value" id="max-distance"> </span> -->
+		<!-- <input type="text" readonly class="slider-value" id="min-distance">
+		<input type="text" readonly class="slider-value" id="max-distance"> -->
+		<div class="slider" id="slider-distance"> </div>
 
-		<input type="checkbox" name="checkboxField" data-elevation-gain="intermediate" class="elevation-gain-filter" id="intermediate">
-		<label> 4000-5000ft </label>
+		<h4>Elevation Gain <span class='unit'>  </span> </h4>
+		<span class="slider-value" id="elev-gain"> </span>
+		 <!-- <span class="slider-value" id="max-elev-gain"> </span> -->
+		<!-- <input type="text" readonly class="slider-value" id="min-elev-gain">
+		 <input type="text" readonly class="slider-value" id="max-elev-gain"> -->
+		<div class="slider" id="slider-elevation-gain"> </div>
 
-		<input type="checkbox" name="checkboxField" data-elevation-gain="high" class="elevation-gain-filter" id="high">
-		<label> >5000ft </label>
+		<h4>Highest Point <span class='unit'>  </span></h4>
+		<span class="slider-value" id="highest-point"> </span>
+		 <!-- <span class="slider-value" id="max-elev-gain"> </span> -->
+<!-- 		<input type="text" readonly class="slider-value" id="min-highest-point"> 
+		<input type="text" readonly class="slider-value" id="max-highest-point">
+ -->		<div class="slider" id="slider-highest-point"> </div>
 
-	</div>
+
+<!-- 		<div  id="distanceFilterContainer">
+			<h4> Distance </h4>
+			<input type="checkbox" name="checkboxField" data-length="short" class="filter" id="distance">
+			<label> Under 3 miles </label>
+
+			<input type="checkbox" name="checkboxField" data-length="medium" class="filter" id="distance">
+			<label> 3-8 miles </label>
+
+			<input type="checkbox" name="checkboxField" data-length="long" class="filter" id="distance">
+			<label> 8-12 miles </label>
+
+		</div>
+
+		<div  id="elevationGainFilterContainer">
+			<h4> Elevation Gain </h4>
+			<input type="checkbox" name="checkboxField" data-elevation-gain="low" class="elevation-gain-filter" id="low">
+			<label> Under 4000ft </label>
+
+			<input type="checkbox" name="checkboxField" data-elevation-gain="intermediate" class="elevation-gain-filter" id="intermediate">
+			<label> 4000-5000ft </label>
+
+			<input type="checkbox" name="checkboxField" data-elevation-gain="high" class="elevation-gain-filter" id="high">
+			<label> >5000ft </label>
+
+		</div>
 
 
 
-	<div  id="highestPointFilterContainer">
-		<h4> Highest Point</h4>
-		<input type="checkbox" name="checkboxField" data-highest-point="low" class="highest-point-filter" id="low">
-		<label> Under 7000ft </label>
+		<div  id="highestPointFilterContainer">
+			<h4> Highest Point</h4>
+			<input type="checkbox" name="checkboxField" data-highest-point="low" class="highest-point-filter" id="low">
+			<label> Under 7000ft </label>
 
-		<input type="checkbox" name="checkboxField" data-highest-point="intermediate" class="highest-point-filter" id="intermediate">
-		<label> 7000-10000ft </label>
+			<input type="checkbox" name="checkboxField" data-highest-point="intermediate" class="highest-point-filter" id="intermediate">
+			<label> 7000-10000ft </label>
 
-		<input type="checkbox" name="checkboxField" data-highest-point="high" class="highest-point-filter" id="high">
-		<label> >11000ft </label>
+			<input type="checkbox" name="checkboxField" data-highest-point="high" class="highest-point-filter" id="high">
+			<label> >11000ft </label>
 
+		</div>
+ -->
 	</div>
 
 </div>
@@ -141,10 +240,127 @@ body{
 
 </div>
 
-<script src="wtaHikingData.js"></script>
+	
+
+<script src="wtaHikingData3.js"></script>
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
+
 <script>
+
+    $( "#slider-distance" ).slider({
+      range: true,
+      min: 0,
+      max: 40,
+      values: [ 5, 30 ],
+      slide: function( event, ui ) {
+
+      	value0 = $("#slider-distance").slider('values',0);
+      	value1 = $("#slider-distance").slider('values',1);
+      	$("#distance").html(function(){ return "<span>"+ value0 + " - " + value1 + 'miles' + "</span>"  })
+
+      	// $("#min-distance").html(function(){ return $("#slider-distance").slider('values',0)})
+      	// $("#max-distance").html(function(){ return $("#slider-distance").slider('values',1)})
+
+        // $( "#min-distance" ).val(ui.values[ 0]);
+        // $("#max-distance").val(ui.values[1]);
+        // mymap.dragging.disable()
+        console.log(mymap.dragging)
+      },
+      change: function(event, ui){
+      	handleDistanceFilterSlider(event,ui.values[0],ui.values[1]);
+
+      },
+      start: function(event, ui){
+      	mymap.dragging.disable();
+      },
+      stop: function(event,ui){
+      	mymap.dragging.enable();
+      }
+    });
+
+    // $("#min-distance").html(function(){ return $("#slider-distance").slider('values',0)})
+    $("#distance").html(function(){ return "<span>"+ $("#slider-distance").slider('values',0) + " - " + $("#slider-distance").slider('values',1) + ' miles' + "</span>" })
+
+    // $("#max-distance").html(function(){ return $("#slider-distance").slider('values',1)})
+
+
+    // $("#min-distance").val($("#slider-distance").slider('values',0))
+    // $("#max-distance").val($("#slider-distance").slider('values',1))
+
+
+    $("#slider-distance").on("slidechange", function(event, ui){
+  
+    	console.log($('#slider-distance').slider('values'))
+    		// handleDistanceFilterSlider(event,ui.values[0],ui.values[1]);
+    })
+
+    $('#slider-elevation-gain').slider({
+    	range: true,
+    	min:0,
+    	max: 27996,
+    	values: [1000,5000],
+    	slide: function ( event, ui){		
+    		value0 = $("#slider-elevation-gain").slider('values',0);
+      		value1 = $("#slider-elevation-gain").slider('values',1);
+      		$("#elev-gain").html(function(){ return "<span>"+ value0 + " - " + value1 + 'ft' + "</span>"  })
+    		// $("#min-elev-gain").val(ui.values[0]+"ft");
+      //   	$("#max-elev-gain").val(ui.values[1]+"ft");
+    	},
+    	change: function(event, ui){
+    		handleElevationGainFilterSlider(event,ui.values[0],ui.values[1])
+    	},
+	    start: function(event, ui){
+	      	mymap.dragging.disable();
+	    },
+	    stop: function(event,ui){
+	      	mymap.dragging.enable();
+	    }
+    })
+
+    $("#elev-gain").html(function(){ return "<span>"+ $("#slider-elevation-gain").slider('values',0) + " - " + $("#slider-elevation-gain").slider('values',1) + ' ft' + "</span>" })
+
+
+    
+
+    $('#slider-elevation-gain').on('slidechange', function(event, ui){
+    		// handleElevationGainFilterSlider(event,ui.values[0],ui.values[1])
+    })
+	   
+
+    $('#slider-highest-point').slider({
+    	range: true,
+    	min:0,
+    	max: 12300,
+    	values: [1000,5000],
+    	slide: function ( event, ui){		
+    		value0 = $("#slider-highest-point").slider('values',0);
+      		value1 = $("#slider-highest-point").slider('values',1);
+      		$("#highest-point").html(function(){ return "<span>"+ value0 + " - " + value1 + 'ft' + "</span>"  })
+    		// $( "#min-highest-point" ).val(ui.values[ 0 ]);
+      //   	$("#max-highest-point").val(ui.values[1]);
+    	},
+    	change: function(event, ui){
+			handleHighestPointFilterSlider(event,ui.values[0],ui.values[1])
+    	},
+    	start: function(event, ui){
+	      	mymap.dragging.disable();
+	    },
+	    stop: function(event,ui){
+	      	mymap.dragging.enable();
+	    }
+    })
+
+    // $("#min-highest-point").val($("#slider-highest-point").slider('values',0))
+    // $("#max-highest-point").val($("#slider-highest-point").slider('values',1))
+
+    $("#highest-point").html(function(){ return "<span>"+ $("#slider-highest-point").slider('values',0) + " - " + $("#slider-highest-point").slider('values',1) + ' ft' + "</span>" })
+
+
+    $('#slider-highest-point').on('slidechange', function(event, ui){
+    		handleHighestPointFilterSlider(event,ui.values[0],ui.values[1])
+    })
+
 
 
 var locationColorMap = {
@@ -167,54 +383,7 @@ function testFunction (){
 
 test.test1()
 
-
-
-
-
-
 // test.testFunction
-
-// url = "https://api.instagram.com/oauth/authorize/?client_id=d8a4a024838248448bbccf110404f319&redirect_uri=http://localhost:8000&response_type=token"
-
-// var request = new XMLHttpRequest();
-// request.open('GET',url,true)
-// var x = request.send()
-
- // $("#div1").load("http://www.wta.org/go-hiking/hikes/high-rock div.latlong");
-
-// $.ajax({
-// 			url: "www.wta.org/go-hiking/hikes/high-rock div.latlong",
-// 			dataType: 'html',
-// 			type: "GET",
-// 			success: function(data){
-// 				console.log(data)
-// 			},
-// 			error: function(data){
-// 				console.log(data)
-// 				console.log("error!")
-// 			}
-
-// });
-
-
-var mymap = L.map('map').setView([47.606, -122.332], 7);
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=sk.eyJ1Ijoic252cGxheWVyIiwiYSI6ImNqN2pyN3YwbzI3M2oyd3F1NnpnMmJidW4ifQ.IPELluvMZZGLtQWvwtFigg', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox.streets',
-    accessToken: 'sk.eyJ1Ijoic252cGxheWVyIiwiYSI6ImNqN2pyN3YwbzI3M2oyd3F1NnpnMmJidW4ifQ.IPELluvMZZGLtQWvwtFigg'
-}).addTo(mymap);
-
-var geojsonMarkerOptions = {
-    radius: 8,
-    fillColor: "#ff7800",
-    // fillColor: function(feature){ getColor(feature);},
-    weight: 1,
-    color: "#fff",
-    opacity: 1,
-    fillOpacity: 0.9,
-    // className: assignClass(feature)
-};
 
 
 var test = {
@@ -226,113 +395,112 @@ function getEngine(){
 	console.log("sd")
 }
 
+var mymap = L.map('map').setView([47.606, -122.332], 7);
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=sk.eyJ1Ijoic252cGxheWVyIiwiYSI6ImNqN2pyN3YwbzI3M2oyd3F1NnpnMmJidW4ifQ.IPELluvMZZGLtQWvwtFigg', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.streets',
+    accessToken: 'sk.eyJ1Ijoic252cGxheWVyIiwiYSI6ImNqN2pyN3YwbzI3M2oyd3F1NnpnMmJidW4ifQ.IPELluvMZZGLtQWvwtFigg'
+}).addTo(mymap);
+
+// top  lat: 48.9390, long -119.4430
+// bottom  45.5603, -122.1726
+
+
+// mymap.fitBounds([[50.0000, -119.4430],[45.5733, -122.1726]])
+
+// L.latLngBounds([49.0000, -119.4430], [45.5603, -122.1726]);
+
+var geojsonMarkerOptions = {
+    radius: 6,
+    fillColor: "#ff7800",
+    weight: 1,
+    color: "#fff",
+    opacity: 1,
+    fillOpacity: 0.9,
+    riseOnHover: true,
+    // fillColor: function(feature){ getColor(feature);},
+    // className: assignClass(feature)
+};
+
+
 geojson = L.geoJson(data,{
 	onEachFeature: featureEvent,
 	pointToLayer: function(feature, latlng){
-		console.log(feature)
 		var marker = L.circleMarker(latlng, geojsonMarkerOptions)
 		marker.setStyle({"fillColor":getColor(feature)})
-		console.log(marker)
 		return marker;
-		// return L.circleMarker(latlng, geojsonMarkerOptions);
+
 	}
 	// style: style,
 
 }).addTo(mymap)
 
-console.log(geojson)
-
 
 function getColor(feature){
-	// console.log("inside feature")
 	var loc = feature.properties.Location;
 	// return locationColorMap[loc]
-	return "pink"
-	// return "#fff";
+	// return "pink"
+	return "#ef2b2b"
+	// return "#990000" 
+	//red
 
 }
-
-// function style(feature){	
-// 	var length;
-// 	if (feature.properties.Length <= 3.0){
-// 		length = " short"
-// 	}
-// 	else if (feature.properties.Length > 3 && feature.properties.Length < 8)
-// 	{
-// 		length = " medium"
-// 	}
-// 	else if (feature.properties.Length >= 8.0){
-// 		length =" long"
-// 	}
-// 	console.log(feature.properties.Name + length)
-// 	test1(feature);
-// 	return {className : feature.properties.Name + length}
-	
-// }
 
 
 function featureEvent(feature,layer){
 	layer.on('click',displayInfo)	
+	console.log(layer)
+	layer.on('mouseover',mouseOverMarker)
+	layer.on('mouseout',mouseOutMarker)
+	// layer.on('mouseover',function(e){ 
+	// 	console.log(this)
+	// 	console.log(e.target)
+		// e.target.setStyle({'opacity':0.7})
+	// })
 	
 }
 
+function mouseOverMarker(e){
+	console.log("asd")
+		e.target.setStyle({'fillColor':"#efdc2b"})
+		// e.target.setStyle({'fillOpacity':0.5})
+}
+function mouseOutMarker(e){
+	console.log("asd")
+		e.target.setStyle({'fillColor':'#ef2b2b'})
+	// e.target.setStyle({'fillOpacity':0.8})
+		// e.target.setStyle({'opacity':0.2})
+}
 function displayInfo(e){
 	var layer = e.target;
-	info.update(layer.feature.properties);
+	// info.update(layer.feature.properties);
+	update(layer.feature.properties);
 }
 
-var info = L.control();
-// var filterContainer = L.control();
+var left_col = L.control({position:'topleft'})
+	left_col.onAdd = function(mymap){
+		this._div = L.DomUtil.get('left-col')
+		return this._div
+}
+
+
+var info = L.control({position:'topleft'});
 var compare = L.control('bottomleft');
-var distanceFilter = L.control({position:'topleft'});
-var elevationGainFilter = L.control({position:'topleft'});
-var highestPointFilter = L.control({position:'topleft'})
+// var distanceFilter = L.control({position:'topleft'});
+// var elevationGainFilter = L.control({position:'topleft'});
+// var highestPointFilter = L.control({position:'topleft'})
 
-// filterContainer.onAdd = function(mymap){
-// 	this._div = L.DomUtil.create('div')
-// 	this.update();
-// 	return this._div;
+
+left_col.addTo(mymap)
+
+// var filterContainer = L.control({position:'topleft'})
+// 	filterContainer.onAdd = function(mymap){ 
+// 	this._div = L.DomUtil.get('filterContainer')
+// 	return this._div
 // }
 
-// filterContainer.update = function(){
-// 	this._div = L.DomUtil.get('distanceFilterContainer')
-// 	this._div = L.DomUtil.get('elevationGainFilterContainer')
-// }
 // filterContainer.addTo(mymap)
-
-filterContainer = L.control({position:'topleft'})
-filterContainer.onAdd = function(mymap){ 
-	this._div = L.DomUtil.get('filterContainer')
-	return this._div
-}
-filterContainer.addTo(mymap)
-
-// distanceFilter.onAdd = function(mymap){
-// 	console.log(this)
-// 	this._div = L.DomUtil.get('distanceFilterContainer')
-// 	return this._div
-// }
-
-// elevationGainFilter.onAdd = function(mymap){
-// 	this._div = L.DomUtil.get('elevationGainFilterContainer')
-// 	return this._div	
-// }
-
-// highestPointFilter.onAdd = function(mymap){
-// 	this._div = L.DomUtil.get('highestPointFilterContainer')
-// 	return this._div
-// }
-
-// distanceFilter.addTo(mymap)
-// elevationGainFilter.addTo(mymap)
-// highestPointFilter.addTo(mymap)
-
-// L.DomEvent.on('div','checked',handleDistanceFilter)
-
-// distanceFilter.on('checked',function(e){
-// 	console.log(this)
-
-// })
 
 compare.onAdd = function(mymap){
 	this._div = L.DomUtil.create('div','compare')
@@ -341,36 +509,56 @@ compare.onAdd = function(mymap){
 
 compare.setPosition('bottomleft')
 
-info.onAdd = function(mymap){
-	// 'this' returns 'e' object, where _div is a property
-	this._div = L.DomUtil.create('div', 'info');
-		this.update();
-		return this._div;
-}
+var info3 = L.DomUtil.get('info3')
+update();
 
-info.update = function (props) {
-		// var paragraph = L.control();
-		 
-		// paragraph.addTo(mymap)
-console.log(this)
-	this._div.innerHTML = '<h4>Trail Information</h4>' +  (props ?
-		'<div id="content">' + '<b>' + props.Name + '</b><br/>' + 'Elevation Gain: ' + props.ElevationGain +'ft' + '<br/>' + 'Highest Point: ' + props.HighestPoint +"ft" + '<br/>' + 'Length: ' + props.Length +' miles' + '<br/>' + "</div>" + '<div id="button1" > <i> Click to add to compare list. </i>  </div>'    : 'Click on a marker' 
+function update(props) {
+	info3.innerHTML = '<h4>Trail Information</h4>' +  (props ?
+		'<div id="content">' + '<span id="trail-name">' + props.Name + '</span> <br/>' + 'Elevation Gain: ' + props.ElevationGain +'ft' + '<br/>' + 'Highest Point: ' + props.HighestPoint +"ft" + '<br/>' + 'Length: ' + props.Length +' miles' + '<br/>' + "</div>  <div class='button' id='but-to-compare'> <i> Click here to add to compare list. </i>  </div>" : '<div class="button"> Click on a marker to display the trail information </div>'
 		)
-	var info1 = L.DomUtil.create('div','info1',this._div)
 
 	var button = L.DomUtil.get('button1')
-	console.log(button)
+
 	if (button != null){
 		L.DomEvent.on(button,'click',function(e){ addToCompareList(e,props)})
 	}
 	
-	// if(document.getElementById('button1') != null){
-	// 	document.getElementById('button1').addEventListener('click',addToCompareList(props))
-	// }
+}
+
+
+info.onAdd = function(mymap){
+	// 'this' returns 'e' object, where _div is a property
+	// this._div = L.DomUtil.create('div', 'info');
+	this._div = L.DomUtil.create('info')
+		this.update();
+		return this._div;
+}
+
+info.update = function (props) {		
+	console.log(this)
+	this._div.innerHTML = '<h4>Trail Information</h4>' +  (props ?
+		'<div id="content">' + '<b>' + props.Name + '</b><br/>' + 'Elevation Gain: ' + props.ElevationGain +'ft' + '<br/>' + 'Highest Point: ' + props.HighestPoint +"ft" + '<br/>' + 'Length: ' + props.Length +' miles' + '<br/>' + "</div>" + '<div id="button1" > <i> Click to add to compare list. </i>  </div>'    : 'Click on a marker' 
+		)
+
+	// var info1 = L.DomUtil.create('div','info1',this._div)
+	var button = L.DomUtil.get('button1')
+
+	if (button != null){
+		L.DomEvent.on(button,'click',function(e){ addToCompareList(e,props)})
+	}
+	
+
 };
 
-	// console.log(document.querySelectorAll(".distanceFilter"))
-	// // document.querySelectorAll(".distanceFilter").addEventListener("change",handleDistanceFilter)
+// info.addTo(mymap)
+compare.addTo(mymap)
+
+
+// Add event listeners to the 3 filters
+// -elevation gain
+// -highest point
+// -distance 
+
 
 var elevationGainFilterDOM = document.getElementsByClassName("elevation-gain-filter");
 
@@ -384,13 +572,11 @@ for (var i = 0; i < highestPointFilterDOM.length; i++){
 	highestPointFilterDOM[i].addEventListener("change",handleHighestPointFilter)
 }
 
+var distanceFilterDOM = document.getElementsByClassName("distanceFilter");
 
-	document.getElementById("short").addEventListener("change",handleDistanceFilter)
-	document.getElementById("medium").addEventListener("change",handleDistanceFilter)
-	document.getElementById("long").addEventListener("change",handleDistanceFilter)
-
-
-console.log(document.querySelectorAll(".elevationGainFilter"))
+for (var i = 0; i < distanceFilterDOM.length; i++){
+	elevationGainFilterDOM[i].addEventListener("change", handleDistanceFilter)
+}
 
 
 function handleHighestPointFilter(e){
@@ -479,70 +665,133 @@ function handleElevationGainFilter(e){
 
 }
 
-function handleDistanceFilter(e){
+function handleDistanceFilterSlider(e,arg1,arg2){
 	var length = e.target.getAttribute('data-length')
-	var min;
-	var max;
-	if(length == "short"){
-		min=0
-		max=3
-	}
-	else if (length == "medium"){
-		min = 3
-		max = 8
-	}
-	else if (length == 'long'){
-		min = 8
-		max = 20
-	}
-	if (e.target.checked){
-		geojson.eachLayer(function(layer){		
-			if ((layer.feature.properties.Length < min || layer.feature.properties.Length >= max)){
+	var min = arg1;
+	var max = arg2;
+	console.log(min)
+	console.log()
+	geojson.eachLayer(function(layer){
+		if ((layer.feature.properties.Length < min || layer.feature.properties.Length >= max)){
 				L.DomUtil.addClass(layer._path,"hide")
 			}
-			
-		})}
-	else if (!(e.target.checked)){
-		geojson.eachLayer(function(layer){		
-			if ((layer.feature.properties.Length < min || layer.feature.properties.Length >= max)){
+		else {
 				L.DomUtil.removeClass(layer._path,"hide")
 			}
-			
-		})
 
-	}
-	
+	})
 }
 
-// function handleDistanceFilter(e){
-// 	var x = e.target.id
-// 	console.log(x)
-// 	if (!e.target.checked){
-// 		var filtered = document.getElementsByClassName(x)
-// 		console.log(x)
-// 		for (var i =0; i< filtered.length; i++){
-// 			filtered[i].classList.remove("hide")
-// 			// filtered[i].style.visibility = 'visible';
-// 		}
-// 	}
-// 	else{
-// 		var filtered = document.getElementsByClassName(x)
-// 		for (var i =0; i< filtered.length; i++){
-// 			console.log(x)
-// 			filtered[i].classList.add("hide")
-// 			// console.log(filtered)
-// 			// filtered[i].style.visibility = 'hidden';
-// 		}
-// 	}
-// 	// console.log(e.target.checked)
 
+function handleElevationGainFilterSlider(e,arg1,arg2){
+	var length = e.target.getAttribute('data-elevation-gain')
+	var min = arg1;
+	var max = arg2;
+	console.log(min)
+	console.log()
+	geojson.eachLayer(function(layer){
+		if ((layer.feature.properties.ElevationGain < min || layer.feature.properties.ElevationGain >= max)){
+				L.DomUtil.addClass(layer._path,"hide")
+			}
+		else {
+				L.DomUtil.removeClass(layer._path,"hide")
+			}
+
+	})
+}
+
+function handleHighestPointFilterSlider(e,arg1,arg2){
+	var length = e.target.getAttribute('data-highest-point')
+	var min = arg1;
+	var max = arg2;
+	console.log(min)
+	console.log()
+	geojson.eachLayer(function(layer){
+		if ((layer.feature.properties.HighestPoint < min || layer.feature.properties.HighestPoint >= max)){
+				L.DomUtil.addClass(layer._path,"hide")
+			}
+		else {
+				L.DomUtil.removeClass(layer._path,"hide")
+			}
+
+	})
+}
+
+
+
+
+
+	// if(length == "short"){
+	// 	min=0
+	// 	max=3
+	// }
+	// else if (length == "medium"){
+	// 	min = 3
+	// 	max = 8
+	// }
+	// else if (length == 'long'){
+	// 	min = 8
+	// 	max = 20
+	// }
+	
+	// if (e.target.checked){
+	// 	geojson.eachLayer(function(layer){		
+	// 		if ((layer.feature.properties.Length < min || layer.feature.properties.Length >= max)){
+	// 			L.DomUtil.addClass(layer._path,"hide")
+	// 		}
+			
+	// 	})}
+	// else if (!(e.target.checked)){
+	// 	geojson.eachLayer(function(layer){		
+	// 		if ((layer.feature.properties.Length < min || layer.feature.properties.Length >= max)){
+	// 			L.DomUtil.removeClass(layer._path,"hide")
+	// 		}
+			
+	// 	})
+
+	// }
+	
+
+// function handleDistanceFilter(e){
+// 	var length = e.target.getAttribute('data-length')
+// 	var min;
+// 	var max;
+// 	if(length == "short"){
+// 		min=0
+// 		max=3
+// 	}
+// 	else if (length == "medium"){
+// 		min = 3
+// 		max = 8
+// 	}
+// 	else if (length == 'long'){
+// 		min = 8
+// 		max = 20
+// 	}
+// 	if (e.target.checked){
+// 		geojson.eachLayer(function(layer){		
+// 			if ((layer.feature.properties.Length < min || layer.feature.properties.Length >= max)){
+// 				L.DomUtil.addClass(layer._path,"hide")
+// 			}
+			
+// 		})}
+// 	else if (!(e.target.checked)){
+// 		geojson.eachLayer(function(layer){		
+// 			if ((layer.feature.properties.Length < min || layer.feature.properties.Length >= max)){
+// 				L.DomUtil.removeClass(layer._path,"hide")
+// 			}
+			
+// 		})
+
+// 	}
+	
 // }
 
 
 function addToCompareList(e,props){
-	console.log(event.target)
-	console.log(props)
-	console.log(this)
+	// console.log(event.target)
+	// console.log(props)
+	// console.log(this)
 	// console.log(temp.innerHTML)
 	// var hash = {}
 
@@ -575,49 +824,7 @@ function removeFromCompareList(e){
 
 
 
-info.addTo(mymap)
-compare.addTo(mymap)
 
-
-
-// var data = {
-// 	[{"coord":[48.4755, -121.0750],
-// 	"name": "camp muir"	
-// 	},
-// 	{"coord":[46.7860, -121.7350],
-// 	"name": "sahale arm"	
-// 	},
-// 	{"coord":[48.5162, -120.7354],
-// 	"name": "abcde"
-// 	}]
-// }
-
-// var coord = [[48.4755, -121.0750],[46.7860, -121.7350],[48.0293, -121.2893],[48.5162, -120.7354]];
-// var names = ['a','b','c']
-
-
-
-// for (var i = 0; i < coord.length; i++){
-// 	var marker = L.circleMarker([coord[i][0],coord[i][1]])
-// 	// L.DomUtil.addClass(marker._icon, "names[i]")
-// 	marker.on('click',displayInfo)
-
-// 	marker.addTo(mymap);
-// }
-
-// marker.on('click',displayInfo)
-
-
-// L.geoJson()
-// function displayInfo(e) {
-// 	console.log(e.target)
-
-// alert("s")
-
-// }
-
-
-// L.circleMarker([48.4755, -121.0750]).addTo(mymap);
 
 
 
