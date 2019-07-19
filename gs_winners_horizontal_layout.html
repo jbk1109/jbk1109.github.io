@@ -1,0 +1,880 @@
+<html>
+<head>
+<style>
+
+body{
+	background-color: #11171c;
+	/*width: 100%;*/
+	
+}
+h2, h3{
+	color: #1da1f2;
+	font-size: 32px;
+	font-family: Helvetica;
+}
+
+h3{
+	font-size: 15px;
+	font-weight: 500;
+	margin-top: -20px;
+}
+#content{
+	max-width: 1300px;
+	
+	margin: auto;
+	background-color: #151d26;
+
+}
+div.column{
+	width: 77px;
+	/*height: 278px;*/
+	/*height: 320px;*/
+	/*margin-left: 10px;*/
+	position: fixed;
+	margin-top: 522px;
+	/*border-right: 0.5px solid #81929f;*/
+	/*float: left;*/
+	background-color: #151d26 ;
+	/*background-color: #1a2531;*/
+	border-right: 2px solid #1a2531;
+	/*opacity: 0.9;*/
+	z-index: 1;
+}
+#topContainer{
+	/*height:300px;*/
+	/*background-color: #223245;*/
+	background-color: #151d26;
+	/*margin: 10 auto 10 auto;*/
+	margin: 10 0 10 0;
+	/*width: 1200px;*/
+	/*width: 100%;*/
+	position: absolute;
+}
+
+#playerContainer{
+	/*width: 1000px;*/
+	background-color: #151d26;
+	/*position: relative;*/
+	margin: 5 auto 5 auto;
+	width: 1200px;
+	/*margin: 10px auto;*/
+}
+
+.mainContainer{
+	width: 1200px;
+	/*height: 2000px;*/
+	
+	background-color: #151d26;
+	/*border-width: 10px;*/
+	border-color:red;
+	/*margin-top: 400px;*/
+	position: absolute;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	margin: 500px 0 10px 0px;
+
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+
+::-webkit-scrollbar-track {
+
+/*    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.8); 
+    -webkit-border-radius: 10px;*/
+    background-color: #1f2223;
+    /*border-radius: 10px;*/
+}
+
+.mainContainer::-webkit-scrollbar-thumb {
+    /*-webkit-border-radius: 10px;*/
+    /*border-radius: 10px;*/
+    /*background-color: #1a1a1a; */
+    /*background-color: #1d1d1d; */
+    background-color: #1a2531;
+    border-radius: 12px;
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2); */
+}
+
+
+.empty{
+	clear:both;
+}
+.profileImage{
+	width: 70px;
+}
+
+
+.clear{
+	clear:both;
+}
+.year{
+	display: inline-block;
+	width: 53px;
+	height: 20px;
+	font-size: 13px;
+	font-weight: bold;
+	color: #768795;
+	/*margin: 5px 5px 5px 5px;*/
+	text-align: center;
+	vertical-align: middle;
+	line-height: 20px;
+	font-family: helvetica;
+	/*padding: 1px;*/
+	/*background-color: steelblue;*/
+	/*float: left;*/
+}
+.box{
+	width:50px;
+	margin: 5px 5px 5px 5px;
+	display:inline-block;
+	background-color: steelblue;
+	/*height:70px;*/
+	/*margin:50px;*/
+}
+
+.row0{
+	width: 2000px;
+	height: 18px;
+	display:block;
+	margin-left: 80px;
+	margin-bottom: 2px;
+	border-bottom: 2px solid #1a2531;
+}
+
+.row1, .row2, .row3, .row4 {
+	width:2000px;
+	height:40px;
+	display: block;
+	/*border-right: 0.5px solid */
+	/*margin-bottom: 5px;*/
+	margin: 0 0 5px 80px;
+	/*margin-left: 80px;*/
+	border-bottom: 2px solid #1a2531;
+}
+
+.logo{
+	/*float:left;*/
+	width: 80px;
+	/*height: 53px;*/
+	/*background-color: #151d26;*/
+	margin: 5px 0px 5px 0px;
+	padding-bottom: 2px;
+	text-align: center;
+	border-bottom: 2px solid #1a2531;
+	font-weight:700px;
+	color: #768795
+}
+.logo img{
+	width: 24px;
+	padding-bottom: 1px;
+
+	/*display: inline;*/
+
+}
+
+
+div.tournament{
+	/*position: absolute;*/
+	/*float: left;*/
+	margin: 0px auto 0px auto;
+	/*text-align: center;*/
+}
+p {
+	/*float: left;*/
+	font-family: helvetica;
+	margin: 0 auto;
+	font-size:10px;
+	text-align: center;
+	/*margin: 0 auto;*/
+	position: relative;
+
+}
+
+
+
+.imageContainer img.default{
+	opacity: 1;
+}
+
+.imageContainer img.selected{
+	opacity: 1;
+	
+	
+}
+
+
+.imageContainer img.unselected{
+	opacity: 0.3;
+}
+
+.playerImageContainer{
+	/*float:left;*/
+	display: inline-block;
+	position: relative;
+	width: 110px;
+	margin: 5 5 5 5;
+	opacity: 1;
+
+
+}
+
+.playerImageContainer img{
+	width: 110px;
+	
+
+}
+
+.highlight{
+	opacity :0.4;
+}
+
+p.playerName{
+	position: absolute;
+	font-size:12px;
+	font-style: 900;
+	text-align: center;
+	margin: -14px auto 0 auto ;
+	background-color: #1a2531;
+	color: #1da1f2;
+	padding: 5px 0px;
+	width:110px;
+}
+/*
+div.row2{
+	width:2800px;
+	height:120px;
+	display: block;
+}
+
+div.row3{
+	width:2800px;
+	height:120px;
+	display: block;
+}
+
+div.row4{
+	width:2800px;
+	height:120px;
+	display: block;
+}*/
+div.imageContainer{
+	float: left;	
+	width: 51px;
+	padding: 1px;
+	/*border: 1px solid red;*/
+	/*background-color: pink;*/
+
+}
+img.playerImage{
+	width: 51px;
+	display: block;
+	margin: 0 auto;
+	/*padding: px;*/
+}
+
+.column:last-child{
+	margin: 20px;
+	/*padding-bottom: 100px;*/
+}
+
+.column #usopen{
+	border: none;
+	padding-bottom: 0px;
+	margin-bottom: :0px;
+
+}
+
+/*div.overlay{
+	float:left;
+	display: inline-block;
+	width:42px;
+	height: 40px;
+}
+*/
+
+</style>
+<script src="jquery-3.1.1.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+
+<body>
+
+<div id="content">
+<div id="topContainer"> 
+	<h2>
+		Past Grand Slam Champions 
+	</h2>
+	
+	<h3>
+		(Toggle on the player's image to view his titles below)
+	</h3>
+	
+	<div id="playerContainer">
+	</div>
+</div>
+
+<div class = "column">
+
+	<div class="logo">			
+			<img src = "./img/aoLogo1.png">
+			<div class= "tournament name">
+				<p> Aussie Open </p>
+			</div>
+
+	</div>
+
+	<div class="logo">			
+			<img src = "./img/foLogo.png">
+			<div class= "tournament name">
+				<p> French Open </p>
+			</div>
+
+	</div>
+
+	<div class="logo" >			
+			<img src = "./img/wimbledonLogo.png">
+			<div class= "tournament name">
+				<p> Wimbledon </p>
+			</div>
+
+	</div>
+
+	<div class="logo" id="usopen">			
+			<img src ="./img/usopenLogo.png">
+			<div class= "tournament name">
+				<p> US Open </p>
+			</div>
+
+	</div>
+
+</div>
+
+<div class = "empty">
+</div>
+
+<div class = "mainContainer">
+	<div class = "row0">
+		
+	</div>
+	<!-- <div class = "clear">
+	</div> -->
+	<div class = "row1" id = "Australian Open">
+		
+	</div>
+
+	
+	<div class = "row2" id = "French Open">
+	
+	</div>
+
+	<div class = "row3" id = "Wimbledon">
+	
+	</div>
+
+	<div class = "row4" id = "US Open">
+		
+	</div>
+</div>
+
+	<!-- 
+	<div class = "column">
+		<div class = "imageContainer">
+			<img class = "playerImage" src = "/img/grayscale/AlbertCosta.jpg">
+		</div>
+
+		<div class = "imageContainer">
+			<img class = "playerImage" src = "/img/grayscale/AlbertCosta.jpg">
+		</div>
+
+		<div class = "imageContainer">
+			<img class = "playerImage" src = "/img/grayscale/AlbertCosta.jpg">
+		</div>
+
+		<div class = "imageContainer">
+			<img class = "playerImage" src = "/img/grayscale/AlbertCosta.jpg">
+		</div>
+	</div>
+
+	<div class = "column">
+		<div class = "imageContainer">
+			<img class = "playerImage" src = "/img/grayscale/AlbertCosta.jpg">
+		</div>
+
+		<div class = "imageContainer">
+			<img class = "playerImage" src = "/img/grayscale/AlbertCosta.jpg">
+		</div>
+
+		<div class = "imageContainer">
+			<img class = "playerImage" src = "/img/grayscale/AlbertCosta.jpg">
+		</div>
+
+		<div class = "imageContainer">
+			<img class = "playerImage" src = "/img/grayscale/AlbertCosta.jpg">
+		</div>
+	</div>
+ -->
+
+
+
+
+</div>
+
+</body>
+
+<script>
+
+var nameArray;
+function readTextFile(file, fn)
+{
+    var rawFile = new XMLHttpRequest();
+    // var allText;
+    // var nameArray = [];
+    rawFile.open("GET", file, true);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                var allText = rawFile.responseText;
+                fn(allText);
+           
+                // alert(allText);
+            }
+        }
+    }
+    rawFile.send(null);
+    // console.log(allText)
+    // return nameArray
+}
+
+readTextFile("./winnernames.txt", function(responseText){
+	// name = responseText
+	nameArray = responseText.split(/\r\n|\n/);
+	// console.log("As")
+	// console.log(name)
+	console.log(nameArray)
+	console.log(nameArray.length)
+
+})
+
+
+
+
+
+d3.csv('output_cleaned2.csv',function(data){
+
+console.log(data[0])
+	
+var yearCount = data.length
+var images = [];
+
+// function preloadImages(){
+// 	console.log("A")
+// 	// var images =[];
+// 	for (var i = 0; i < nameArray.length-1; i++){
+// 		if(nameArray[i]=="nocompetition.jpg"){
+// 						
+// 		}
+// 		else{
+// 			images[i] = new Image();
+// 			images[i].src = "/img/"+nameArray[i];
+// 		}
+// 	}
+
+// }
+
+function preloadImages(){
+	
+	var skipIndex = nameArray.indexOf("nocompetition.jpg")
+	nameArray.splice(skipIndex,1)
+	
+	// var images =[];
+	// for (var i = 0; i < nameArray.length-1; i++){
+
+	// 		images[i] = new Image();
+	// 		images[i].src = "/img/"+nameArray[i];
+	// }
+	var i =0;
+	while( i< nameArray.length-1){
+
+			console.log(nameArray[i])
+			images[i] = new Image();
+			images[i].src = "/img/"+nameArray[i];
+			// console.log(images[i.src])
+			i++
+		
+	}
+		
+}
+
+
+
+preloadImages();
+
+for (i=0; i<=images.length-1; i++){
+	
+	
+	var img = $('<img '+'class=profileImage>');	
+	var playerImageContainer = $('<div>')
+	playerImageContainer.attr("class","playerImageContainer")
+
+	img.attr('src',images[i].src)
+	parsedName = nameArray[i].substr(0,nameArray[i].indexOf("."))
+	
+	$("#playerContainer").append(playerImageContainer)
+	playerImageContainer.attr("id",parsedName)
+	playerImageContainer.append(img)
+	var n =  $('<p class=playerName>');
+	playerImageContainer.append(n)
+	// console.log(x)
+	n.text(parsedName)
+	// $('#playerImageContainer p').text(parsedName)
+	// $(playerImageContainer "p.playerName").attr("class","playerName")
+	// $("#playerContainer").attr("id",parsedName)
+
+}
+
+var listOfSelectPlayers = [];
+
+function addClick(){
+$('.playerImageContainer').click(function(d){
+
+	target = $(event.target)
+	console.log(this)
+	console.log(target)
+	// console.log($(event.target))
+	console.log("inside event")
+	// console.log(this.id)
+	selectName = this.id
+
+// Check if clicked players is in the array
+// if does not exists and there are no select players 
+// then set all opacity except for this player  to 0.4
+// set this player's image to 1
+// and push this name to array
+// array length should be <= 4
+// this is the first player
+
+
+
+numOfSelectPlayers = $('.imageContainer img').filter(".default").length
+console.log(numOfSelectPlayers)
+
+console.log(listOfSelectPlayers.length)
+if(listOfSelectPlayers.length == 4 && listOfSelectPlayers.indexOf(selectName) == -1 ){
+	alert("you can only choose upto 4 players, please unselect a player")
+}
+
+else if (listOfSelectPlayers.indexOf(selectName) == -1 && numOfSelectPlayers != 0 ){
+	console.log(numOfSelectPlayers)
+	// new selection without any existing selection	
+	$('.imageContainer img').removeClass("default")
+	$('.imageContainer img').addClass("unselected")
+	$('.imageContainer img#'+selectName).removeClass("unselected")
+	$('.imageContainer img#'+selectName).addClass("selected")
+	// $('.div#'+selectName).css("background-color",'#60797D')
+	$('.div#'+selectName).css("background-color",'black')
+	console.log($('div#'+selectName))
+	
+	listOfSelectPlayers.push(selectName)
+	console.log("turn opacity to 0.9")
+	console.log(this)
+	$(this).toggleClass("highlight")
+	// $('this').toggleClass("highlight")
+
+}
+
+
+/*
+Check if clicked players in the array
+// if it exists, and there are no select players
+then reset all opacity to 1
+
+
+*/
+
+/*
+Check if clicked players in the array
+// if it doesn't exist, and there is/are other select players
+then change the newly clicked player opacity to 1
+
+*/
+
+else if (listOfSelectPlayers.indexOf(selectName) == -1 && numOfSelectPlayers ==0){
+	console.log(listOfSelectPlayers)
+	$('.imageContainer img#'+selectName).removeClass("unselected")
+	$('.imageContainer img#'+selectName).addClass("selected")
+	listOfSelectPlayers.push(selectName)
+	console.log(listOfSelectPlayers.length)
+	switch(parseInt(listOfSelectPlayers.length)){
+		case 2:
+			$('.imageContainer img#'+selectName).css("background-color","#60797D")
+			// $(this).find(".overlay").css("background-color",'black')
+			break;
+		case 3:
+			$('.imageContainer img#'+selectName).css("background-color","#C2F4FC")
+			break;
+		case 4:
+			$('.imageContainer img#'+selectName).css("background-color","#197080")
+
+	}
+	$(this).toggleClass("highlight")
+}
+
+/*
+Check if clicked players in the array
+// if it exist, and there is/are other select players
+then change the clicked player opacity to 0.4
+and remove the name from the array
+this is not the last player in the array
+*/
+
+else if (listOfSelectPlayers.indexOf(selectName) >= 0 && listOfSelectPlayers.length > 1 && numOfSelectPlayers ==0){
+	console.log(listOfSelectPlayers)
+	$('.imageContainer img#'+selectName).removeClass("selected")
+	$('.imageContainer img#'+selectName).addClass("unselected")	
+	$('.imageContainer img#'+selectName).css("background-color","transparent")
+	listOfSelectPlayers.splice(listOfSelectPlayers.indexOf(selectName),1)
+
+	$(this).toggleClass("highlight")
+}
+
+/*
+Check if clicked players in the array
+// if it exist, and there is/are other select players
+then change the clicked player opacity to 0.4
+and remove the name from the array
+this is the last player in the array
+restore all gallary image class to default
+*/
+
+else if (listOfSelectPlayers.indexOf(selectName) >= 0 && listOfSelectPlayers.length == 1 && numOfSelectPlayers ==0){
+
+	console.log("last player")
+	$('.imageContainer img').removeClass("selected")
+	$('.imageContainer img').removeClass("unselected")	
+	listOfSelectPlayers.splice(listOfSelectPlayers.indexOf(selectName),1)
+	$('.imageContainer img#'+selectName).css("background-color","transparent")
+	$('.imageContainer img').addClass("default")
+
+	$(this).toggleClass("highlight")
+}
+	
+
+	// $('.imageContainer img#'+selectName).addClass("selected")
+
+/*
+	check for other select players
+	if true && already select(clicked) players:
+		set opacity of the select players to 0.4
+
+	if true && this is only select players
+		restore all opacity to 1
+
+	if true && this is newly clicked player
+		then just set this player image opacity to 0.4
+	
+	if false && 
+		set opacity of the select player to 1
+
+*/
+
+
+
+
+	// $('.imageContainer img').toggleClass(function(){
+	// 	if ($(this).hasClass("selected")){
+	// 		$('.imageContainer img').removeClass("selected")
+	// 		$('.imageContainer img').addClass("unselected")
+	// 		console.log("selected")
+	// 		return "selected";
+	// 	}
+	// 	else{
+	// 		return "unselected";
+
+	// 	}
+	// })
+
+
+	// if ($(this).hasClass("selected") == true){
+	// 	$(this).removeClass("selected")
+
+	// }
+	// else{
+	// 	$(this).addClass("selected")
+	// }
+
+
+	
+
+
+	// $('.imageContainer img').css("opacity",0.4)
+	// $('.imageContainer img#'+selectName).css("opacity",1)
+	// $(this).addClass("selected")
+
+
+
+	// if ($(this).hasClass("selected") == true){
+	// 	console.log("yoohoo")
+	// }
+
+
+	// $(this).addClass("selected")
+
+	// if ($(this).hasClass("selected") == true){
+	// 	console.log("yoohoo")
+	// }
+		
+	})
+}
+
+addClick();
+// var fs = require("fs");
+// fs.readFile("./winnernames.txt", function(text){
+//     var textByLine = text.split("\n")
+// });
+
+// print(fs)
+
+// Number of pictures needed = 4*data.length
+
+// Preload images
+console.log("Asdf")
+
+
+var imageWidth = 80
+var mainContainer = d3.select('.mainContainer')
+var row0 = d3.select(".row0")
+var row1 = d3.select(".row1")
+var row2 = d3.select(".row2")
+var row3 = d3.select(".row3")
+var row4 = d3.select(".row4")
+
+
+var rowArray = [row1,row2,row3,row4]
+var tournaments = ["Australian Open","French Open","Wimbledon","US Open"]
+
+var minYear = 1985;
+var maxYear = d3.max(data, function(d){
+
+				return +d.Year
+})
+
+var yearArray = []
+
+for (i=minYear; i<=maxYear; i++){
+	yearArray.push(i)
+
+}
+
+row0.selectAll(".year").data(yearArray).enter().append('div').html(function(d){
+	console.log(d)
+	return d
+}).attr("class","year") 
+
+
+for (i=0; i<rowArray.length; i++){
+
+var imageContainer = rowArray[i].selectAll('.imageContainer').data(data.filter(function(d){
+	return d.Tournament == tournaments[i] && d.Year >= minYear
+}))
+								.enter()
+								.append('div')
+								
+								.attr('class','imageContainer')
+								.attr("id",function(d,i){							
+									var idName = parseName(d)
+									idName=idName.replace(/\s/g,'')											
+									
+									// console.log(this) //this points to the <image>
+									// console.log(d)		
+									return idName
+					})
+
+// .filter(function(d){	
+
+// 									return (d.Tournament == tournaments[i] && d.Year >= minYear)
+// 				})
+
+
+// imageContainer.append("div").attr("class","overlay")
+// 								.attr("id",function(d,i){							
+// 									var idName = parseName(d)
+// 									idName=idName.replace(/\s/g,'')											
+									
+// 									// console.log(this) //this points to the <image>
+// 									// console.log(d)		
+// 									return idName
+// 					})
+
+imageContainer.append('img')
+				
+				.attr('class','imageContainer')				
+				.attr("id",function(d,i){
+							
+						var idName = parseName(d)
+						idName=idName.replace(/\s/g,'')											
+						
+						// console.log(this) //this points to the <image>
+						// console.log(d)		
+						return idName
+					})
+				.attr('src',function(d,i){
+					var filename = d.Winner;
+						// console.log(filename)
+						var position = filename.indexOf("(")
+						if (position != -1)
+							filename = filename.slice(0,position)
+						position = filename.indexOf(":")
+						if (position != -1)
+							filename = filename.slice(position+1,filename.length)
+						filename=filename.replace(/\s/g,'') + ".jpg"				
+						// console.log(nameArray)
+						// console.log(filename)
+						// console.log(nameArray.indexOf(filename))					
+						// k = nameArray.indexOf(filename)
+						// console.log(images)
+						// return 
+						
+						
+						// console.log(this) //this points to the <image>		
+						return "/img/" + filename
+
+
+				})
+				.attr("class","playerImage default")
+
+
+}
+
+
+
+
+
+	function parseName(d){
+						var name = d.Winner;
+						var position = name.indexOf("(")
+						if (position != -1)
+							name = name.slice(0,position)
+						position = name.indexOf(":")
+						if (position != -1)
+							name = name.slice(position+1,name.length)
+						return name;
+
+			}
+
+console.log(imageContainer)
+
+
+
+})
+
+
+
+</script>
+
+</html>
