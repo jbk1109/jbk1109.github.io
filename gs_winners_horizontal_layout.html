@@ -31,7 +31,8 @@ div.column{
 	/*height: 320px;*/
 	/*margin-left: 10px;*/
 	position: absolute;
-	margin-top: 521px;
+	/*top: 522px;*/
+	margin-top: 551px;
 	/*border-right: 0.5px solid #81929f;*/
 	/*float: left;*/
 	background-color: #151d26 ;
@@ -71,12 +72,13 @@ div.column{
 	position: absolute;
 	overflow-x: scroll;
 	overflow-y: hidden;
-	margin: 500px 0 10px 0px;
+	margin: 530px 0 10px 0px;
 
 }
 
 ::-webkit-scrollbar {
-    width: 12px;
+    width: 5px;
+
 }
 
 
@@ -85,19 +87,20 @@ div.column{
 /*    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.8); 
     -webkit-border-radius: 10px;*/
     background-color: #1f2223;
+    width: thin;
     /*border-radius: 10px;*/
 }
+
 
 .mainContainer::-webkit-scrollbar-thumb {
-    /*-webkit-border-radius: 10px;*/
-    /*border-radius: 10px;*/
-    /*background-color: #1a1a1a; */
-    /*background-color: #1d1d1d; */
-    background-color: #1a2531;
-    border-radius: 12px;
-    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2); */
+   scrollbar-width: thin;
+    background-color: #768795;
+        /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2); */
 }
 
+.mainContainer::-webkit-scrollbar-width{
+
+}
 
 .empty{
 	clear:both;
@@ -207,7 +210,7 @@ p {
 
 
 .imageContainer img.unselected{
-	opacity: 0.3;
+	opacity: 0.1;
 }
 
 .playerImageContainer{
@@ -228,7 +231,7 @@ p {
 }
 
 .highlight{
-	opacity :0.4;
+	opacity :0.3;
 }
 
 p.playerName{
@@ -305,11 +308,13 @@ img.playerImage{
 <div id="content">
 <div id="topContainer"> 
 	<h2>
-		Past Grand Slam Champions 
+		Grand Slam Champions (1985-2019)
 	</h2>
 	
 	<h3>
-		(Toggle on the player's image to view his titles below)
+		(Toggle on the player's image to view his titles below. 
+		<br>
+		You can select upto 4 players to compare their records.)
 	</h3>
 	
 	<div id="playerContainer">
@@ -451,13 +456,10 @@ function readTextFile(file, fn)
     // return nameArray
 }
 
-readTextFile("./winnernames.txt", function(responseText){
-	// name = responseText
+readTextFile("./winnernames1.txt", function(responseText){
+
 	nameArray = responseText.split(/\r\n|\n/);
-	// console.log("As")
-	// console.log(name)
 	console.log(nameArray)
-	console.log(nameArray.length)
 
 })
 
@@ -467,44 +469,27 @@ readTextFile("./winnernames.txt", function(responseText){
 
 d3.csv('output_cleaned2.csv',function(data){
 
-console.log(data[0])
-	
+
 var yearCount = data.length
 var images = [];
 
-// function preloadImages(){
-// 	console.log("A")
-// 	// var images =[];
-// 	for (var i = 0; i < nameArray.length-1; i++){
-// 		if(nameArray[i]=="nocompetition.jpg"){
-// 						
-// 		}
-// 		else{
-// 			images[i] = new Image();
-// 			images[i].src = "/img/"+nameArray[i];
-// 		}
-// 	}
-
-// }
 
 function preloadImages(){
 	
-	var skipIndex = nameArray.indexOf("nocompetition.jpg")
+	var skipIndex = nameArray.indexOf("no competition")
 	nameArray.splice(skipIndex,1)
 	
-	// var images =[];
-	// for (var i = 0; i < nameArray.length-1; i++){
+	;
 
-	// 		images[i] = new Image();
-	// 		images[i].src = "/img/"+nameArray[i];
-	// }
 	var i =0;
 	while( i< nameArray.length-1){
-
-			console.log(nameArray[i])
+		console.log(nameArray[i])
 			images[i] = new Image();
-			images[i].src = "/img/"+nameArray[i];
-			// console.log(images[i.src])
+			imgFileName = nameArray[i]
+			images[i].src = "/img/" + imgFileName.replace(/\s/g, '') + ".jpg"
+			console.log(nameArray[i])
+			console.log(nameArray[i].replace(/\s/g, ''))
+			// images[i].src = "/img/"+nameArray[i];
 			i++
 		
 	}
@@ -515,23 +500,40 @@ function preloadImages(){
 
 preloadImages();
 
+
+
 for (i=0; i<=images.length-1; i++){
-	
 	
 	var img = $('<img '+'class=profileImage>');	
 	var playerImageContainer = $('<div>')
 	playerImageContainer.attr("class","playerImageContainer")
 
 	img.attr('src',images[i].src)
-	parsedName = nameArray[i].substr(0,nameArray[i].indexOf("."))
+
+	parsedName = nameArray[i]
+	// parsedName = nameArray[i].substr(0,nameArray[i].indexOf("."))
 	
+	// parsedName = nameArray[]	
 	$("#playerContainer").append(playerImageContainer)
 	playerImageContainer.attr("id",parsedName)
 	playerImageContainer.append(img)
 	var n =  $('<p class=playerName>');
-	playerImageContainer.append(n)
-	// console.log(x)
+	playerImageContainer.append(n);
 	n.text(parsedName)
+
+
+	// for (i = 1; i < parsedName.length; i++) {
+	// 	console.log(parsedName.charAt(i))
+	// }
+	// 	if ((parseName.charAt(i) >= 'A') && ( parseName.charAt(i) <= 'Z')){
+	// 		console.log(i)
+	// 		name = parsedName.substring(0,i) + " "+parsedName.substring(i,parsedName.length-1)
+
+	// 	}
+	// }
+	
+
+	// n.text(parsedName)
 	// $('#playerImageContainer p').text(parsedName)
 	// $(playerImageContainer "p.playerName").attr("class","playerName")
 	// $("#playerContainer").attr("id",parsedName)
@@ -549,7 +551,7 @@ $('.playerImageContainer').click(function(d){
 	// console.log($(event.target))
 	console.log("inside event")
 	// console.log(this.id)
-	selectName = this.id
+	selectName = this.id.replace(/\s/g,'')
 
 // Check if clicked players is in the array
 // if does not exists and there are no select players 
