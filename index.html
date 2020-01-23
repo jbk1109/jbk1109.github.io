@@ -7,21 +7,40 @@ body{
   margin:40px 0px 0px 20px ;
 
 }
+
+
 .intro{
-  font-size:24px;
+	width: 800px;
+	margin-bottom: 30px;
 }
 
-.description{
+.intro h1{
+	color: steelblue;
+	font-size: 30px;
+}
+
+
+.intro p {
+	text-align: justify;
 	line-height: 1.2;
 }
-.container{
+.description{
 	width: 800px;
+	line-height: 1.2;
+	text-align: justify;
+}
+.container{
+	width: 900px;
 
 }
 .toClearDisplay{
 	clear:both;
+	margin: 20px 0px 20px 0px;
 }
 
+.source {
+	font-size: 12px;
+}
 .line{
 		
 }
@@ -33,9 +52,11 @@ img{
 	height: 200px;
 
 }
-.container div{
+.container .project{
 	overflow: auto;
-	width: 400px;	
+	position: relative;
+	width: 850px;	
+	
 }
 .subheading{
 	font-size: 18px;
@@ -43,85 +64,119 @@ img{
 
 
 a{
+
+  position: absolute;
+  bottom: 0;
   color: steelblue;
   text-decoration: none;
 }
 
+
+
 </style>
 <body>
-<p class="intro">
-  These are some of visualiztions I created with d3 as a side project. 
-</p>
+<div class="intro">
+
+<h1>
+  Welcome to my interactive data visualization projects. 
+</h1>
+	<p class = "intro-description">
+	I love tinkering, exploring, and discovering. And, interactive data visualization lets me do all of it. 
+	The ability to layer data from macro to microscope and creating fun interaction is fascinating. Data Visualization can provide insight, opportunity to explore large amount of data and raise questions, and ultimately lead to actionable information for the audience. 
+	<br>
+	<br>
+	These are my side projects created with d3 (javascript library), data cleaning and wrangling were done in python
+	<br>
+	<br>
+	If you want to visualie any dataset, you can contact me at jbk1109@gmail.com
+
+	
+	
+
+
+	</p>
+</div>
 
 <div class="container">
-	<h1 class="subheading"> Roger Federer's Air Travel in 2014</h1>
+	<div class="project">	
+		<h1 class="subheading"> Tennis Grand Slam Winners (1985-2019) - 2nd Iteration </h1>
+		<!-- <img width="616" alt="tennismapscreenshot" src="https://cloud.githubusercontent.com/assets/7552207/23035208/39442a70-f433-11e6-88f6-964b3af27cc3.png"> -->
+			<img src="gs_horizontal.png" height='200px'>
+			<p class="description">		
+				Grand Slams refer to the 4 major tournaments played on different surface types. The surface difference favors 
+				different playing styles, although the difference diminished over the years. Since mid 2000s, fewer players
+				have dominated the Grand Slam. To visulize this trend, this visualization allows selection and comparison of players' Grand Slam titles and their streaks in timeline with their image.
+				<p class ="source"> *Data Source: www.wikipedia.com, www.atptour.com </p>
+				
+				<a href="gs_winners_horizontal_layout.html"> - See the visualization </a>
+			</p>
+	</div>
+		
+		<div class="toClearDisplay"></div>	
 
-	<img src="https://cloud.githubusercontent.com/assets/7552207/5659332/734f26b6-96c5-11e4-828a-23f494105125.png" height='200px'>
-	
-	<p class="description">
-		Tennis players travel around the world all year round to play in tournaments. 
-		Using d3 geo projections and topojson data, I marked cities and flight paths that Roger Federer flew in 2014.  
-		<br><br>
+	<div class="project">
+		<h1 class="subheading"> World Dominance Trend Map in Tennis (1982 ~ 2016) </h1>
+	<!-- <img width="616" alt="tennismapscreenshot" src="https://cloud.githubusercontent.com/assets/7552207/23035208/39442a70-f433-11e6-88f6-964b3af27cc3.png"> -->
+		<img src="distribution_map.png" height='200px'>
+		<p class="description">		
+			Dominant nation in tennis has changed over the years. Using a choropleth map, this visualization 
+			shows the shift in the distribution of top 100 tennis players' nationalities from 1982 to 2016. Additionally, 
+			the timeline bar graph displays numeric data on a select country.
+			<p class ="source"> *Data Source: https://data.world/sixmanguru/mens-year-end-atp-rankings</p>
+			<a href="tennismap1.html">- See the visualization </a>
+		</p>
+	</div>
 
-		Data was scraped from www.atptour.com wtih 'beautifulsoup' python library, then parsed and cleaned.
-		<br><br>
-		<a href="Federer_Github.html">- View Roger Federer's Air Travel</a>
-	</p>
+	<div class="toClearDisplay"></div>	
 
-<div class="toClearDisplay"></div>
+	<div class="project">
+		<h1 class="subheading"> Tennis Grand Slam Winners (1985-2019) - 1st Iteration </h1>
+	<!-- <img width="616" alt="tennismapscreenshot" src="https://cloud.githubusercontent.com/assets/7552207/23035208/39442a70-f433-11e6-88f6-964b3af27cc3.png"> -->
+		<img src="gs_winners_vertical.png" height='200px'>
+		<p class="description">
+			Grand Slams refers to the most prestgious 4 major tournaments. This visualization uses a player's image to highlight his grand slam victories in a timeline and shows the break down of the record in a pie chart. 
+			<p class ="source"> *Data Source: www.wikipedia.com, www.atptour.com </p>
+			<br>
+			<a href="grandSlamVerticalLayout_ver3.html">- See the visualization</a>
+		</p>
+	</div>
 
-	<h1 class="subheading"> Top 100 Tennis Players Distribution Map</h1>
-<!-- <img width="616" alt="tennismapscreenshot" src="https://cloud.githubusercontent.com/assets/7552207/23035208/39442a70-f433-11e6-88f6-964b3af27cc3.png"> -->
-	<img src="https://cloud.githubusercontent.com/assets/7552207/23791165/dacd29b4-0536-11e7-9e3d-44f47f1c3c61.png" height='200px'>
-	<p class="description">
-		Distribution of Top 100 tennis players' nationalities from 1982 to 2016. 
+	<div class="toClearDisplay"></div>
 
-		<br><br>
-		<a href="tennismap1.html">- View Tennis Players Distribution Map </a>
-	</p>
-	
-<div class="toClearDisplay"></div>	
-	<h1 class="subheading"> Grand Slam Winners 1985-2019</h1>
-<!-- <img width="616" alt="tennismapscreenshot" src="https://cloud.githubusercontent.com/assets/7552207/23035208/39442a70-f433-11e6-88f6-964b3af27cc3.png"> -->
-	<img src="https://cloud.githubusercontent.com/assets/7552207/24373048/e547642a-12e4-11e7-88b4-ae60e142818c.png" height='200px'>
-	<p class="description">
-		Grand Slam Winners from 1985-2017 and their Grand Slam title break down in a pie chart. 
+	<div class="project">
+		<h1 class="subheading"> World Immunization Trend (1980~2013) Line Graph</h1>
 
-		<br><br>
-		<a href="grandSlamVerticalLayout_ver3.html">- View Grand Slam Winner </a>
-	</p>
+		<img src="immunization_line.png" height='200px'>
+		<p class="description">
+			Immunization is an important mark in modern medicine. I wanted to visualize the trend of immunization in countries over the years.
+			I first began with a line graph in conjunction with scatter plot. You can select a country to view its immunization history from 1980 to 2013. 
+			<br>
+			<br>
+			<p class ="source"> *Data Source: wwww.oecd.org </p>
+			<br>
+			<a href="Immunization.html">- See the visualization</a>
+		</p>
+	</div>
 
-<div class="toClearDisplay"></div>
+	<div class="toClearDisplay"></div>
 
-	<h1 class="subheading"> World Immunization Trend - line graph</h1>
+	<div class="project">
+		<h1 class="subheading"> World Immunization Trend Stacked Bar Graph</h1>
 
-	<img src="https://cloud.githubusercontent.com/assets/7552207/5659333/7350d114-96c5-11e4-9610-09b260e8cf28.png" height='200px'>
-	<p class="description">
-		Immunization is an important mark in modern medicine. I wanted to visualize the trend of immunization in countries over the years.
-		I first began with a line graph in conjunction with scatter plot. You can select a country to view its immunization history from 1980 to 2013. 
-		<br>
-		<br>
-		*Data Source: wwww.oecd.org
-		<br><br>
-		<a href="Immunization.html">- View Immunization Line Graph</a>
-	</p>
-
-<div class="toClearDisplay"></div>
-	<h1 class="subheading"> World Immunization Trend - stacked bar graph</h1>
-
-	<img src="https://cloud.githubusercontent.com/assets/7552207/5659644/88c069f6-96ca-11e4-8014-aa98d0642055.png" height='200px'>
-	<p class="description">
-		After creating the line graph of immunization history, I wanted to create a visualiation that allowed easier comparison between countries.
-		The line graph made it diffcult comparisons among countires. 
-		Stacked bar graph seemed like a rational choice (and I just wanted to learn how to make one in d3).
-		I used distinct hue for each disease rather than varying saturation and value in order to visually separate each disease. 
-		<br><br>
-		<a href="immunization_stacked_bar.html">- View Immunization Stacked Bar Graph</a>
-	</p>
-
- 
+		<img src="immunization_stacked_bar.png" height='200px'>
+		<p class="description">
+			After creating the line graph of immunization history, I wanted to create a visualiation that allowed easier comparison between countries.
+			The line graph made it diffcult comparisons among countires. 
+			Stacked bar graph seemed like a rational choice.
+			I used distinct hue for each disease rather than varying saturation in order to separate each disease visually . 
+			<p class ="source"> *Data Source: wwww.oecd.org </p>
+			<br><br>
+			<a href="immunization_stacked_bar.html">- See the visualization</a>
+		</p>
+	</div>
+	<div class="toClearDisplay"></div> 
 </div>
-	<a href="hiking.html"> Hiking </a>
+	
 </body>
 
 </html>
